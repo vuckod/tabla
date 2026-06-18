@@ -73,7 +73,7 @@ gem "audited", "~> 5.6"
 gem "meilisearch-rails"
 
 # Paginacija
-gem "pagy", "~> 9.3"
+gem "pagy", "~> 43.5"
 
 # OCR
 gem "rtesseract"
