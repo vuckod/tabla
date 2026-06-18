@@ -16,7 +16,9 @@ Rails.application.routes.draw do
   root "home#index"
 
   # --- Letter Opener (development) ---
-  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+  if defined?(LetterOpenerWeb)
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
 
   # --- Telefonski imenik ---
   resources :persons, only: [:index, :show]
