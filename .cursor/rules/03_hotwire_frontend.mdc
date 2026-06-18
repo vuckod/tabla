@@ -1,0 +1,11 @@
+---
+description: Pravila za ERB poglede, Hotwire (Turbo/Stimulus), Tailwind CSS in odzivnost
+globs: app/views/**/*.erb, app/javascript/controllers/**/*.js, app/assets/stylesheets/**/*.css
+---
+- **Odzivnost (Responsive & Mobile-first):** Aplikacija mora delovati brezhibno na mobilnih napravah. Vedno uporabljaj Tailwind utility razrede za odzivnost (`sm:`, `md:`, `lg:`).
+- **Dark Mode:** Aplikacija podpira preklop v temni način. Vsem elementom dodaj ustrezen `dark:` razred (npr. `bg-white dark:bg-slate-900`, `text-slate-900 dark:text-slate-100`).
+- **Tailwind CSS konvencije:** Za primarne akcijske gumbe uporabljaj Indigo barvno paleto (`bg-indigo-600 dark:bg-indigo-500`). Konsistentno z Delovodnikom.
+- **Turbo in Turbo Frames:** Za dinamične sekcije (zavihki dokumentov, iskanje) uporabljaj Turbo Frames. Ko ustvarjaš gumbe za odpiranje modalnih oken, preveri, da je pripadajoča datoteka v celoti ovita v `turbo_frame_tag`.
+- **Stimulus kontrolerji:** Za lokalne iskalnike znotraj tabel uporabljaj `auto-submit` kontroler. Globalni iskalniki NAJ NE uporabljajo auto-submita (potrditev z Enter).
+- **Prevodi (I18n):** Ne kodirati besedil v HTML. Zanašaj se na Rails I18n prevode v `config/locales/sl.yml`.
+- **Print:** Elemente, ki se ne smejo natisniti (gumbi, iskalniki), označi s `print:hidden`.

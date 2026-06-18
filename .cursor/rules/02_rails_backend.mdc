@@ -1,0 +1,21 @@
+---
+description: Pravila za Ruby on Rails backend, modele, kontrolerje in PostgreSQL
+globs: app/models/**/*.rb, app/controllers/**/*.rb, db/migrate/**/*.rb, config/routes.rb
+---
+- **Okolje:** Projekt uporablja Rails 8.1.2. Uporabljaj najnovejše konvencije za to verzijo.
+- **PostgreSQL in podatkovni tipi:** Baza je zelo stroga glede tipov. Pri boolean primerjavah v SQL poizvedbah (npr. znotraj `Arel.sql` ali pri `ORDER BY`) VEDNO uporabi `sanitize_sql_array`, da preprečiš Datatype Mismatch napake.
+- **Iskanje (Search):** Vsi iskalniki po besedilu morajo ignorirati šumnike in akcente. Uporabi concern `UnaccentSearchable` in PostgreSQL razširitev `unaccent`.
+- **Validacije:** Vedno dodaj potrebne validacije na nivoju modela (presence, uniqueness, itd.).
+- **Pundit:** Vsak kontroler mora imeti pripadajočo Pundit politiko. Uporabi `policy_scope` za sezname.
+- **Audited:** Modeli z uporabniškimi podatki (Document, Person, PhoneNumber) morajo imeti `audited`.
+- **UserStampable:** Modeli, ki spremljajo avtorja, vključijo concern `UserStampable` za `created_by_id` / `updated_by_id`.
+
+### Dockerized Environment (CRITICAL)
+Razvojno okolje teče v Docker kontejnerju. Host nima Ruby-ja ali Rails-a.
+Vedno uporabi Docker Compose wrapper za ukaze:
+`docker compose run --rm rails_app <ukaz>`
+
+Primeri:
+- `docker compose run --rm rails_app bundle install`
+- `docker compose run --rm rails_app bin/rails db:migrate`
+- `docker compose run --rm rails_app bin/rails generate model Foo`

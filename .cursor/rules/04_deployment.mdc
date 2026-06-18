@@ -1,0 +1,11 @@
+---
+description: Pravila za deployment, Kamal in infrastrukturo
+globs: config/deploy.yml, Dockerfile, bin/*
+---
+- **Kamal:** Za deployment se uporablja Kamal verzije 2. Sintaksa in zmožnosti Kamal 2.
+- **Strežnik:** Produkcija teče na `193.2.53.52` (isti strežnik kot Prisotnost in Delovodnik).
+- **Domena:** `i.kl-kl.si`
+- **Port:** Kamal proxy na portu 5000 (Prisotnost: 3000, Delovodnik: 4000).
+- **PostgreSQL:** Accessory na portu 5435 (Prisotnost: 5433, Delovodnik: 5434).
+- **Meilisearch:** Deljena instanca z Delovodnikom (`delovodnik-app-meilisearch:7700`). NE ustvarjaj novega accessory-ja.
+- **Dockerfile:** Vključuje `tesseract-ocr`, `tesseract-ocr-slv`, `tesseract-ocr-hun`, `poppler-utils`.

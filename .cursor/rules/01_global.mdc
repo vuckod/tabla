@@ -1,0 +1,10 @@
+---
+description: Splošna pravila za celoten projekt Tabla (Intranet KL-KL)
+globs: "**/*"
+---
+- **Projekt:** Tabla je intranetna stran Knjižnice Lendava. Nadomešča staro PHP "tablo".
+- **Dokumentacija:** Vedno preberi relevantne `docs/*.md` datoteke preden začneš z nalogo.
+- **Naloge:** Naloge so v `docs/tasks/*.md`. Vsaka ima jasne korake, predpogoje in acceptance criteria. Drži se njih.
+- **Jezik:** Komentarji v kodi in commit messages so v **slovenščini**. Imena modelov, kontrolerjev in metod so v **angleščini** (Rails konvencija).
+- **CHANGELOG:** Po vsaki končani nalogi posodobi `CHANGELOG.md`.
+- **Sorodna projekta:** Delovodnik (`delovodnik_rails`) in Prisotnost (`prisotnost_028`) sta referenca za vzorce. Kadar docs navajajo "kot v Delovodniku", poglej ustrezno datoteko v tistem projektu.
