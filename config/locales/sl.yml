@@ -1,0 +1,86 @@
+# Tabla — slovenski prevodi
+sl:
+  activerecord:
+    models:
+      document: "Dokument"
+      person: "Oseba"
+      phone_number: "Telefonska številka"
+      location: "Lokacija"
+      link: "Povezava"
+      link_category: "Kategorija povezav"
+      document_category: "Kategorija dokumentov"
+      user: "Uporabnik"
+    attributes:
+      document:
+        title: "Naslov"
+        description: "Opis"
+        published_at: "Datum objave"
+        internal_only: "Samo za interno uporabo"
+        notify_staff: "Obvesti zaposlene"
+        file: "Datoteka"
+        ocr_text: "OCR besedilo"
+      person:
+        first_name: "Ime"
+        last_name: "Priimek"
+        email: "E-pošta"
+        position_title: "Delovno mesto"
+      phone_number:
+        number: "Številka"
+        kind: "Vrsta"
+        label: "Oznaka"
+      location:
+        name: "Ime"
+        kind: "Vrsta"
+        short_code: "Kratica"
+        schedule_info: "Urnik"
+      link:
+        title: "Naslov"
+        url: "URL naslov"
+        description: "Opis"
+      link_category:
+        name: "Ime kategorije"
+      document_category:
+        name: "Ime kategorije"
+      user:
+        username: "Uporabniško ime"
+        ime: "Ime"
+        priimek: "Priimek"
+        email: "E-pošta"
+  helpers:
+    submit:
+      create: "Shrani"
+      update: "Posodobi"
+      document:
+        create: "Objavi dokument"
+        update: "Posodobi dokument"
+  views:
+    shared:
+      actions: "Dejanja"
+      edit: "Uredi"
+      delete: "Izbriši"
+      back: "Nazaj"
+      confirm_delete: "Ali ste prepričani?"
+      search_placeholder: "Išči..."
+      no_results: "Ni zadetkov."
+    sessions:
+      login: "Prijava"
+      username: "Uporabniško ime"
+      password: "Geslo"
+      submit: "Prijava"
+      logout: "Odjava"
+      invalid_credentials: "Napačno uporabniško ime ali geslo."
+    home:
+      title: "Intranet"
+      recent_documents: "Zadnji dokumenti"
+      phone_directory: "Telefonski imenik"
+      quick_links: "Hitre povezave"
+      all_links: "Vse povezave"
+    documents:
+      title: "Dokumenti"
+      all: "Vsi"
+      download: "Prenesi"
+      published_on: "Objavljeno"
+      internal: "Interno"
+    admin:
+      title: "Administracija"
+      dashboard: "Nadzorna plošča"
