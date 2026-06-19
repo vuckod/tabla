@@ -81,6 +81,9 @@ gem "rtesseract"
 # CSV obdelava
 gem "csv"
 
+# HTTP klient za komunikacijo s Prisotnost API-jem
+gem "faraday"
+
 # Pregled poslane e-pošte v razvoju
 group :development do
   gem "letter_opener_web"
