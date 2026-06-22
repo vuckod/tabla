@@ -8,3 +8,6 @@ globs: "**/*"
 - **Jezik:** Komentarji v kodi in commit messages so v **slovenščini**. Imena modelov, kontrolerjev in metod so v **angleščini** (Rails konvencija).
 - **CHANGELOG:** Po vsaki končani nalogi posodobi `CHANGELOG.md`.
 - **Sorodna projekta:** Delovodnik (`delovodnik_rails`) in Prisotnost (`prisotnost_028`) sta referenca za vzorce. Kadar docs navajajo "kot v Delovodniku", poglej ustrezno datoteko v tistem projektu.
+- **Obstoječi temelji:** Modeli, migracije, `ApplicationPolicy`, `ApplicationController`, `UserStampable`, `UnaccentSearchable`, `PrisotnostApiClient`, `SessionsController`, `UserSyncJob` že obstajajo in delujejo — NE prepisuj jih na novo. Pri novih policy razredih deduj od `ApplicationPolicy` in sledi `editor?` vzorcu (admin/urednik lahko ureja, bralec samo bere).
+- **Document model:** `Document` ima `queue_ocr_extraction` in `send_notification` metode pripravljene defenzivno z `defined?(OcrExtractionJob)` / `defined?(DocumentNotificationJob)` — ti razredi še ne obstajajo namenoma (ločene naloge). Ne dodajaj jih, dokler naloga to izrecno ne zahteva.
+- **Pred implementacijo:** Preglej `app/models/`, `app/controllers/`, `app/policies/` da vidiš, kaj že obstaja, preden ustvariš nov razred z istim imenom.

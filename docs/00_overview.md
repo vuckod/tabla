@@ -173,17 +173,17 @@ Enako kot Delovodnik:
 ## Faze razvoja
 
 ### Faza 1 — MVP (cilj: delujoča zamenjava PHP table)
-- [ ] Skelet projekta (Rails new, Gemfile, Docker, Kamal)
-- [ ] API endpoint v Prisotnosti + auth flow v Intranetu
-- [ ] Modeli: Location, Person, PhoneNumber, LinkCategory, Link, DocumentCategory, Document
-- [ ] Osnovni layout (header, responsive mreža, dark mode)
-- [ ] Telefonski imenik (prikaz + admin CRUD)
-- [ ] Povezave (prikaz po kategorijah + admin CRUD)
-- [ ] Dokumenti (upload PDF, kategorije, prikaz seznama, prenos)
-- [ ] OCR pipeline (Tesseract slv+hun, asinhrono)
-- [ ] Iskanje po dokumentih (Meilisearch)
-- [ ] Seed podatkov (kontakti, povezave iz obstoječe PHP table)
-- [ ] Deploy na i.kl-kl.si
+- [x] Skelet projekta (Rails new, Gemfile, Docker, Kamal)
+- [x] API endpoint v Prisotnosti + auth flow v Intranetu
+- [x] Modeli: Location, Person, PhoneNumber, LinkCategory, Link, DocumentCategory, Document
+- [ ] Osnovni layout (header, responsive mreža, dark mode) — `docs/tasks/06_layout_nav.md`
+- [ ] Telefonski imenik (prikaz + admin CRUD) — `docs/tasks/07_contacts_ui.md`
+- [ ] Povezave (prikaz po kategorijah + admin CRUD) — `docs/tasks/08_links_ui.md`
+- [ ] Dokumenti (upload PDF, kategorije, prikaz seznama, prenos) — `docs/tasks/09_documents_upload.md`
+- [ ] OCR pipeline (Tesseract slv+hun, asinhrono) — `docs/tasks/10_ocr_pipeline.md`
+- [ ] Iskanje po dokumentih (Meilisearch) — `docs/tasks/11_meilisearch_setup.md`
+- [x] Seed podatkov (kontakti, povezave iz obstoječe PHP table)
+- [ ] Deploy na i.kl-kl.si — `docs/tasks/12_deploy_kamal.md`
 
 ### Faza 2 — Izboljšave
 - [ ] E-mail obvestila ob objavi dokumenta ("obvesti delavce")
@@ -199,11 +199,11 @@ Enako kot Delovodnik:
 
 ## Imenovanje projekta
 
-- **Ime repozitorija:** `intranet_rails`
-- **Kamal service:** `intranet-app`
-- **Docker image:** `vucko/intranet-app`
-- **Baza:** `intranet_production`
-- **Gitea repo:** `git.kl-kl.si/vucko/intranet_rails`
+- **Ime repozitorija:** `tabla`
+- **Kamal service:** `tabla-app`
+- **Docker image:** `vucko/tabla-app`
+- **Baza:** `tabla_production`
+- **Gitea repo:** `git.kl-kl.si/vucko/tabla`
 
 ## Datotečna struktura docs/
 
@@ -217,20 +217,20 @@ docs/
   05_deployment.md                — deploy.yml, Dockerfile, DNS, Nginx
   
   tasks/                          — naloge za Cursor
-    01_skeleton.md                — Rails new, Gemfile, Docker, .devcontainer
-    02_api_prisotnost.md          — API endpoint v projektu Prisotnost
-    03_auth_flow.md               — Login, session, user sync v Intranetu
-    04_models_migrations.md       — Vsi modeli in migracije
-    05_seeds.md                   — Začetni podatki (kontakti, povezave)
+    02_api_prisotnost.md          — API endpoint v projektu Prisotnost (že narejeno)
     06_layout_nav.md              — Application layout, header, dark mode
     07_contacts_ui.md             — Telefonski imenik: prikaz + admin CRUD
     08_links_ui.md                — Povezave: prikaz + admin CRUD
     09_documents_upload.md        — Upload, kategorije, seznam, prenos
-    10_ocr_pipeline.md            — OCR job, service, log
-    11_meilisearch_setup.md       — Meilisearch indeks, iskanje
-    12_deploy_kamal.md            — Kamal deploy, DNS, first deploy
-    ...
+    10_ocr_pipeline.md            — OCR job, service, log (še ni napisano)
+    11_meilisearch_setup.md       — Meilisearch indeks, iskanje (še ni napisano)
+    12_deploy_kamal.md            — Kamal deploy, DNS, first deploy (še ni napisano)
 ```
+
+Opomba: skelet, modeli/migracije in avtentikacijska koda (naloge, ki bi ustrezale
+`01_skeleton.md`, `03_auth_flow.md`, `04_models_migrations.md`, `05_seeds.md`) so bile
+implementirane neposredno v pogovoru s Claudom, brez vmesnih task datotek — glej
+`CHANGELOG.md` za podroben seznam opravljenega.
 
 Vsak `tasks/XX_*.md` ima obvezno strukturo:
 - **Cilj**: v dveh stavkih
