@@ -14,3 +14,11 @@
 # ActiveSupport::Inflector.inflections(:en) do |inflect|
 #   inflect.acronym "RESTful"
 # end
+
+# Tabla: model Person ima namensko tabelo "persons" (ne Rails-ovo privzeto
+# nepravilno množino "people"), da se ujema z routes.rb (`resources :persons`)
+# in vsemi route helperji (`persons_path`, `admin_persons_path`, ...).
+# Brez tega pravila Rails generira `admin_people_path`, ki ne obstaja.
+ActiveSupport::Inflector.inflections(:en) do |inflect|
+  inflect.irregular "person", "persons"
+end

@@ -24,6 +24,8 @@ sl:
         last_name: "Priimek"
         email: "E-pošta"
         position_title: "Delovno mesto"
+        location: "Lokacija"
+        active: "Aktivna"
       phone_number:
         number: "Številka"
         kind: "Vrsta"
@@ -33,6 +35,9 @@ sl:
         kind: "Vrsta"
         short_code: "Kratica"
         schedule_info: "Urnik"
+        address: "Naslov"
+        phone: "Glavna telefonska številka"
+        position: "Vrstni red"
       link:
         title: "Naslov"
         url: "URL naslov"
@@ -46,6 +51,17 @@ sl:
         ime: "Ime"
         priimek: "Priimek"
         email: "E-pošta"
+  phone_number:
+    kinds:
+      external: "Zunanja"
+      internal: "Interna"
+      mobile: "GSM"
+      fax: "Faks"
+  location:
+    kinds:
+      headquarters: "Sedež"
+      branch: "Enota"
+      mobile_library: "Krajevna knjižnica"
   helpers:
     submit:
       create: "Shrani"
@@ -94,6 +110,42 @@ sl:
       download: "Prenesi"
       published_on: "Objavljeno"
       internal: "Interno"
+    persons:
+      title: "Telefonski imenik"
+      employees: "Zaposleni"
+      phone_numbers: "Telefonske številke"
+      no_phone_numbers: "Ni telefonskih številk"
+      search_placeholder: "Išči po imenu ali priimku..."
+      filter_location: "Filtriraj po lokaciji"
+      all_locations: "Vse lokacije"
+      locations_section: "Lokacije in skupne številke"
+      mobile_libraries: "Krajevne knjižnice"
+      schedule: "Urnik"
+      main_phone: "Telefon"
     admin:
+      nav: "Admin navigacija"
+      back_to_app: "Nazaj na intranet"
       title: "Administracija"
       dashboard: "Nadzorna plošča"
+      persons:
+        title: "Osebe v imeniku"
+        new: "Nova oseba"
+        edit: "Uredi osebo"
+        created: "Oseba je bila uspešno dodana."
+        updated: "Oseba je bila uspešno posodobljena."
+        destroyed: "Oseba je bila izbrisana."
+        active: "Aktivna"
+        inactive: "Neaktivna"
+        no_location: "Brez lokacije"
+      locations:
+        title: "Lokacije"
+        new: "Nova lokacija"
+        edit: "Uredi lokacijo"
+        created: "Lokacija je bila uspešno dodana."
+        updated: "Lokacija je bila uspešno posodobljena."
+        destroyed: "Lokacija je bila izbrisana."
+        schedule_hint: "npr. PON 12:00–16:00"
+      phone_numbers:
+        title: "Telefonske številke"
+        add: "Dodaj številko"
+        label_hint: "npr. Centrala, Blagajna"

@@ -3,6 +3,8 @@
 # Osebe v telefonskem imeniku. Ni enako kot User — Person je za prikaz v imeniku,
 # User je za prijavo. Ista oseba je lahko oboje (ali samo eno od tega).
 class Person < ApplicationRecord
+  self.table_name = "persons"
+
   include UserStampable
 
   belongs_to :location, optional: true

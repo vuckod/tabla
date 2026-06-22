@@ -1,0 +1,26 @@
+<% headquarters = locations.select(&:headquarters?) %>
+<% branches = locations.select(&:branch?) %>
+<% mobile_libraries = locations.select(&:mobile_library?) %>
+
+<section class="space-y-8" aria-label="<%= t("views.persons.locations_section") %>">
+  <% if headquarters.any? || branches.any? %>
+    <div class="space-y-6">
+      <% (headquarters + branches).each do |location| %>
+        <%= render "location_card", location: location, show_schedule: false %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if mobile_libraries.any? %>
+    <div>
+      <h2 class="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-4">
+        <%= t("views.persons.mobile_libraries") %>
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <% mobile_libraries.each do |location| %>
+          <%= render "location_card", location: location, show_schedule: true %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</section>

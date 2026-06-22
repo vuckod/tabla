@@ -5,6 +5,10 @@ Vse pomembne spremembe so dokumentirane v tej datoteki.
 ## [Unreleased]
 
 ### Dodano
+- Telefonski imenik: javni prikaz (`/persons`) z iskanjem, filtrom po lokaciji in prikazom lokacij
+- Admin CRUD za osebe in lokacije z nested telefonskimi številkami
+- Stimulus kontrolerja `auto_submit` in `nested_form`
+- Politike `PersonPolicy`, `LocationPolicy`, `PhoneNumberPolicy`
 - Osnovni layout z header navigacijo, flash sporočili in dark mode preklopom (Stimulus)
 - Responsive hamburger meni za mobilne naprave (< 640px)
 - `admin_root_path` — preusmeritev na admin osebe
@@ -27,13 +31,14 @@ Vse pomembne spremembe so dokumentirane v tej datoteki.
 - `host.docker.internal` dovoljen v Prisotnosti (development) za API dostop iz Table
 
 ### Popravljeno
+- `Person` model — `self.table_name = "persons"` (Rails privzeto išče `people`)
 - `Gemfile.lock` — dodana `aarch64-linux` platforma (MacBook Apple Silicon)
 - Odstranjen napačen `WebConsole.whiny_requests=` klic (metoda ne obstaja v 4.3.0)
 - `CreatePhoneNumbers` migracija — pravilna `to_table: :persons` referenca
 
 ### Še ni narejeno (naslednje faze)
-- UI: domača stran z dejanskimi podatki (imenik, povezave, dokumenti)
-- Admin CRUD vmesniki
+- UI: domača stran z dejanskimi podatki (povezave, dokumenti)
+- Admin CRUD za povezave in dokumente
 - Upload in OCR pipeline za dokumente
 - Meilisearch integracija in iskanje
 - E-mail obvestila ob objavi dokumenta

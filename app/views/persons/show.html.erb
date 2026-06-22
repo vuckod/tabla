@@ -1,0 +1,40 @@
+<% content_for :title, @person.full_name %>
+
+<div class="mb-6">
+  <%= link_to t("views.shared.back"), persons_path,
+      class: "text-sm text-indigo-600 dark:text-indigo-400 hover:underline print:hidden" %>
+</div>
+
+<article class="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-6 shadow-sm max-w-2xl">
+  <h1 class="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-2">
+    <%= @person.full_name %>
+  </h1>
+
+  <% if @person.position_title.present? %>
+    <p class="text-lg text-slate-600 dark:text-slate-400 mb-4"><%= @person.position_title %></p>
+  <% end %>
+
+  <dl class="space-y-3 text-sm">
+    <% if @person.location.present? %>
+      <div>
+        <dt class="font-medium text-slate-500 dark:text-slate-400"><%= Person.human_attribute_name(:location) %></dt>
+        <dd class="text-slate-900 dark:text-slate-100"><%= @person.location.name %></dd>
+      </div>
+    <% end %>
+
+    <% if @person.email.present? %>
+      <div>
+        <dt class="font-medium text-slate-500 dark:text-slate-400"><%= Person.human_attribute_name(:email) %></dt>
+        <dd>
+          <%= mail_to @person.email, @person.email,
+              class: "text-indigo-600 dark:text-indigo-400 hover:underline" %>
+        </dd>
+      </div>
+    <% end %>
+
+    <div>
+      <dt class="font-medium text-slate-500 dark:text-slate-400 mb-1"><%= t("views.persons.phone_numbers") %></dt>
+      <dd><%= render_phone_numbers_list(@person.phone_numbers) %></dd>
+    </div>
+  </dl>
+</article>

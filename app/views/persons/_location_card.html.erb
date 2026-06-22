@@ -1,0 +1,32 @@
+<article class="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-5 shadow-sm">
+  <header class="mb-3">
+    <h3 class="text-lg font-semibold text-slate-900 dark:text-slate-100">
+      <%= location.name %>
+    </h3>
+    <% if location.short_code.present? %>
+      <p class="text-sm text-slate-500 dark:text-slate-400"><%= location.short_code %></p>
+    <% end %>
+  </header>
+
+  <% if show_schedule && location.schedule_info.present? %>
+    <p class="text-sm font-medium text-indigo-600 dark:text-indigo-400 mb-3">
+      <%= t("views.persons.schedule") %>: <%= location.schedule_info %>
+    </p>
+  <% end %>
+
+  <div class="space-y-1">
+    <% if location.phone.present? %>
+      <p class="text-sm">
+        <span class="text-slate-500 dark:text-slate-400"><%= t("views.persons.main_phone") %>:</span>
+        <%= link_to location.phone, "tel:#{location.phone.gsub(/[^\d+]/, '')}",
+            class: "text-indigo-600 dark:text-indigo-400 hover:underline" %>
+      </p>
+    <% end %>
+
+    <%= render_phone_numbers_list(location.phone_numbers) %>
+  </div>
+
+  <% if location.address.present? %>
+    <p class="text-sm text-slate-500 dark:text-slate-400 mt-3"><%= location.address %></p>
+  <% end %>
+</article>

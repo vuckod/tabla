@@ -24,6 +24,37 @@ lokacije.each do |attrs|
 end
 puts "  Lokacije: #{Location.count}"
 
+puts "=== Seed: Telefonske številke lokacij ==="
+siklnd = Location.find_by!(short_code: "SIKLND")
+[
+  { number: "575-13-53", kind: :external, label: "Centrala" },
+  { number: "575-13-54", kind: :external, label: "Blagajna" },
+  { number: "580", kind: :internal, label: "Interna" }
+].each do |attrs|
+  siklnd.phone_numbers.find_or_create_by!(label: attrs[:label]) do |pn|
+    pn.number = attrs[:number]
+    pn.kind = attrs[:kind]
+  end
+end
+puts "  Telefonske številke: #{PhoneNumber.count}"
+
+puts "=== Seed: Osebe v imeniku (vzorčni podatki) ==="
+if Person.none?
+  hq = Location.find_by!(short_code: "SIKLND")
+  person = Person.create!(
+    first_name: "Maja",
+    last_name: "Novak",
+    email: "maja.novak@kl-kl.si",
+    position_title: "Direktorica",
+    location: hq,
+    active: true
+  )
+  person.phone_numbers.create!(number: "574-25-80", kind: :external)
+  person.phone_numbers.create!(number: "581", kind: :internal)
+  person.phone_numbers.create!(number: "040-123-456", kind: :mobile)
+end
+puts "  Osebe: #{Person.count}"
+
 puts "=== Seed: Kategorije povezav ==="
 kategorije_povezav = [
   { name: "Interne aplikacije", icon: "computer-desktop", position: 1 },

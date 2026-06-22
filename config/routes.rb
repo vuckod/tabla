@@ -35,12 +35,11 @@ Rails.application.routes.draw do
   end
 
   # --- Admin ---
-  # OPOMBA: Admin::PersonsController in ostali admin kontrolerji še ne obstajajo
-  # (pridejo v docs/tasks/07_contacts_ui.md, 08_links_ui.md, 09_documents_upload.md).
-  # Dokler niso implementirani, admin namespace preusmeri na domov, da ne povzroča
-  # NameError / 500 napak pri klikih na "Administracija".
   namespace :admin do
-    root to: redirect("/")
+    root to: redirect("/admin/persons")
+
+    resources :persons
+    resources :locations
   end
 
   # --- Iskanje ---
