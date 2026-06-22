@@ -54,6 +54,19 @@ sl:
         create: "Objavi dokument"
         update: "Posodobi dokument"
   views:
+    layouts:
+      header:
+        title: "Tabla — Intranet KL-KL"
+        home: "Domov"
+        directory: "Imenik"
+        links: "Povezave"
+        documents: "Dokumenti"
+        admin: "Administracija"
+        dark_mode_toggle: "Preklopi temni način"
+        menu_toggle: "Odpri meni"
+        main_nav: "Glavna navigacija"
+      flash:
+        dismiss: "Zapri obvestilo"
     shared:
       actions: "Dejanja"
       edit: "Uredi"
@@ -70,7 +83,7 @@ sl:
       logout: "Odjava"
       invalid_credentials: "Napačno uporabniško ime ali geslo."
     home:
-      title: "Intranet"
+      title: "Intranet — Knjižnica Lendava"
       recent_documents: "Zadnji dokumenti"
       phone_directory: "Telefonski imenik"
       quick_links: "Hitre povezave"

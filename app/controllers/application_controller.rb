@@ -46,6 +46,10 @@ class ApplicationController < ActionController::Base
     return unless request.get? && request.format.html?
 
     ahoy.track_visit
+  rescue ActiveRecord::RecordNotUnique
+    # Dirkalni pogoj: dva hitra zaporedna requesta (npr. redirect takoj za njim) sta
+    # poskusila ustvariti isti visit_token preden je bil cookie potrjen. Neškodljivo —
+    # visit je bil že ustvarjen pri prvem requestu, samo ne logiramo kot napako.
   rescue StandardError => e
     Rails.logger.error "Ahoy track_visit: #{e.message}"
   end

@@ -5,6 +5,9 @@ Vse pomembne spremembe so dokumentirane v tej datoteki.
 ## [Unreleased]
 
 ### Dodano
+- Osnovni layout z header navigacijo, flash sporočili in dark mode preklopom (Stimulus)
+- Responsive hamburger meni za mobilne naprave (< 640px)
+- `admin_root_path` — preusmeritev na admin osebe
 - Začetni skelet projekta (Rails 8.1.3, Docker, devcontainer)
 - Projektna dokumentacija (`docs/00_overview.md`, `docs/01_data_model.md`, `docs/02_authentication_api.md`)
 - Cursor pravila (`.cursor/rules/`)

@@ -1,0 +1,13 @@
+<% mobile = local_assigns.fetch(:mobile, false) %>
+<% link_classes = mobile ?
+     "block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-indigo-600 dark:hover:text-indigo-400" :
+     "px-3 py-2 rounded-md text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-indigo-600 dark:hover:text-indigo-400" %>
+
+<%= link_to t("views.layouts.header.home"), root_path, class: link_classes %>
+<%= link_to t("views.layouts.header.directory"), persons_path, class: link_classes %>
+<%= link_to t("views.layouts.header.links"), links_path, class: link_classes %>
+<%= link_to t("views.layouts.header.documents"), documents_path, class: link_classes %>
+
+<% if current_user&.admin? || current_user&.urednik? %>
+  <%= link_to t("views.layouts.header.admin"), admin_root_path, class: link_classes %>
+<% end %>
