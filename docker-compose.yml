@@ -29,10 +29,15 @@ services:
       DATABASE_URL: postgres://postgres:password@tabla-db:5432/tabla_development
       MAILER_URL_HOST: localhost
       MAILER_URL_PORT: "3002"
+      # Prisotnost API — za prijavo in sinhronizacijo uporabnikov
+      PRISOTNOST_API_URL: ${PRISOTNOST_API_URL:-http://host.docker.internal:3000/api/v1}
+      PRISOTNOST_API_TOKEN: ${PRISOTNOST_API_TOKEN:-}
       # Meilisearch: odkomentiraj ko potrebuješ iskanje
       # Za uporabo delovodnikovega Meilisearch dodaj external network (glej docs/05_deployment.md)
       # MEILISEARCH_URL: http://delovodnik_meilisearch:7700
       # MEILISEARCH_MASTER_KEY: ${MEILISEARCH_MASTER_KEY:-lokalni_razvojni_kljuc_123}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
 volumes:
   tabla_pgsql_data:

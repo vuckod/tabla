@@ -30,11 +30,8 @@ class ApplicationController < ActionController::Base
 
   def current_user
     return nil unless session[:user_id]
-    return nil unless defined?(User) && User.table_exists?
 
     @current_user ||= User.find_by(id: session[:user_id])
-  rescue ActiveRecord::StatementInvalid
-    nil
   end
 
   def require_login
