@@ -1,0 +1,21 @@
+<% card_classes = category.links.any?(&:internal_app?) ?
+     "bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800" :
+     "bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700" %>
+
+<article class="rounded-lg border p-4 shadow-sm <%= card_classes %>">
+  <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100 mb-3 pb-2
+             border-b border-slate-200/80 dark:border-slate-600/80">
+    <%= category.name %>
+  </h2>
+
+  <% links = category.links %>
+  <% if links.empty? %>
+    <p class="text-sm text-slate-500 dark:text-slate-400"><%= t("views.links.empty_category") %></p>
+  <% else %>
+    <ul class="space-y-1">
+      <% links.each do |link| %>
+        <li><%= render "link_item", link: link %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</article>

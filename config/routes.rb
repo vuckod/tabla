@@ -40,6 +40,8 @@ Rails.application.routes.draw do
 
     resources :persons
     resources :locations
+    resources :link_categories
+    resources :links
   end
 
   # --- Iskanje ---

@@ -5,6 +5,10 @@ Vse pomembne spremembe so dokumentirane v tej datoteki.
 ## [Unreleased]
 
 ### Dodano
+- Povezave: javni prikaz (`/links`) s kategoriziranim gridom in izpostavljenimi internimi aplikacijami
+- Domača stran: sekcija hitre povezave (`internal_app`) z linkom na vse povezave
+- Admin CRUD za kategorije povezav in povezave (vrstni red, internal_app, new_tab)
+- Politiki `LinkPolicy` in `LinkCategoryPolicy`
 - Telefonski imenik: javni prikaz (`/persons`) z iskanjem, filtrom po lokaciji in prikazom lokacij
 - Admin CRUD za osebe in lokacije z nested telefonskimi številkami
 - Stimulus kontrolerja `auto_submit` in `nested_form`
@@ -37,8 +41,8 @@ Vse pomembne spremembe so dokumentirane v tej datoteki.
 - `CreatePhoneNumbers` migracija — pravilna `to_table: :persons` referenca
 
 ### Še ni narejeno (naslednje faze)
-- UI: domača stran z dejanskimi podatki (povezave, dokumenti)
-- Admin CRUD za povezave in dokumente
+- UI: domača stran z dejanskimi podatki (dokumenti)
+- Admin CRUD za dokumente
 - Upload in OCR pipeline za dokumente
 - Meilisearch integracija in iskanje
 - E-mail obvestila ob objavi dokumenta

@@ -7,4 +7,5 @@ class Link < ApplicationRecord
   validates :url, presence: true
 
   scope :ordered, -> { order(:position, :title) }
+  scope :internal_apps, -> { where(internal_app: true) }
 end

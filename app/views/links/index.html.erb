@@ -1,0 +1,15 @@
+<% content_for :title, t("views.links.title") %>
+
+<h1 class="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-8">
+  <%= t("views.links.title") %>
+</h1>
+
+<% if @link_categories.empty? %>
+  <p class="text-slate-500 dark:text-slate-400"><%= t("views.shared.no_results") %></p>
+<% else %>
+  <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+    <% @link_categories.each do |category| %>
+      <%= render "category_card", category: category %>
+    <% end %>
+  </div>
+<% end %>

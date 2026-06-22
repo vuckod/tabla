@@ -4,6 +4,10 @@
       class: "text-sm font-medium #{controller_path == 'admin/persons' ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400'}" %>
   <%= link_to t("views.admin.locations.title"), admin_locations_path,
       class: "text-sm font-medium #{controller_path == 'admin/locations' ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400'}" %>
+  <%= link_to t("views.admin.link_categories.title"), admin_link_categories_path,
+      class: "text-sm font-medium #{controller_path == 'admin/link_categories' ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400'}" %>
+  <%= link_to t("views.admin.links.title"), admin_links_path,
+      class: "text-sm font-medium #{controller_path == 'admin/links' ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400'}" %>
   <%= link_to t("views.admin.back_to_app"), root_path,
       class: "text-sm text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 ml-auto" %>
 </nav>

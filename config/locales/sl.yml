@@ -42,8 +42,14 @@ sl:
         title: "Naslov"
         url: "URL naslov"
         description: "Opis"
+        position: "Vrstni red"
+        internal_app: "Interna aplikacija"
+        new_tab: "Odpri v novem zavihku"
+        link_category: "Kategorija"
       link_category:
         name: "Ime kategorije"
+        position: "Vrstni red"
+        icon: "Ikona"
       document_category:
         name: "Ime kategorije"
       user:
@@ -122,6 +128,10 @@ sl:
       mobile_libraries: "Krajevne knjižnice"
       schedule: "Urnik"
       main_phone: "Telefon"
+    links:
+      title: "Povezave"
+      empty_category: "V tej kategoriji še ni povezav."
+      no_internal_apps: "Ni nastavljenih internih aplikacij."
     admin:
       nav: "Admin navigacija"
       back_to_app: "Nazaj na intranet"
@@ -149,3 +159,25 @@ sl:
         title: "Telefonske številke"
         add: "Dodaj številko"
         label_hint: "npr. Centrala, Blagajna"
+      shared:
+        position_hint: "Manjše število = višje na seznamu"
+      link_categories:
+        title: "Kategorije povezav"
+        new: "Nova kategorija"
+        edit: "Uredi kategorijo"
+        created: "Kategorija je bila uspešno dodana."
+        updated: "Kategorija je bila uspešno posodobljena."
+        destroyed: "Kategorija je bila izbrisana."
+        links_count: "Št. povezav"
+        icon_hint: "npr. computer-desktop"
+      links:
+        title: "Povezave"
+        new: "Nova povezava"
+        edit: "Uredi povezavo"
+        created: "Povezava je bila uspešno dodana."
+        updated: "Povezava je bila uspešno posodobljena."
+        destroyed: "Povezava je bila izbrisana."
+        category: "Kategorija"
+        flags: "Oznake"
+        internal_app: "Interna"
+        new_tab: "Nov zavihek"
