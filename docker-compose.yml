@@ -32,6 +32,9 @@ services:
       # Prisotnost API — za prijavo in sinhronizacijo uporabnikov
       PRISOTNOST_API_URL: ${PRISOTNOST_API_URL:-http://host.docker.internal:3000/api/v1}
       PRISOTNOST_API_TOKEN: ${PRISOTNOST_API_TOKEN:-}
+      # Solid Queue teče znotraj Puma procesa (za OCR in ostala ozadnja opravila v razvoju).
+      # V produkciji ima Kamal ločen job worker — glej config/deploy.yml.
+      SOLID_QUEUE_IN_PUMA: "true"
       # Meilisearch: odkomentiraj ko potrebuješ iskanje
       # Za uporabo delovodnikovega Meilisearch dodaj external network (glej docs/05_deployment.md)
       # MEILISEARCH_URL: http://delovodnik_meilisearch:7700

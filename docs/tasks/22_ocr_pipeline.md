@@ -51,10 +51,11 @@ zdaj obstaja, se bo callback samodejno sprožil ob create/update z novo datoteko
 `mark_ocr_file_change` pravilno zazna `has_one_attached :file` spremembo (`attachment_changes.key?("file")`).
 
 ### 4. Solid Queue — `ocr` vrsta
-Job uporablja `queue_as :ocr`. Preveri `config/queue.yml` (Solid Queue), da delavec posluša
-tudi vrsto `ocr` (ali doda `ocr` v seznam vrst). V developmentu Solid Queue lahko teče prek
-`bin/jobs` ali znotraj Puma (`SOLID_QUEUE_IN_PUMA`). Preveri obstoječo konfiguracijo in po
-potrebi dodaj `ocr` vrsto.
+Job uporablja `queue_as :ocr`. **ŽE UREJENO:** `config/queue.yml` ima `queues: "*"` (delavec
+posluša vse vrste, vključno z `ocr`), in `docker-compose.yml` ima `SOLID_QUEUE_IN_PUMA: "true"`
+(Solid Queue teče znotraj Puma v razvoju). Torej NE rabiš spreminjati `queue.yml` ali
+`docker-compose.yml` — samo preveri, da delavec dejansko teče (v Puma logu ob zagonu naj bo
+vrstica o Solid Queue supervisor-ju).
 
 ### 5. Prikaz OCR statusa v admin
 V `admin/documents` (index ali show) prikaži OCR status zadnjega `OcrLog` za dokument
