@@ -34,5 +34,26 @@
     <h2 id="home-recent-documents" class="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-4">
       <%= t("views.home.recent_documents") %>
     </h2>
+
+    <% if @recent_documents.any? %>
+      <ul class="space-y-2">
+        <% @recent_documents.each do |document| %>
+          <li>
+            <%= link_to document.title, document_path(document),
+                class: "text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:underline" %>
+            <span class="text-xs text-slate-500 dark:text-slate-400 ml-2">
+              <%= l(document.published_at.to_date, format: :short) if document.published_at %>
+            </span>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="text-sm text-slate-500 dark:text-slate-400"><%= t("views.documents.empty_category") %></p>
+    <% end %>
+
+    <p class="mt-4">
+      <%= link_to t("views.home.all_documents"), documents_path,
+          class: "text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:underline" %>
+    </p>
   </section>
 </div>

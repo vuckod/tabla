@@ -1,0 +1,33 @@
+<% content_for :title, @document.title %>
+
+<div class="mb-6">
+  <%= link_to t("views.shared.back"), documents_path,
+      class: "text-sm text-indigo-600 dark:text-indigo-400 hover:underline print:hidden" %>
+</div>
+
+<article class="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-6 shadow-sm max-w-3xl">
+  <div class="flex flex-wrap items-center gap-2 mb-4">
+    <h1 class="text-2xl font-bold text-slate-900 dark:text-slate-100"><%= @document.title %></h1>
+    <%= document_category_badge(@document.document_category) %>
+    <% if @document.internal_only? %>
+      <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium
+                   bg-amber-100 dark:bg-amber-900/40 text-amber-800 dark:text-amber-200">
+        <%= t("views.documents.internal") %>
+      </span>
+    <% end %>
+  </div>
+
+  <% if @document.description.present? %>
+    <p class="text-slate-600 dark:text-slate-400 mb-4"><%= simple_format(@document.description) %></p>
+  <% end %>
+
+  <p class="text-sm text-slate-500 dark:text-slate-400 mb-6">
+    <%= t("views.documents.published_on") %>: <%= format_published_at(@document) %>
+  </p>
+
+  <%= link_to t("views.documents.download"), download_document_path(@document),
+      class: "inline-flex items-center px-4 py-2 text-sm font-medium rounded-md
+              bg-indigo-600 dark:bg-indigo-500 text-white
+              hover:bg-indigo-700 dark:hover:bg-indigo-600 shadow-sm print:hidden",
+      data: { turbo: false } %>
+</article>

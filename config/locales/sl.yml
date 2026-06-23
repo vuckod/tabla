@@ -1,5 +1,12 @@
 # Tabla — slovenski prevodi
 sl:
+  date:
+    formats:
+      short: "%d.%m.%Y"
+      long: "%d. %B %Y"
+  time:
+    formats:
+      short: "%d.%m.%Y %H:%M"
   activerecord:
     models:
       document: "Dokument"
@@ -19,6 +26,13 @@ sl:
         notify_staff: "Obvesti zaposlene"
         file: "Datoteka"
         ocr_text: "OCR besedilo"
+        document_category: "Kategorija"
+      document_category:
+        name: "Ime kategorije"
+        slug: "Identifikator"
+        position: "Vrstni red"
+        color: "Barva"
+        description: "Opis"
       person:
         first_name: "Ime"
         last_name: "Priimek"
@@ -110,12 +124,16 @@ sl:
       phone_directory: "Telefonski imenik"
       quick_links: "Hitre povezave"
       all_links: "Vse povezave"
+      all_documents: "Vsi dokumenti →"
     documents:
       title: "Dokumenti"
       all: "Vsi"
       download: "Prenesi"
       published_on: "Objavljeno"
       internal: "Interno"
+      empty_category: "Ni dokumentov v tej kategoriji."
+      categories_nav: "Kategorije dokumentov"
+      unpublished: "Ni objavljeno"
     persons:
       title: "Telefonski imenik"
       employees: "Zaposleni"
@@ -181,3 +199,19 @@ sl:
         flags: "Oznake"
         internal_app: "Interna"
         new_tab: "Nov zavihek"
+      documents:
+        title: "Dokumenti"
+        new: "Nov dokument"
+        edit: "Uredi dokument"
+        created: "Dokument je bil uspešno objavljen."
+        updated: "Dokument je bil uspešno posodobljen."
+        destroyed: "Dokument je bil izbrisan."
+        category: "Kategorija"
+        flags: "Oznake"
+        scheduled: "Načrtovano"
+        notify_staff: "Obvestilo"
+        current_file: "Trenutna datoteka"
+        file_hint: "Samo PDF, največ 50 MB"
+        published_at_hint: "Pustite prazno ali nastavite prihodnji datum za zakasnjeno objavo"
+        internal_only_hint: "Vidno samo administratorjem in urednikom"
+        notify_staff_hint: "Obvesti delavce po e-pošti ob objavi (pošiljanje pride v fazi 2)"

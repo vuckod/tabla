@@ -42,6 +42,7 @@ Rails.application.routes.draw do
     resources :locations
     resources :link_categories
     resources :links
+    resources :documents
   end
 
   # --- Iskanje ---

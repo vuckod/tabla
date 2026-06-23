@@ -5,6 +5,10 @@ Vse pomembne spremembe so dokumentirane v tej datoteki.
 ## [Unreleased]
 
 ### Dodano
+- Dokumenti: javni prikaz (`/documents`) z zavihki po kategorijah (Turbo Frame), paginacija in prenos PDF
+- Admin CRUD za dokumente (upload PDF, kategorija, datum objave, internal_only, notify_staff)
+- Politika `DocumentPolicy` z defense-in-depth za `internal_only` dokumente
+- Domača stran: zadnjih 5 objavljenih dokumentov
 - Povezave: javni prikaz (`/links`) s kategoriziranim gridom in izpostavljenimi internimi aplikacijami
 - Domača stran: sekcija hitre povezave (`internal_app`) z linkom na vse povezave
 - Admin CRUD za kategorije povezav in povezave (vrstni red, internal_app, new_tab)
@@ -36,13 +40,25 @@ Vse pomembne spremembe so dokumentirane v tej datoteki.
 
 ### Popravljeno
 - `Person` model — `self.table_name = "persons"` (Rails privzeto išče `people`)
+- `Person` pluralizacija prek `inflections.rb` (`irregular "person", "persons"`) — popravek `admin_people_path` napake
+- Ahoy duplicate key race condition (tiho prezrt `RecordNotUnique` v `track_ahoy_visit`)
+- Admin route preusmeritev na domov dokler kontrolerji ne obstajajo
+- `audited` Psych::DisallowedClass — `yaml_column_permitted_classes` vključuje `TimeWithZone`
+- `set_document` v javnem DocumentsController uporablja `visible_to` (defense-in-depth za internal_only)
 - `Gemfile.lock` — dodana `aarch64-linux` platforma (MacBook Apple Silicon)
 - Odstranjen napačen `WebConsole.whiny_requests=` klic (metoda ne obstaja v 4.3.0)
 - `CreatePhoneNumbers` migracija — pravilna `to_table: :persons` referenca
 
-### Še ni narejeno (naslednje faze)
-- UI: domača stran z dejanskimi podatki (dokumenti)
-- Admin CRUD za dokumente
-- Upload in OCR pipeline za dokumente
-- Meilisearch integracija in iskanje
-- E-mail obvestila ob objavi dokumenta
+### Načrtovano — UI prenova (naloge 13-18)
+- Preimenovanje: "Intranet (tabla) KKC Lendava — Lendvai KKK"
+- Nujna obvestila (`Announcement` model, 7-dnevni privzeti potek, vezava na enoto)
+- Nova mreža blokov (8:2:2), ~90% širina, živahne barve blokov
+- Tabelaričen imenik (interna/zunanja/mesto/enota)
+- Ločena živa bloka za interne aplikacije (zeleno) in zunanje povezave (modro)
+- Dokumenti z barvnimi značkami in filtrom
+- Globalni iskalnik po dokumentih
+
+### Še ni narejeno (kasnejše faze)
+- OCR ekstrakcija besedila (`10_ocr_pipeline.md`)
+- Iskanje po vsebini (Meilisearch, `11_meilisearch_setup.md`)
+- E-mail obvestila ob objavi dokumenta (`DocumentNotificationJob`)

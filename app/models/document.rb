@@ -18,6 +18,7 @@ class Document < ApplicationRecord
 
   validates :title, presence: true
   validates :document_category, presence: true
+  validate :file_must_be_attached, on: :create
   validate :file_size_within_limit
   validate :file_is_pdf
 
@@ -73,5 +74,11 @@ class Document < ApplicationRecord
     return if file.content_type == "application/pdf"
 
     errors.add(:file, "mora biti v PDF obliki")
+  end
+
+  def file_must_be_attached
+    return if file.attached?
+
+    errors.add(:file, "mora biti priložena")
   end
 end

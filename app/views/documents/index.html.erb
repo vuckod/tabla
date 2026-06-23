@@ -1,0 +1,40 @@
+<% content_for :title, t("views.documents.title") %>
+
+<h1 class="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-6">
+  <%= t("views.documents.title") %>
+</h1>
+
+<%= turbo_frame_tag "documents_list" do %>
+  <nav class="flex flex-wrap gap-1 border-b border-slate-200 dark:border-slate-700 mb-6 print:hidden"
+       aria-label="<%= t("views.documents.categories_nav") %>">
+    <%= link_to t("views.documents.all"),
+        documents_path,
+        class: document_tab_class(@selected_category_id),
+        data: { turbo_frame: "documents_list" } %>
+
+    <% @document_categories.each do |category| %>
+      <%= link_to category.name,
+          documents_path(category_id: category.id),
+          class: document_tab_class(@selected_category_id, category.id),
+          data: { turbo_frame: "documents_list" } %>
+    <% end %>
+  </nav>
+
+  <% if @documents.empty? %>
+    <p class="text-slate-500 dark:text-slate-400 py-8 text-center">
+      <%= t("views.documents.empty_category") %>
+    </p>
+  <% else %>
+    <div class="space-y-3">
+      <% @documents.each do |document| %>
+        <%= render "document_row", document: document %>
+      <% end %>
+    </div>
+
+    <% if @pagy.pages > 1 %>
+      <div class="mt-8 flex justify-center print:hidden">
+        <%== pagy_nav(@pagy) %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

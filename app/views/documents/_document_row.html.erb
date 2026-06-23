@@ -1,0 +1,38 @@
+<article class="flex flex-col sm:flex-row sm:items-center gap-4 p-4 rounded-lg border
+                border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm
+                hover:border-indigo-200 dark:hover:border-indigo-800 transition-colors">
+  <div class="flex-1 min-w-0">
+    <div class="flex flex-wrap items-center gap-2 mb-1">
+      <h2 class="text-base font-semibold text-slate-900 dark:text-slate-100">
+        <%= link_to document.title, document_path(document),
+            class: "hover:text-indigo-600 dark:hover:text-indigo-400",
+            data: { turbo_frame: "_top" } %>
+      </h2>
+
+      <%= document_category_badge(document.document_category) %>
+
+      <% if document.internal_only? %>
+        <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium
+                     bg-amber-100 dark:bg-amber-900/40 text-amber-800 dark:text-amber-200">
+          <%= t("views.documents.internal") %>
+        </span>
+      <% end %>
+    </div>
+
+    <% if document.description.present? %>
+      <p class="text-sm text-slate-600 dark:text-slate-400 line-clamp-2"><%= document.description %></p>
+    <% end %>
+
+    <p class="text-xs text-slate-500 dark:text-slate-400 mt-2">
+      <%= t("views.documents.published_on") %>: <%= format_published_at(document) %>
+    </p>
+  </div>
+
+  <div class="shrink-0 print:hidden">
+    <%= link_to t("views.documents.download"), download_document_path(document),
+        class: "inline-flex items-center px-4 py-2 text-sm font-medium rounded-md
+                bg-indigo-600 dark:bg-indigo-500 text-white
+                hover:bg-indigo-700 dark:hover:bg-indigo-600 shadow-sm",
+        data: { turbo: false } %>
+  </div>
+</article>
