@@ -1,0 +1,5 @@
+<%= turbo_stream.replace "inline_document_category" do %>
+  <%= turbo_frame_tag "inline_document_category" do %>
+    <%= render "inline_form", document_category: @document_category %>
+  <% end %>
+<% end %>

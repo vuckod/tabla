@@ -1,0 +1,5 @@
+<%= turbo_stream.replace "document_category_field" do %>
+  <%= render "admin/documents/category_field", selected_id: @document_category.id %>
+<% end %>
+
+<%= turbo_stream.update "inline_document_category" %>

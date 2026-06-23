@@ -3,9 +3,7 @@
     <%= render layout: "admin/shared/form_section", locals: { title: t("views.admin.shared.basic_data") } do %>
       <%= admin_text_field f, :title, label: Document.human_attribute_name(:title), required: true %>
       <%= admin_text_area f, :description, label: Document.human_attribute_name(:description), rows: 4 %>
-      <%= admin_select f, :document_category_id, nil,
-          label: Document.human_attribute_name(:document_category),
-          collection: DocumentCategory.ordered %>
+      <%= render "admin/documents/category_field", form: f %>
 
       <div class="space-y-1">
         <% if document.file.attached? %>

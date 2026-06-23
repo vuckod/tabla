@@ -1,0 +1,29 @@
+<div class="mt-3 p-4 rounded-lg border border-indigo-200 dark:border-indigo-800 bg-indigo-50/50 dark:bg-indigo-900/20">
+  <h3 class="text-sm font-semibold text-slate-900 dark:text-slate-100 mb-3">
+    <%= t("views.admin.document_categories.new_inline") %>
+  </h3>
+
+  <%= form_with model: [:admin, document_category], class: "space-y-4" do |f| %>
+    <% if document_category.errors.any? %>
+      <div class="p-3 rounded-md bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-800 text-sm"
+           role="alert">
+        <ul class="list-disc list-inside space-y-1">
+          <% document_category.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%= admin_text_field f, :name, label: DocumentCategory.human_attribute_name(:name), required: true %>
+    <%= admin_color_picker f, :color, label: DocumentCategory.human_attribute_name(:color) %>
+    <%= f.hidden_field :position, value: document_category.position %>
+
+    <div class="flex flex-col-reverse sm:flex-row gap-2 pt-2">
+      <%= admin_submit f, label: t("views.admin.document_categories.add_inline") %>
+      <%= link_to t("views.admin.shared.cancel"), inline_cancel_admin_document_categories_path,
+          class: AdminFormHelper::CANCEL_CLASSES,
+          data: { turbo_frame: "inline_document_category" } %>
+    </div>
+  <% end %>
+</div>

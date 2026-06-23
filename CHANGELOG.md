@@ -5,6 +5,8 @@ Vse pomembne spremembe so dokumentirane v tej datoteki.
 ## [Unreleased]
 
 ### Dodano
+- Admin CRUD za značke dokumentov (`DocumentCategory`) z vizualnim izbirnikom barve
+- Inline dodajanje nove značke v obrazcu za dokument (Turbo Stream, brez zapuščanja strani)
 - Admin obrazci: skupni `AdminFormHelper`, kartična postavitev, sekcije, konsistentni gumbi in prazna stanja v seznamih
 - Globalni iskalnik po dokumentih v headerju (`/search`, naslov + opis, brez šumnikov)
 - Domača stran: blok dokumentov z barvnimi značkami (kategorije), filtrom po Turbo Frame in paginacijo

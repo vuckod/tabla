@@ -1,0 +1,23 @@
+<%= form_with model: [:admin, document_category], class: "max-w-xl" do |f| %>
+  <%= render layout: "admin/shared/form_card", locals: { object: document_category } do %>
+    <%= render layout: "admin/shared/form_section", locals: { title: t("views.admin.shared.basic_data") } do %>
+      <%= admin_text_field f, :name, label: DocumentCategory.human_attribute_name(:name), required: true %>
+      <%= admin_color_picker f, :color,
+          label: DocumentCategory.human_attribute_name(:color),
+          hint: t("views.admin.document_categories.color_hint") %>
+      <%= admin_text_field f, :position,
+          label: DocumentCategory.human_attribute_name(:position),
+          input: :number_field,
+          hint: t("views.admin.shared.position_hint") %>
+
+      <% if document_category.persisted? %>
+        <p class="text-xs text-slate-500 dark:text-slate-400">
+          <%= DocumentCategory.human_attribute_name(:slug) %>:
+          <span class="font-mono text-slate-700 dark:text-slate-300"><%= document_category.slug %></span>
+        </p>
+      <% end %>
+    <% end %>
+
+    <%= render "admin/shared/form_actions", form: f, cancel_path: admin_document_categories_path %>
+  <% end %>
+<% end %>

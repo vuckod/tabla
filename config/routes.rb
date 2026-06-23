@@ -42,6 +42,11 @@ Rails.application.routes.draw do
     resources :locations
     resources :link_categories
     resources :links
+    resources :document_categories, except: :show do
+      collection do
+        get :inline_cancel
+      end
+    end
     resources :documents
     resources :announcements
   end

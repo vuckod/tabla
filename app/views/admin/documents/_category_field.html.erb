@@ -1,0 +1,29 @@
+<%# locals: form (optional), selected_id: nil %>
+<% form = local_assigns[:form] %>
+<% selected = local_assigns.fetch(:selected_id) { form&.object&.document_category_id } %>
+
+<div id="document_category_field" class="space-y-1">
+  <label for="document_document_category_id" class="<%= AdminFormHelper::LABEL_CLASSES %>">
+    <%= Document.human_attribute_name(:document_category) %>
+  </label>
+
+  <%= select_tag "document[document_category_id]",
+      options_from_collection_for_select(DocumentCategory.ordered, :id, :name, selected),
+      id: "document_document_category_id",
+      class: AdminFormHelper::FIELD_CLASSES %>
+
+  <% if form&.object&.errors&.[](:document_category_id)&.any? %>
+    <p class="<%= AdminFormHelper::ERROR_CLASSES %>"><%= form.object.errors[:document_category_id].first %></p>
+  <% end %>
+
+  <div class="mt-2 flex flex-wrap items-center gap-3 print:hidden">
+    <%= link_to t("views.admin.document_categories.new_inline"), new_admin_document_category_path,
+        class: "text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:underline",
+        data: { turbo_frame: "inline_document_category" } %>
+    <%= link_to t("views.admin.document_categories.manage"), admin_document_categories_path,
+        class: "text-sm text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400",
+        target: "_blank", rel: "noopener" %>
+  </div>
+
+  <%= turbo_frame_tag "inline_document_category" %>
+</div>

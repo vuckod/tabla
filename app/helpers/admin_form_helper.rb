@@ -81,7 +81,43 @@ module AdminFormHelper
     link_to t("views.admin.shared.cancel"), path, class: CANCEL_CLASSES
   end
 
+  def admin_color_picker(form, field, label:, hint: nil)
+    selected = form.object.public_send(field).to_s.presence || "slate"
+
+    content_tag(:div, class: "space-y-1") do
+      safe_join([
+        form.label(field, label, class: LABEL_CLASSES),
+        content_tag(:div, class: "flex flex-wrap gap-3", role: "radiogroup", aria: { label: label }) do
+          safe_join(DocumentsHelper::CATEGORY_COLORS.map do |color|
+            admin_color_option(form, field, color, selected)
+          end)
+        end,
+        (hint.present? ? content_tag(:p, hint, class: HINT_CLASSES) : nil),
+        admin_field_errors(form, field)
+      ].compact)
+    end
+  end
+
   private
+
+  def admin_color_option(form, field, color, selected)
+    checked = selected == color.to_s
+    ring_classes = if checked
+                     "ring-2 ring-offset-2 ring-indigo-500 dark:ring-offset-slate-800"
+                   else
+                     "hover:ring-2 hover:ring-offset-2 hover:ring-slate-300 dark:hover:ring-slate-600 dark:hover:ring-offset-slate-800"
+                   end
+
+    content_tag(:label, class: "cursor-pointer") do
+      safe_join([
+        form.radio_button(field, color, class: "sr-only", checked: checked),
+        content_tag(:span, "",
+                    class: "block w-9 h-9 rounded-full #{category_swatch_classes(color)} #{ring_classes}",
+                    title: category_color_label(color),
+                    aria: { hidden: true })
+      ])
+    end
+  end
 
   def admin_field(form, field, label:, hint: nil, &block)
     content_tag(:div, class: "space-y-1") do

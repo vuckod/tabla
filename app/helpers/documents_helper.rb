@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module DocumentsHelper
+  CATEGORY_COLORS = %i[red amber orange blue green purple slate indigo].freeze
+
   CATEGORY_COLOR_CLASSES = {
     red: "bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-200",
     amber: "bg-amber-100 text-amber-900 dark:bg-amber-900/40 dark:text-amber-200",
@@ -10,6 +12,17 @@ module DocumentsHelper
     purple: "bg-purple-100 text-purple-800 dark:bg-purple-900/40 dark:text-purple-200",
     slate: "bg-slate-100 text-slate-800 dark:bg-slate-700 dark:text-slate-200",
     indigo: "bg-indigo-100 text-indigo-800 dark:bg-indigo-900/40 dark:text-indigo-200"
+  }.freeze
+
+  CATEGORY_SWATCH_CLASSES = {
+    red: "bg-red-500",
+    amber: "bg-amber-500",
+    orange: "bg-orange-500",
+    blue: "bg-blue-500",
+    green: "bg-green-500",
+    purple: "bg-purple-500",
+    slate: "bg-slate-500",
+    indigo: "bg-indigo-500"
   }.freeze
 
   def category_badge(category)
@@ -54,6 +67,14 @@ module DocumentsHelper
     return t("views.documents.unpublished") unless document.published_at
 
     l(document.published_at.to_date, format: :long)
+  end
+
+  def category_color_label(color)
+    t("views.admin.document_categories.colors.#{color}", default: color.to_s.humanize)
+  end
+
+  def category_swatch_classes(color)
+    CATEGORY_SWATCH_CLASSES.fetch(color.to_s.presence&.to_sym, CATEGORY_SWATCH_CLASSES[:slate])
   end
 
   private
