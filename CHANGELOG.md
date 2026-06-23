@@ -67,7 +67,13 @@ Vse pomembne spremembe so dokumentirane v tej datoteki.
 - Dokumenti z barvnimi značkami in filtrom
 - Globalni iskalnik po dokumentih
 
+### Načrtovano — dovršitev (naloge 19-23)
+- Izboljšava admin obrazcev (skupni form helperji, preglednost) — `19_admin_forms.md`
+- Upravljanje značk dokumentov (`DocumentCategory` CRUD + inline dodajanje) — `20_document_categories_crud.md`
+- Predogled dokumenta (inline iframe + nov zavihek) — `21_document_preview.md`
+- OCR pipeline (Tesseract slv+hun, searchable sandwich PDF) — `22_ocr_pipeline.md`
+- Meilisearch iskanje (vključno OCR vsebina, deljena instanca) — `23_meilisearch.md`
+
 ### Še ni narejeno (kasnejše faze)
-- OCR ekstrakcija besedila (`10_ocr_pipeline.md`)
-- Iskanje po vsebini (Meilisearch, `11_meilisearch_setup.md`)
 - E-mail obvestila ob objavi dokumenta (`DocumentNotificationJob`)
+- Produkcijski deploy na i.kl-kl.si (`12_deploy_kamal.md`)
