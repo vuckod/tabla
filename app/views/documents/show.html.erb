@@ -1,14 +1,13 @@
 <% content_for :title, @document.title %>
 
-<div class="mb-6">
-  <%= link_to t("views.shared.back"), documents_path,
-      class: "text-sm text-indigo-600 dark:text-indigo-400 hover:underline print:hidden" %>
-</div>
+<header class="mb-6 space-y-4">
+  <div class="flex flex-wrap items-center gap-2">
+    <h1 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-slate-100">
+      <%= @document.title %>
+    </h1>
 
-<article class="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-6 shadow-sm max-w-3xl">
-  <div class="flex flex-wrap items-center gap-2 mb-4">
-    <h1 class="text-2xl font-bold text-slate-900 dark:text-slate-100"><%= @document.title %></h1>
     <%= document_category_badge(@document.document_category) %>
+
     <% if @document.internal_only? %>
       <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium
                    bg-amber-100 dark:bg-amber-900/40 text-amber-800 dark:text-amber-200">
@@ -18,16 +17,56 @@
   </div>
 
   <% if @document.description.present? %>
-    <p class="text-slate-600 dark:text-slate-400 mb-4"><%= simple_format(@document.description) %></p>
+    <p class="text-slate-600 dark:text-slate-400 max-w-3xl"><%= simple_format(@document.description) %></p>
   <% end %>
 
-  <p class="text-sm text-slate-500 dark:text-slate-400 mb-6">
+  <p class="text-sm text-slate-500 dark:text-slate-400">
     <%= t("views.documents.published_on") %>: <%= format_published_at(@document) %>
   </p>
 
-  <%= link_to t("views.documents.download"), download_document_path(@document),
-      class: "inline-flex items-center px-4 py-2 text-sm font-medium rounded-md
+  <div class="flex flex-wrap gap-3 print:hidden">
+    <%= link_to t("views.documents.open_in_new_tab"), @inline_url,
+        target: "_blank", rel: "noopener",
+        class: "inline-flex items-center px-4 py-2 text-sm font-medium rounded-md
+                border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300
+                bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 shadow-sm" %>
+
+    <%= link_to t("views.documents.download"), @download_url,
+        class: "inline-flex items-center px-4 py-2 text-sm font-medium rounded-md
+                bg-indigo-600 dark:bg-indigo-500 text-white
+                hover:bg-indigo-700 dark:hover:bg-indigo-600 shadow-sm",
+        data: { turbo: false } %>
+
+    <%= link_to t("views.shared.back"), documents_path,
+        class: "inline-flex items-center px-4 py-2 text-sm font-medium rounded-md
+                text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400" %>
+  </div>
+</header>
+
+<div class="md:hidden print:hidden mb-6">
+  <%= link_to t("views.documents.open_document"), @inline_url,
+      target: "_blank", rel: "noopener",
+      class: "flex items-center justify-center w-full px-4 py-4 text-base font-medium rounded-lg
               bg-indigo-600 dark:bg-indigo-500 text-white
-              hover:bg-indigo-700 dark:hover:bg-indigo-600 shadow-sm print:hidden",
-      data: { turbo: false } %>
-</article>
+              hover:bg-indigo-700 dark:hover:bg-indigo-600 shadow-sm" %>
+  <p class="mt-2 text-sm text-slate-500 dark:text-slate-400 text-center">
+    <%= t("views.documents.preview_mobile_hint") %>
+  </p>
+</div>
+
+<div class="hidden md:block print:hidden" data-controller="document-preview">
+  <iframe src="<%= @inline_url %>"
+          title="<%= @document.title %>"
+          class="w-full h-[80vh] rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900"
+          data-document-preview-target="iframe"
+          data-action="load->document-preview#loaded"></iframe>
+
+  <p class="mt-3 text-sm text-slate-500 dark:text-slate-400 hidden"
+     data-document-preview-target="fallback"
+     role="status">
+    <%= t("views.documents.preview_fallback") %>
+    <%= link_to t("views.documents.open_in_new_tab"), @inline_url,
+        target: "_blank", rel: "noopener",
+        class: "text-indigo-600 dark:text-indigo-400 hover:underline" %>.
+  </p>
+</div>

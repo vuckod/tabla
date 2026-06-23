@@ -5,6 +5,7 @@ Vse pomembne spremembe so dokumentirane v tej datoteki.
 ## [Unreleased]
 
 ### Dodano
+- Predogled dokumenta (`documents#show`): PDF inline v iframe, odprtje v novem zavihku in prenos; mobilni fallback
 - Admin CRUD za značke dokumentov (`DocumentCategory`) z vizualnim izbirnikom barve
 - Inline dodajanje nove značke v obrazcu za dokument (Turbo Stream, brez zapuščanja strani)
 - Admin obrazci: skupni `AdminFormHelper`, kartična postavitev, sekcije, konsistentni gumbi in prazna stanja v seznamih
@@ -71,9 +72,9 @@ Vse pomembne spremembe so dokumentirane v tej datoteki.
 - Globalni iskalnik po dokumentih
 
 ### Načrtovano — dovršitev (naloge 19-23)
-- Izboljšava admin obrazcev (skupni form helperji, preglednost) — `19_admin_forms.md`
-- Upravljanje značk dokumentov (`DocumentCategory` CRUD + inline dodajanje) — `20_document_categories_crud.md`
-- Predogled dokumenta (inline iframe + nov zavihek) — `21_document_preview.md`
+- Izboljšava admin obrazcev (skupni form helperji, preglednost) — `19_admin_forms.md` ✓
+- Upravljanje značk dokumentov (`DocumentCategory` CRUD + inline dodajanje) — `20_document_categories_crud.md` ✓
+- Predogled dokumenta (inline iframe + nov zavihek) — `21_document_preview.md` ✓
 - OCR pipeline (Tesseract slv+hun, searchable sandwich PDF) — `22_ocr_pipeline.md`
 - Meilisearch iskanje (vključno OCR vsebina, deljena instanca) — `23_meilisearch.md`
 

@@ -12,6 +12,14 @@ class DocumentsController < ApplicationController
 
   def show
     authorize @document
+
+    unless @document.file.attached?
+      redirect_to documents_path, alert: t("views.documents.file_missing")
+      return
+    end
+
+    @inline_url = rails_blob_path(@document.file, disposition: "inline")
+    @download_url = rails_blob_path(@document.file, disposition: "attachment")
   end
 
   def download
@@ -23,6 +31,6 @@ class DocumentsController < ApplicationController
   private
 
   def set_document
-    @document = Document.visible_to(current_user).published.find(params[:id])
+    @document = Document.visible_to(current_user).published.includes(:document_category).find(params[:id])
   end
 end
