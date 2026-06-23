@@ -1,4 +1,61 @@
 <%= render layout: "shared/block",
     locals: { title: t("views.home.phone_directory"), color: :yellow } do %>
-  <p class="text-sm opacity-80"><%= t("views.home.coming_soon") %></p>
+  <% if directory_rows.blank? %>
+    <p class="text-sm opacity-80"><%= t("views.directory.empty") %></p>
+  <% else %>
+    <%# Desktop tabela %>
+    <div class="hidden sm:block">
+      <table class="w-full text-sm border-collapse">
+        <thead>
+          <tr class="border-b border-yellow-300/60 dark:border-yellow-700/60">
+            <th scope="col" class="py-2 pr-3 text-left font-semibold text-slate-800 dark:text-slate-200 w-[15%]">
+              <%= t("views.directory.internal") %>
+            </th>
+            <th scope="col" class="py-2 pr-3 text-left font-semibold text-slate-800 dark:text-slate-200 w-[25%]">
+              <%= t("views.directory.external") %>
+            </th>
+            <th scope="col" class="py-2 pr-3 text-left font-semibold text-slate-800 dark:text-slate-200">
+              <%= t("views.directory.naziv") %>
+            </th>
+            <th scope="col" class="py-2 text-left font-semibold text-slate-800 dark:text-slate-200 w-[18%]">
+              <%= t("views.directory.enota") %>
+            </th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-yellow-200/50 dark:divide-yellow-800/40">
+          <% directory_rows.each do |row| %>
+            <tr class="hover:bg-yellow-200/30 dark:hover:bg-yellow-900/20">
+              <td class="py-2 pr-3 font-mono text-sm"><%= directory_tel_link(row.internal) %></td>
+              <td class="py-2 pr-3 font-mono text-sm"><%= directory_tel_link(row.external) %></td>
+              <td class="py-2 pr-3 font-medium"><%= row.naziv %></td>
+              <td class="py-2"><%= directory_unit_badge(row.enota, row.unit_kind) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <%# Mobilne kartice %>
+    <div class="sm:hidden space-y-2">
+      <% directory_rows.each do |row| %>
+        <article class="rounded-lg border border-yellow-300/60 dark:border-yellow-700/60 bg-white/50 dark:bg-slate-900/30 p-3">
+          <div class="flex items-start justify-between gap-2 mb-2">
+            <h3 class="font-semibold text-slate-900 dark:text-slate-100"><%= row.naziv %></h3>
+            <%= directory_unit_badge(row.enota, row.unit_kind) %>
+          </div>
+          <dl class="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-sm">
+            <dt class="text-slate-600 dark:text-slate-400"><%= t("views.directory.internal") %></dt>
+            <dd class="font-mono"><%= directory_tel_link(row.internal) %></dd>
+            <dt class="text-slate-600 dark:text-slate-400"><%= t("views.directory.external") %></dt>
+            <dd class="font-mono"><%= directory_tel_link(row.external) %></dd>
+          </dl>
+        </article>
+      <% end %>
+    </div>
+  <% end %>
+
+  <p class="mt-4 pt-3 border-t border-yellow-300/50 dark:border-yellow-700/50">
+    <%= link_to t("views.home.full_directory"), persons_path,
+        class: "text-sm font-semibold text-slate-800 dark:text-slate-200 hover:text-indigo-700 dark:hover:text-indigo-300 underline-offset-2 hover:underline" %>
+  </p>
 <% end %>

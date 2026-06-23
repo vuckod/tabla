@@ -4,5 +4,6 @@ class HomeController < ApplicationController
 
   def index
     @announcements = Announcement.active.recent
+    @directory_rows = DirectoryTableBuilder.rows
   end
 end

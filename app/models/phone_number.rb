@@ -21,6 +21,10 @@ class PhoneNumber < ApplicationRecord
   private
 
   def person_or_location_present
+    # Preverjamo tudi asociirana objekta (person / location), ne samo tujih ključev:
+    # pri gnezdenem ustvarjanju (accepts_nested_attributes_for) oseba še nima id-ja,
+    # ko se številka validira, zato person_id še ni nastavljen — person objekt pa je.
+    return if person.present? || location.present?
     return if person_id.present? || location_id.present?
 
     errors.add(:base, "Številka mora pripadati osebi ali lokaciji")

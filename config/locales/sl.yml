@@ -141,10 +141,17 @@ sl:
       external_links: "Zunanje povezave"
       quick_links: "Hitre povezave"
       coming_soon: "Vsebina pride kmalu."
+      full_directory: "Celoten imenik →"
       all_links: "Vse povezave"
       all_documents: "Vsi dokumenti →"
       urgent_announcements: "Nujna obvestila"
       announcement_expires: "Velja do"
+    directory:
+      internal: "Interna"
+      external: "Zunanja"
+      naziv: "Naziv"
+      enota: "Enota"
+      empty: "Ni vnosov v imeniku."
     documents:
       title: "Dokumenti"
       all: "Vsi"

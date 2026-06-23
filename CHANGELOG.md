@@ -5,6 +5,7 @@ Vse pomembne spremembe so dokumentirane v tej datoteki.
 ## [Unreleased]
 
 ### Dodano
+- Tabelaričen telefonski imenik na domači strani (interna/zunanja/naziv/enota, osebe + samostojna mesta)
 - Prenova postavitve: mreža 8:2:2 na domači strani, ~90% širina vsebine, živahni barvni bloki
 - Ime aplikacije: "Intranet (tabla) KKC Lendava — Lendvai KKK"
 - Nujna obvestila (`Announcement`): model, admin CRUD, prikaz na domači strani z avtomatskim potekom po 7 dneh
