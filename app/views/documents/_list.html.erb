@@ -1,0 +1,28 @@
+<%= turbo_frame_tag "documents_list" do %>
+  <nav class="flex flex-wrap gap-2 mb-4 print:hidden"
+       aria-label="<%= t("views.documents.categories_nav") %>">
+    <%= category_filter_all_chip(selected_category_id, documents_filter_url(filter_base)) %>
+
+    <% document_categories.each do |category| %>
+      <%= category_filter_chip(category, selected_category_id, documents_filter_url(filter_base, category.id)) %>
+    <% end %>
+  </nav>
+
+  <% if documents.empty? %>
+    <p class="text-sm opacity-80 py-4 text-center">
+      <%= t("views.documents.empty_category") %>
+    </p>
+  <% else %>
+    <div class="space-y-3">
+      <% documents.each do |document| %>
+        <%= render "documents/document_row", document: document %>
+      <% end %>
+    </div>
+
+    <% if pagy.pages > 1 %>
+      <div class="mt-6 flex justify-center print:hidden">
+        <%== pagy_nav(pagy) %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

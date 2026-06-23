@@ -105,19 +105,20 @@ puts "  Povezave: #{Link.count}"
 
 puts "=== Seed: Kategorije dokumentov ==="
 kategorije_dokumentov = [
-  { name: "Interni akti", slug: "interni_akti", position: 1 },
-  { name: "Obvestila za zaposlene", slug: "obvestila", position: 2 },
-  { name: "Zapisniki sej sveta zavoda", slug: "zapisniki_ssz", position: 3 },
-  { name: "Zapisniki sestankov delavcev - knjižnica", slug: "zapisniki_knjiznica", position: 4 },
-  { name: "Zapisniki sestankov delavcev - NOE", slug: "zapisniki_noe", position: 5 },
-  { name: "Pravilniki, navodila, ukrepi", slug: "pravilniki", position: 6 }
+  { name: "Interni akti", slug: "interni_akti", position: 1, color: "red" },
+  { name: "Obvestila za zaposlene", slug: "obvestila", position: 2, color: "amber" },
+  { name: "Obvestilo delavcem", slug: "obvestilo_delavcem", position: 3, color: "orange" },
+  { name: "Zapisniki sej sveta zavoda", slug: "zapisniki_ssz", position: 4, color: "blue" },
+  { name: "Zapisniki sestankov delavcev - knjižnica", slug: "zapisniki_knjiznica", position: 5, color: "green" },
+  { name: "Zapisniki sestankov delavcev - NOE", slug: "zapisniki_noe", position: 6, color: "purple" },
+  { name: "Pravilniki, navodila, ukrepi", slug: "pravilniki", position: 7, color: "slate" },
+  { name: "Aneksi", slug: "aneksi", position: 8, color: "indigo" }
 ]
 
 kategorije_dokumentov.each do |attrs|
-  DocumentCategory.find_or_create_by!(slug: attrs[:slug]) do |dc|
-    dc.name = attrs[:name]
-    dc.position = attrs[:position]
-  end
+  category = DocumentCategory.find_or_initialize_by(slug: attrs[:slug])
+  category.assign_attributes(attrs)
+  category.save!
 end
 puts "  Kategorije dokumentov: #{DocumentCategory.count}"
 

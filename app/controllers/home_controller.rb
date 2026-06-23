@@ -1,5 +1,7 @@
 # Tabla — domača stran (dashboard)
 class HomeController < ApplicationController
+  include DocumentListing
+
   skip_before_action :require_login
 
   def index
@@ -7,6 +9,7 @@ class HomeController < ApplicationController
     @directory_rows = DirectoryTableBuilder.rows
     @internal_links = Link.internal_apps.ordered
     @external_link_categories = external_link_categories_for_home
+    load_documents_list
   end
 
   private

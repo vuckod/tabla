@@ -16,6 +16,10 @@
   </div>
 
   <div>
-    <%= render "home/documents" %>
+    <%= render "home/documents",
+        document_categories: @document_categories,
+        selected_category_id: @selected_category_id,
+        documents: @documents,
+        pagy: @pagy %>
   </div>
 </div>

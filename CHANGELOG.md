@@ -5,6 +5,8 @@ Vse pomembne spremembe so dokumentirane v tej datoteki.
 ## [Unreleased]
 
 ### Dodano
+- Domača stran: blok dokumentov z barvnimi značkami (kategorije), filtrom po Turbo Frame in paginacijo
+- Deljen partial `documents/_list` med domačo stranjo in `/documents`
 - Domača stran: zeleni blok internih aplikacij in modri blok zunanjih povezav (po kategorijah)
 - Tabelaričen telefonski imenik na domači strani (interna/zunanja/naziv/enota, osebe + samostojna mesta)
 - Prenova postavitve: mreža 8:2:2 na domači strani, ~90% širina vsebine, živahni barvni bloki
