@@ -163,6 +163,13 @@ sl:
       empty_category: "Ni dokumentov v tej kategoriji."
       categories_nav: "Kategorije dokumentov"
       unpublished: "Ni objavljeno"
+    search:
+      title: "Iskanje"
+      placeholder: "Išči dokumente..."
+      submit: "Išči"
+      prompt: "Vnesite iskalni niz in pritisnite Enter."
+      results_for: "Rezultati za \"%{query}\" (%{count})"
+      no_results: "Ni zadetkov za \"%{query}\"."
     persons:
       title: "Telefonski imenik"
       employees: "Zaposleni"

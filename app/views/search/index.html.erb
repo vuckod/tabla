@@ -1,0 +1,33 @@
+<% content_for :title, t("views.search.title") %>
+
+<h1 class="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-6">
+  <%= t("views.search.title") %>
+</h1>
+
+<div class="max-w-xl mb-8 print:hidden">
+  <%= render "layouts/search_form" %>
+</div>
+
+<% if @query.blank? %>
+  <p class="text-slate-500 dark:text-slate-400"><%= t("views.search.prompt") %></p>
+<% elsif @documents.empty? %>
+  <p class="text-slate-500 dark:text-slate-400 py-8">
+    <%= t("views.search.no_results", query: @query) %>
+  </p>
+<% else %>
+  <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">
+    <%= t("views.search.results_for", query: @query, count: @pagy.count) %>
+  </p>
+
+  <div class="space-y-3">
+    <% @documents.each do |document| %>
+      <%= render "documents/document_row", document: document %>
+    <% end %>
+  </div>
+
+  <% if @pagy.pages > 1 %>
+    <div class="mt-8 flex justify-center print:hidden">
+      <%== pagy_nav(@pagy) %>
+    </div>
+  <% end %>
+<% end %>

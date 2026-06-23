@@ -1,8 +1,8 @@
 <header class="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 print:hidden"
         data-controller="mobile-menu">
   <div class="<%= page_container_classes %>">
-    <div class="flex items-center justify-between h-16">
-      <div class="flex items-center gap-4 lg:gap-8 min-w-0">
+    <div class="flex items-center justify-between h-16 gap-3">
+      <div class="flex items-center gap-4 lg:gap-8 min-w-0 shrink-0">
         <%= link_to root_path,
             class: "hover:text-indigo-600 dark:hover:text-indigo-400 shrink-0" do %>
           <span class="block leading-tight">
@@ -15,18 +15,22 @@
           </span>
         <% end %>
 
-        <nav class="hidden sm:flex sm:items-center sm:gap-1" aria-label="<%= t("views.layouts.header.main_nav") %>">
+        <nav class="hidden lg:flex lg:items-center lg:gap-1" aria-label="<%= t("views.layouts.header.main_nav") %>">
           <%= render "layouts/nav_links" %>
         </nav>
       </div>
 
-      <div class="flex items-center gap-2">
+      <div class="hidden md:flex flex-1 max-w-md mx-2">
+        <%= render "layouts/search_form" %>
+      </div>
+
+      <div class="flex items-center gap-2 shrink-0">
         <div class="hidden sm:flex sm:items-center sm:gap-4">
           <%= render "layouts/header_actions" %>
         </div>
 
         <button type="button"
-                class="sm:hidden inline-flex items-center justify-center p-2 rounded-md
+                class="lg:hidden inline-flex items-center justify-center p-2 rounded-md
                        text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700
                        focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 data-action="click->mobile-menu#toggle"
@@ -38,9 +42,13 @@
       </div>
     </div>
 
-    <nav class="hidden sm:hidden pb-4 space-y-1 border-t border-slate-200 dark:border-slate-700 pt-4"
+    <nav class="hidden lg:hidden pb-4 space-y-3 border-t border-slate-200 dark:border-slate-700 pt-4"
          data-mobile-menu-target="menu"
          aria-label="<%= t("views.layouts.header.main_nav") %>">
+      <div class="md:hidden">
+        <%= render "layouts/search_form" %>
+      </div>
+
       <%= render "layouts/nav_links", mobile: true %>
       <div class="pt-4 mt-4 border-t border-slate-200 dark:border-slate-700 space-y-2">
         <%= render "layouts/header_actions", mobile: true %>

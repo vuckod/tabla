@@ -5,6 +5,7 @@ Vse pomembne spremembe so dokumentirane v tej datoteki.
 ## [Unreleased]
 
 ### Dodano
+- Globalni iskalnik po dokumentih v headerju (`/search`, naslov + opis, brez šumnikov)
 - Domača stran: blok dokumentov z barvnimi značkami (kategorije), filtrom po Turbo Frame in paginacijo
 - Deljen partial `documents/_list` med domačo stranjo in `/documents`
 - Domača stran: zeleni blok internih aplikacij in modri blok zunanjih povezav (po kategorijah)
