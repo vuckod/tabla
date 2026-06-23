@@ -42,4 +42,35 @@ module LinksHelper
       end
     end
   end
+
+  def link_to_internal_block(link)
+    options = {
+      class: "block rounded-lg px-3 py-2.5 text-sm font-semibold " \
+             "bg-white/85 dark:bg-slate-900/50 text-slate-900 dark:text-slate-100 " \
+             "border border-green-700/20 dark:border-green-500/30 shadow-sm " \
+             "hover:bg-white dark:hover:bg-slate-900/70 transition-colors"
+    }
+    if link.new_tab?
+      options[:target] = "_blank"
+      options[:rel] = "noopener noreferrer"
+    end
+
+    link_to link.url, options do
+      content_tag(:span, class: "inline-flex items-center gap-2") do
+        safe_join([
+          content_tag(:span, "🏠", class: "shrink-0", aria: { hidden: true }),
+          content_tag(:span, link.title, class: "leading-snug")
+        ])
+      end
+    end
+  end
+
+  def link_to_external_block(link)
+    link_to link.title, link.url,
+            class: "block text-xs leading-tight truncate text-slate-900 dark:text-slate-100 " \
+                   "hover:text-indigo-800 dark:hover:text-indigo-300 hover:underline",
+            title: link.title,
+            target: "_blank",
+            rel: "noopener noreferrer"
+  end
 end

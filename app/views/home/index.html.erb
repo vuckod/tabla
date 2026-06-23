@@ -8,10 +8,10 @@
       <%= render "home/directory", directory_rows: @directory_rows %>
     </div>
     <div class="lg:col-span-2">
-      <%= render "home/internal_apps" %>
+      <%= render "home/internal_apps", internal_links: @internal_links %>
     </div>
     <div class="lg:col-span-2">
-      <%= render "home/external_links" %>
+      <%= render "home/external_links", external_link_categories: @external_link_categories %>
     </div>
   </div>
 

@@ -8,4 +8,5 @@ class Link < ApplicationRecord
 
   scope :ordered, -> { order(:position, :title) }
   scope :internal_apps, -> { where(internal_app: true) }
+  scope :external_links, -> { where(internal_app: false) }
 end

@@ -78,18 +78,28 @@ puts "  Kategorije povezav: #{LinkCategory.count}"
 puts "=== Seed: Povezave ==="
 interne_apps = LinkCategory.find_by!(name: "Interne aplikacije")
 povezave = [
-  { title: "Prisotnost", url: "https://p.kl-kl.si", internal_app: true, category: interne_apps },
-  { title: "Delovodnik", url: "https://d.kl-kl.si", internal_app: true, category: interne_apps },
-  { title: "COBISS", url: "https://www.cobiss.si", category: LinkCategory.find_by!(name: "COBISS") },
-  { title: "Uradni list RS", url: "https://www.uradni-list.si", category: LinkCategory.find_by!(name: "Pravni viri") },
-  { title: "dlib.si", url: "https://www.dlib.si", category: LinkCategory.find_by!(name: "Drugo") }
+  { title: "Prisotnost", url: "https://p.kl-kl.si", internal_app: true, position: 1, category: interne_apps },
+  { title: "Delovodnik", url: "https://d.kl-kl.si", internal_app: true, position: 2, category: interne_apps },
+  { title: "SharePoint", url: "https://klkl.sharepoint.com", internal_app: true, position: 3, category: interne_apps },
+  { title: "Statistika", url: "https://statistika.kl-kl.si", internal_app: true, position: 4, category: interne_apps },
+  { title: "Naslovi", url: "https://naslovi.kl-kl.si", internal_app: true, position: 5, category: interne_apps },
+  { title: "COBISS", url: "https://www.cobiss.si", position: 1, category: LinkCategory.find_by!(name: "COBISS") },
+  { title: "COBISS KL", url: "https://bib.cobiss.net/biblioteke/Lendava", position: 2, category: LinkCategory.find_by!(name: "COBISS") },
+  { title: "Geslovnik", url: "https://www.cobiss.net/geslovnik/", position: 1, category: LinkCategory.find_by!(name: "Geslovnik / UDK") },
+  { title: "IZUM", url: "https://www.izum.si", position: 1, category: LinkCategory.find_by!(name: "NUK / IZUM") },
+  { title: "NUK", url: "https://www.nuk.uni-lj.si", position: 2, category: LinkCategory.find_by!(name: "NUK / IZUM") },
+  { title: "Uradni list RS", url: "https://www.uradni-list.si", position: 1, category: LinkCategory.find_by!(name: "Pravni viri") },
+  { title: "Občina Lendava", url: "https://www.lendava.si", position: 1, category: LinkCategory.find_by!(name: "Občine") },
+  { title: "Občina Dobrovnik", url: "https://www.dobrovnik.si", position: 2, category: LinkCategory.find_by!(name: "Občine") },
+  { title: "dlib.si", url: "https://www.dlib.si", position: 1, category: LinkCategory.find_by!(name: "Drugo") }
 ]
 
 povezave.each do |attrs|
-  Link.find_or_create_by!(title: attrs[:title], link_category: attrs[:category]) do |l|
-    l.url = attrs[:url]
-    l.internal_app = attrs[:internal_app] || false
-  end
+  category = attrs.delete(:category)
+  link = Link.find_or_initialize_by(title: attrs[:title], link_category: category)
+  link.assign_attributes(attrs)
+  link.new_tab = true unless link.internal_app?
+  link.save!
 end
 puts "  Povezave: #{Link.count}"
 
