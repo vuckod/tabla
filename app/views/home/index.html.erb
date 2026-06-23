@@ -1,61 +1,21 @@
-<h1 class="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-8">
-  <%= t("views.home.title") %>
-</h1>
+<div class="space-y-6">
+  <% if @announcements.any? %>
+    <%= render "home/announcements", announcements: @announcements %>
+  <% end %>
 
-<%= render "announcements" %>
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
+    <div class="lg:col-span-8">
+      <%= render "home/directory" %>
+    </div>
+    <div class="lg:col-span-2">
+      <%= render "home/internal_apps" %>
+    </div>
+    <div class="lg:col-span-2">
+      <%= render "home/external_links" %>
+    </div>
+  </div>
 
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-  <section aria-labelledby="home-phone-directory">
-    <h2 id="home-phone-directory" class="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-4">
-      <%= t("views.home.phone_directory") %>
-    </h2>
-  </section>
-
-  <section aria-labelledby="home-quick-links">
-    <h2 id="home-quick-links" class="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-4">
-      <%= t("views.home.quick_links") %>
-    </h2>
-
-    <% if @internal_links.any? %>
-      <div class="space-y-2">
-        <% @internal_links.each do |link| %>
-          <%= link_to_entry(link, variant: :compact) %>
-        <% end %>
-      </div>
-    <% else %>
-      <p class="text-sm text-slate-500 dark:text-slate-400"><%= t("views.links.no_internal_apps") %></p>
-    <% end %>
-
-    <p class="mt-4">
-      <%= link_to t("views.home.all_links"), links_path,
-          class: "text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:underline" %>
-    </p>
-  </section>
-
-  <section aria-labelledby="home-recent-documents">
-    <h2 id="home-recent-documents" class="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-4">
-      <%= t("views.home.recent_documents") %>
-    </h2>
-
-    <% if @recent_documents.any? %>
-      <ul class="space-y-2">
-        <% @recent_documents.each do |document| %>
-          <li>
-            <%= link_to document.title, document_path(document),
-                class: "text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:underline" %>
-            <span class="text-xs text-slate-500 dark:text-slate-400 ml-2">
-              <%= l(document.published_at.to_date, format: :short) if document.published_at %>
-            </span>
-          </li>
-        <% end %>
-      </ul>
-    <% else %>
-      <p class="text-sm text-slate-500 dark:text-slate-400"><%= t("views.documents.empty_category") %></p>
-    <% end %>
-
-    <p class="mt-4">
-      <%= link_to t("views.home.all_documents"), documents_path,
-          class: "text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:underline" %>
-    </p>
-  </section>
+  <div>
+    <%= render "home/documents" %>
+  </div>
 </div>

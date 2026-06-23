@@ -1,0 +1,10 @@
+<% color = local_assigns.fetch(:color, :indigo) %>
+
+<section class="rounded-xl overflow-hidden shadow-md">
+  <header class="px-4 py-2 font-bold text-lg <%= block_header_classes(color) %>">
+    <%= title %>
+  </header>
+  <div class="p-4 <%= block_body_classes(color) %>">
+    <%= yield %>
+  </div>
+</section>

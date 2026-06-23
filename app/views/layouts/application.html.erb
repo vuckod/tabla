@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html lang="sl" data-controller="dark-mode">
   <head>
-    <title><%= content_for(:title) || "Tabla" %></title>
+    <title>
+      <% if content_for?(:title) %>
+        <%= content_for(:title) %> | <%= t("views.layouts.header.page_title") %>
+      <% else %>
+        <%= t("views.layouts.header.page_title") %>
+      <% end %>
+    </title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Tabla">
+    <meta name="application-name" content="<%= t("views.layouts.header.page_title") %>">
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -34,7 +40,7 @@
       <%= render "layouts/flash" %>
     <% end %>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <main class="<%= page_container_classes %> py-6">
       <%= yield %>
     </main>
   </body>

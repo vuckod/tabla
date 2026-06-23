@@ -105,7 +105,9 @@ sl:
   views:
     layouts:
       header:
-        title: "Tabla — Intranet KL-KL"
+        title: "Intranet (tabla) KKC Lendava"
+        subtitle: "Lendvai KKK"
+        page_title: "Intranet (tabla) KKC Lendava — Lendvai KKK"
         home: "Domov"
         directory: "Imenik"
         links: "Povezave"
@@ -132,10 +134,13 @@ sl:
       logout: "Odjava"
       invalid_credentials: "Napačno uporabniško ime ali geslo."
     home:
-      title: "Intranet — Knjižnica Lendava"
-      recent_documents: "Zadnji dokumenti"
+      title: "Intranet (tabla) KKC Lendava"
+      recent_documents: "Dokumenti"
       phone_directory: "Telefonski imenik"
+      internal_apps: "Interne aplikacije"
+      external_links: "Zunanje povezave"
       quick_links: "Hitre povezave"
+      coming_soon: "Vsebina pride kmalu."
       all_links: "Vse povezave"
       all_documents: "Vsi dokumenti →"
       urgent_announcements: "Nujna obvestila"
