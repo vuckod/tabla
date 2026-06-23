@@ -5,6 +5,7 @@ Vse pomembne spremembe so dokumentirane v tej datoteki.
 ## [Unreleased]
 
 ### Dodano
+- Admin obrazci: skupni `AdminFormHelper`, kartična postavitev, sekcije, konsistentni gumbi in prazna stanja v seznamih
 - Globalni iskalnik po dokumentih v headerju (`/search`, naslov + opis, brez šumnikov)
 - Domača stran: blok dokumentov z barvnimi značkami (kategorije), filtrom po Turbo Frame in paginacijo
 - Deljen partial `documents/_list` med domačo stranjo in `/documents`

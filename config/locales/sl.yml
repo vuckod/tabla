@@ -215,6 +215,12 @@ sl:
         label_hint: "npr. Centrala, Blagajna"
       shared:
         position_hint: "Manjše število = višje na seznamu"
+        cancel: "Prekliči"
+        basic_data: "Osnovni podatki"
+        publication_settings: "Nastavitve objave"
+        display_settings: "Nastavitve prikaza"
+        errors_title: "Obrazec vsebuje napake"
+        empty_list: "Ni vnosov."
       link_categories:
         title: "Kategorije povezav"
         new: "Nova kategorija"

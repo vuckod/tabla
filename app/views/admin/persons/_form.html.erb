@@ -1,58 +1,22 @@
-<%= form_with model: [:admin, person], class: "space-y-6 max-w-3xl" do |f| %>
-  <% if person.errors.any? %>
-    <div class="p-4 rounded-lg bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-800">
-      <ul class="list-disc list-inside text-sm">
-        <% person.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
+<%= form_with model: [:admin, person], class: "max-w-3xl" do |f| %>
+  <%= render layout: "admin/shared/form_card", locals: { object: person } do %>
+    <%= render layout: "admin/shared/form_section", locals: { title: t("views.admin.shared.basic_data") } do %>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <%= admin_text_field f, :first_name, label: Person.human_attribute_name(:first_name) %>
+        <%= admin_text_field f, :last_name, label: Person.human_attribute_name(:last_name), required: true %>
+      </div>
+
+      <%= admin_text_field f, :position_title, label: Person.human_attribute_name(:position_title) %>
+      <%= admin_text_field f, :email, label: Person.human_attribute_name(:email), input: :email_field %>
+      <%= admin_select f, :location_id, nil,
+          label: Person.human_attribute_name(:location),
+          collection: Location.ordered,
+          include_blank: t("views.admin.persons.no_location") %>
+      <%= admin_checkbox f, :active, label: Person.human_attribute_name(:active) %>
+    <% end %>
+
+    <%= render "admin/phone_numbers/nested_form", form: f %>
+
+    <%= render "admin/shared/form_actions", form: f, cancel_path: admin_persons_path %>
   <% end %>
-
-  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-    <div>
-      <%= f.label :first_name, class: "block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1" %>
-      <%= f.text_field :first_name,
-          class: "w-full rounded-md border-slate-300 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
-    </div>
-
-    <div>
-      <%= f.label :last_name, class: "block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1" %>
-      <%= f.text_field :last_name, required: true,
-          class: "w-full rounded-md border-slate-300 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
-    </div>
-  </div>
-
-  <div>
-    <%= f.label :position_title, class: "block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1" %>
-    <%= f.text_field :position_title,
-        class: "w-full rounded-md border-slate-300 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
-  </div>
-
-  <div>
-    <%= f.label :email, class: "block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1" %>
-    <%= f.email_field :email,
-        class: "w-full rounded-md border-slate-300 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
-  </div>
-
-  <div>
-    <%= f.label :location_id, class: "block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1" %>
-    <%= f.collection_select :location_id, Location.ordered, :id, :name,
-        { include_blank: t("views.admin.persons.no_location") },
-        class: "w-full rounded-md border-slate-300 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
-  </div>
-
-  <div class="flex items-center gap-2">
-    <%= f.check_box :active, class: "rounded border-slate-300 dark:border-slate-600 text-indigo-600 focus:ring-indigo-500" %>
-    <%= f.label :active, class: "text-sm text-slate-700 dark:text-slate-300" %>
-  </div>
-
-  <%= render "admin/phone_numbers/nested_form", form: f %>
-
-  <div class="flex gap-3 pt-4">
-    <%= f.submit class: "px-4 py-2 bg-indigo-600 dark:bg-indigo-500 text-white text-sm font-medium rounded-md
-                          hover:bg-indigo-700 dark:hover:bg-indigo-600 shadow-sm cursor-pointer" %>
-    <%= link_to t("views.shared.back"), admin_persons_path,
-        class: "px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400" %>
-  </div>
 <% end %>

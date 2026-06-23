@@ -1,0 +1,9 @@
+<div class="rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm overflow-hidden">
+  <% if object.errors.any? %>
+    <%= render "admin/shared/error_summary", object: object %>
+  <% end %>
+
+  <div class="p-6 space-y-8">
+    <%= yield %>
+  </div>
+</div>
