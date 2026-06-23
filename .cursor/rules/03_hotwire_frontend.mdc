@@ -9,3 +9,4 @@ globs: app/views/**/*.erb, app/javascript/controllers/**/*.js, app/assets/styles
 - **Stimulus kontrolerji:** Za lokalne iskalnike znotraj tabel uporabljaj `auto-submit` kontroler. Globalni iskalniki NAJ NE uporabljajo auto-submita (potrditev z Enter).
 - **Prevodi (I18n):** Ne kodirati besedil v HTML. Zanašaj se na Rails I18n prevode v `config/locales/sl.yml`.
 - **Print:** Elemente, ki se ne smejo natisniti (gumbi, iskalniki), označi s `print:hidden`.
+- **Tailwind build po spremembi razredov:** Razvojno okolje na macOS Docker NE poganja `tailwindcss:watch` (file system events ne pridejo čez bind mount). Po vsaki spremembi view, helper ali partial datoteke, ki uvaja NOVE Tailwind razrede, je treba ročno klicati: `docker compose exec rails_app bin/rails tailwindcss:build` (ali `bin/tailwind-build`). Brez tega bodo novi razredi v HTML, brez CSS-a, in učinki ne bodo vidni.
