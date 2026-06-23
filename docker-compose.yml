@@ -39,5 +39,21 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
+  # Tailwind CSS watch — samodejno prevaja CSS ob spremembi view datotek.
+  # Brez tega je treba ročno poganjati `bin/rails tailwindcss:build` ob vsaki spremembi razredov.
+  tailwind:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: tabla_tailwind_watch
+    command: bundle exec rails tailwindcss:watch
+    volumes:
+      - .:/rails
+    depends_on:
+      - rails_app
+    environment:
+      TZ: Europe/Ljubljana
+      RAILS_ENV: development
+
 volumes:
   tabla_pgsql_data:

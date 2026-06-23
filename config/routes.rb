@@ -43,6 +43,7 @@ Rails.application.routes.draw do
     resources :link_categories
     resources :links
     resources :documents
+    resources :announcements
   end
 
   # --- Iskanje ---

@@ -16,6 +16,7 @@ sl:
       link: "Povezava"
       link_category: "Kategorija povezav"
       document_category: "Kategorija dokumentov"
+      announcement: "Obvestilo"
       user: "Uporabnik"
     attributes:
       document:
@@ -33,6 +34,13 @@ sl:
         position: "Vrstni red"
         color: "Barva"
         description: "Opis"
+      announcement:
+        title: "Naslov"
+        body: "Vsebina"
+        unit: "Enota"
+        published_at: "Datum objave"
+        expires_at: "Datum poteka"
+        pinned: "Pripeto"
       person:
         first_name: "Ime"
         last_name: "Priimek"
@@ -82,6 +90,11 @@ sl:
       headquarters: "Sedež"
       branch: "Enota"
       mobile_library: "Krajevna knjižnica"
+  announcement:
+    units:
+      both: "Knjižnica in gledališče"
+      library: "Knjižnica"
+      theatre: "Gledališče"
   helpers:
     submit:
       create: "Shrani"
@@ -125,6 +138,8 @@ sl:
       quick_links: "Hitre povezave"
       all_links: "Vse povezave"
       all_documents: "Vsi dokumenti →"
+      urgent_announcements: "Nujna obvestila"
+      announcement_expires: "Velja do"
     documents:
       title: "Dokumenti"
       all: "Vsi"
@@ -215,3 +230,17 @@ sl:
         published_at_hint: "Pustite prazno ali nastavite prihodnji datum za zakasnjeno objavo"
         internal_only_hint: "Vidno samo administratorjem in urednikom"
         notify_staff_hint: "Obvesti delavce po e-pošti ob objavi (pošiljanje pride v fazi 2)"
+      announcements:
+        title: "Nujna obvestila"
+        new: "Novo obvestilo"
+        edit: "Uredi obvestilo"
+        created: "Obvestilo je bilo uspešno objavljeno."
+        updated: "Obvestilo je bilo uspešno posodobljeno."
+        destroyed: "Obvestilo je bilo izbrisano."
+        status: "Status"
+        active: "Aktivno"
+        expired: "Poteklo"
+        scheduled: "Načrtovano"
+        pinned: "Pripeto"
+        expires_at_hint: "Prazno = samodejno 7 dni od objave (samo ob ustvarjanju)"
+        pinned_hint: "Ostane prikazano tudi po preteku roka"

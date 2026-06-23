@@ -5,6 +5,8 @@ Vse pomembne spremembe so dokumentirane v tej datoteki.
 ## [Unreleased]
 
 ### Dodano
+- Nujna obvestila (`Announcement`): model, admin CRUD, prikaz na domači strani z avtomatskim potekom po 7 dneh
+- Politika `AnnouncementPolicy`
 - Dokumenti: javni prikaz (`/documents`) z zavihki po kategorijah (Turbo Frame), paginacija in prenos PDF
 - Admin CRUD za dokumente (upload PDF, kategorija, datum objave, internal_only, notify_staff)
 - Politika `DocumentPolicy` z defense-in-depth za `internal_only` dokumente

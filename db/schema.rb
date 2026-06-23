@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_19_100015) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_19_100016) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -85,6 +85,22 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_19_100015) do
     t.index ["user_id"], name: "index_ahoy_visits_on_user_id"
     t.index ["visit_token"], name: "index_ahoy_visits_on_visit_token", unique: true
     t.index ["visitor_token", "started_at"], name: "index_ahoy_visits_on_visitor_token_and_started_at"
+  end
+
+  create_table "announcements", force: :cascade do |t|
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.integer "created_by_id"
+    t.datetime "expires_at"
+    t.boolean "pinned", default: false, null: false
+    t.datetime "published_at", null: false
+    t.string "title", null: false
+    t.integer "unit", default: 0, null: false
+    t.datetime "updated_at", null: false
+    t.integer "updated_by_id"
+    t.index ["expires_at"], name: "index_announcements_on_expires_at"
+    t.index ["published_at"], name: "index_announcements_on_published_at"
+    t.index ["unit"], name: "index_announcements_on_unit"
   end
 
   create_table "audits", force: :cascade do |t|

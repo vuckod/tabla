@@ -111,4 +111,13 @@ kategorije_dokumentov.each do |attrs|
 end
 puts "  Kategorije dokumentov: #{DocumentCategory.count}"
 
+puts "=== Seed: Nujna obvestila (vzorec) ==="
+Announcement.find_or_create_by!(title: "Vzdrževalna dela na strežniku") do |a|
+  a.body = "V petek 28.6. med 18:00 in 20:00 bodo potekala vzdrževalna dela. Intranet bo začasno nedosegljiv."
+  a.unit = :both
+  a.published_at = Time.current
+  a.expires_at = 7.days.from_now
+end
+puts "  Obvestila: #{Announcement.count}"
+
 puts "=== Seed končan ==="
