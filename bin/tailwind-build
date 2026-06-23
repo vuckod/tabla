@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Bližnjica za ponovno prevedbo Tailwind CSS po spremembi view/helper datotek.
+# Glej docker-compose.yml za razlago, zakaj watch ne deluje na macOS Docker.
+set -e
+docker compose exec rails_app bin/rails tailwindcss:build
