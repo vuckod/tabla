@@ -12,7 +12,7 @@ class Document < ApplicationRecord
   has_many :ocr_logs, as: :record, dependent: :destroy
   has_one_attached :file
 
-  audited except: %i[updated_at created_at ocr_text]
+  audited except: %i[updated_at created_at ocr_text source_url]
   has_associated_audits
 
   MAX_FILE_SIZE = 50.megabytes
