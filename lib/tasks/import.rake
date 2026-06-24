@@ -22,4 +22,16 @@ namespace :import do
 
     LinkRecategorizer.call(scope: scope)
   end
+
+  desc "Uvoz telefonskih številk iz stare table (HTML)"
+  task :phones, [:path] => :environment do |_t, args|
+    path = args[:path] || LegacyPhoneImporter::DEFAULT_HTML_PATH.to_s
+    LegacyPhoneImporter.call(path, dry_run: false)
+  end
+
+  desc "Suhi tek telefonskih — parsiraj in izpiši ujemanja, brez shranjevanja"
+  task :phones_dry, [:path] => :environment do |_t, args|
+    path = args[:path] || LegacyPhoneImporter::DEFAULT_HTML_PATH.to_s
+    LegacyPhoneImporter.call(path, dry_run: true)
+  end
 end

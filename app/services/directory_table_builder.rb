@@ -2,7 +2,10 @@
 
 # Sestavi enoten seznam vrstic za kompakten imenik na domači strani.
 class DirectoryTableBuilder
-  DirectoryRow = Data.define(:internal, :external, :naziv, :enota, :unit_kind)
+  DirectoryRow = Data.define(:internal, :external, :naziv, :enota, :unit_kind, :unit_position)
+
+  # Lokacije brez position (npr. samostojne številke brez lokacije) gredo na konec.
+  NO_POSITION = 9_999
 
   def self.rows
     new.rows
@@ -11,7 +14,7 @@ class DirectoryTableBuilder
   def rows
     (person_rows + standalone_location_rows)
       .reject { |row| row.internal.blank? && row.external.blank? }
-      .sort_by { |row| [row.enota.to_s.downcase, row.naziv.to_s.downcase] }
+      .sort_by { |row| [row.unit_position, internal_sort_key(row.internal), row.naziv.to_s.downcase] }
   end
 
   private
@@ -24,7 +27,8 @@ class DirectoryTableBuilder
         external: number_for(numbers, :external),
         naziv: person.full_name,
         enota: unit_label(person.location),
-        unit_kind: person.location&.kind
+        unit_kind: person.location&.kind,
+        unit_position: unit_position(person.location)
       )
     end
   end
@@ -40,7 +44,8 @@ class DirectoryTableBuilder
         external: number_for(numbers, :external),
         naziv: numbers.first.label.presence || location.name,
         enota: unit_label(location),
-        unit_kind: location.kind
+        unit_kind: location.kind,
+        unit_position: unit_position(location)
       )
     end
   end
@@ -53,5 +58,17 @@ class DirectoryTableBuilder
     return "" unless location
 
     location.short_code.presence || location.name
+  end
+
+  # Vrstni red enot po Location#position (SIKLND=1, NOE=2 iz seeda). Brez lokacije → na konec.
+  def unit_position(location)
+    location&.position.presence || NO_POSITION
+  end
+
+  # Numerični ključ za sortiranje po interni številki (da "80" pride pred "650").
+  # Vrstice brez interne številke gredo na konec znotraj enote.
+  def internal_sort_key(internal)
+    digits = internal.to_s.gsub(/\D/, "")
+    digits.present? ? digits.to_i : Float::INFINITY
   end
 end

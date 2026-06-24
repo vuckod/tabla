@@ -5,6 +5,7 @@ Vse pomembne spremembe so dokumentirane v tej datoteki.
 ## [Unreleased]
 
 ### Dodano
+- Uvoz telefonskih številk iz stare table: `LegacyPhoneImporter`, rake `import:phones_dry` / `import:phones`
 - E-mail obvestila ob objavi dokumenta: `DocumentMailer`, `DocumentNotificationJob`, enota na uporabnikih/dokumentih, Outlook-kompatibilna predloga, SMTP v produkciji
 - Predgeneriranje thumbnailov: `ThumbnailGenerationService`, `ThumbnailGenerationJob`, `has_one_attached :thumbnail`, rake `thumbnails:generate_missing` / `regenerate_all`
 - Javni dostop: stran brez prijave (imenik, povezave, seznam dokumentov, iskanje); prijava za ogled/prenos dokumentov in admin; `return_to` po prijavi; `Admin::BaseController`
