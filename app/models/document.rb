@@ -11,6 +11,7 @@ class Document < ApplicationRecord
 
   has_many :ocr_logs, as: :record, dependent: :destroy
   has_one_attached :file
+  has_one_attached :thumbnail
 
   audited except: %i[updated_at created_at ocr_text source_url]
   has_associated_audits
@@ -23,8 +24,9 @@ class Document < ApplicationRecord
   validate :file_size_within_limit
   validate :file_is_pdf
 
-  before_save :mark_ocr_file_change
-  after_commit :queue_ocr_extraction, on: %i[create update]
+  before_save :mark_file_change
+  before_save :purge_thumbnail_on_file_change
+  after_commit :queue_file_processing, on: %i[create update]
   after_commit :send_notification, on: :create, if: :notify_staff?
 
   scope :published, -> { where.not(published_at: nil).where("published_at <= ?", Time.current) }
@@ -52,6 +54,10 @@ class Document < ApplicationRecord
     latest_searchable_ocr_log.present?
   end
 
+  def thumbnail_ready?
+    thumbnail.attached?
+  end
+
   meilisearch index_uid: "tabla_documents",
               auto_index: !Rails.env.test?,
               auto_remove: !Rails.env.test? do
@@ -71,18 +77,36 @@ class Document < ApplicationRecord
 
   private
 
-  def mark_ocr_file_change
-    @ocr_file_changed = attachment_changes.key?("file")
+  def mark_file_change
+    @file_changed = attachment_changes.key?("file")
+  end
+
+  def purge_thumbnail_on_file_change
+    return unless @file_changed
+
+    thumbnail.purge if thumbnail.attached?
+  end
+
+  def queue_file_processing
+    return unless file.attached?
+    return unless @file_changed
+
+    queue_ocr_extraction
+    queue_thumbnail_generation
+  ensure
+    @file_changed = false
   end
 
   def queue_ocr_extraction
-    return unless file.attached?
-    return unless @ocr_file_changed
     return unless defined?(OcrExtractionJob)
 
     OcrExtractionJob.perform_later(self)
-  ensure
-    @ocr_file_changed = false
+  end
+
+  def queue_thumbnail_generation
+    return unless defined?(ThumbnailGenerationJob)
+
+    ThumbnailGenerationJob.perform_later(self)
   end
 
   def send_notification

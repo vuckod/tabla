@@ -125,43 +125,24 @@ module DocumentsHelper
   private
 
   def build_document_thumbnail(document, width:, height:)
-    if document_thumbnail_previewable?(document)
-      document_thumbnail_image(document, width: width, height: height)
+    if document.thumbnail.attached?
+      # Proxy način (ne redirect): servira sliko direktno skozi aplikacijo brez potekajočega
+      # disk žetona. Redirect način povzroči zlomljene slike ("?"), ker brskalnik predpomni
+      # 302 preusmeritev, disk URL pa po ~5 min poteče → predpomnjena preusmeritev kaže na mrtev URL.
+      image_tag rails_storage_proxy_path(document.thumbnail),
+                class: "#{thumbnail_size_classes} object-cover rounded border " \
+                       "border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900",
+                loading: "lazy",
+                alt: document.title
     else
       document_thumbnail_fallback(width: width, height: height)
     end
   end
 
-  def document_thumbnail_previewable?(document)
-    document.file.attached? && document.file.previewable?
-  rescue StandardError
-    false
-  end
-
-  def document_thumbnail_image(document, width:, height:)
-    content_tag(:span, class: thumbnail_frame_classes) do
-      safe_join([
-        image_tag(
-          document.file.preview(resize_to_limit: [width, height]),
-          class: "#{thumbnail_size_classes} object-cover",
-          loading: "lazy",
-          alt: document.title,
-          onerror: thumbnail_image_onerror_js
-        ),
-        document_thumbnail_fallback(width: width, height: height, overlay: true, hidden: true)
-      ])
-    end
-  rescue StandardError => e
-    Rails.logger.warn("[DocumentsHelper] Thumbnail preview error document ##{document.id}: #{e.class} - #{e.message}")
-    document_thumbnail_fallback(width: width, height: height)
-  end
-
-  def document_thumbnail_fallback(width:, height:, overlay: false, hidden: false)
+  def document_thumbnail_fallback(width:, height:)
     classes = "flex items-center justify-center #{thumbnail_size_classes} rounded border " \
               "border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 " \
               "text-slate-400 dark:text-slate-500"
-    classes += " hidden" if hidden
-    classes += " absolute inset-0" if overlay
 
     content_tag(:div, document_pdf_icon_svg, class: classes, role: "img",
                 aria: { label: t("views.documents.thumbnail_fallback") })
@@ -187,15 +168,6 @@ module DocumentsHelper
 
   def thumbnail_size_classes
     "w-24 h-32"
-  end
-
-  def thumbnail_frame_classes
-    "#{thumbnail_size_classes} relative shrink-0 overflow-hidden rounded border " \
-    "border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900"
-  end
-
-  def thumbnail_image_onerror_js
-    "this.classList.add('hidden');var f=this.nextElementSibling;if(f)f.classList.remove('hidden')"
   end
 
   def ocr_status_badge(label, color, title: nil)
