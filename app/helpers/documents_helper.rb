@@ -25,6 +25,27 @@ module DocumentsHelper
     indigo: "bg-indigo-500"
   }.freeze
 
+  THUMBNAIL_WIDTH = 96
+  THUMBNAIL_HEIGHT = 128
+
+  def document_thumbnail(document, width: THUMBNAIL_WIDTH, height: THUMBNAIL_HEIGHT)
+    thumb = build_document_thumbnail(document, width: width, height: height)
+
+    link_to document_path(document),
+            class: "shrink-0 print:hidden hidden sm:block rounded " \
+                   "focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500",
+            data: { turbo_frame: "_top" } do
+      thumb
+    end
+  rescue StandardError => e
+    Rails.logger.warn("[DocumentsHelper] Thumbnail error document ##{document.id}: #{e.class} - #{e.message}")
+    link_to document_path(document),
+            class: "shrink-0 print:hidden hidden sm:block rounded",
+            data: { turbo_frame: "_top" } do
+      document_thumbnail_fallback(width: width, height: height)
+    end
+  end
+
   def category_badge(category)
     content_tag(:span, category.name,
                 class: "inline-flex items-center px-2 py-0.5 rounded text-xs font-medium #{category_color_classes(category.color)}")
@@ -102,6 +123,80 @@ module DocumentsHelper
   end
 
   private
+
+  def build_document_thumbnail(document, width:, height:)
+    if document_thumbnail_previewable?(document)
+      document_thumbnail_image(document, width: width, height: height)
+    else
+      document_thumbnail_fallback(width: width, height: height)
+    end
+  end
+
+  def document_thumbnail_previewable?(document)
+    document.file.attached? && document.file.previewable?
+  rescue StandardError
+    false
+  end
+
+  def document_thumbnail_image(document, width:, height:)
+    content_tag(:span, class: thumbnail_frame_classes) do
+      safe_join([
+        image_tag(
+          document.file.preview(resize_to_limit: [width, height]),
+          class: "#{thumbnail_size_classes} object-cover",
+          loading: "lazy",
+          alt: document.title,
+          onerror: thumbnail_image_onerror_js
+        ),
+        document_thumbnail_fallback(width: width, height: height, overlay: true, hidden: true)
+      ])
+    end
+  rescue StandardError => e
+    Rails.logger.warn("[DocumentsHelper] Thumbnail preview error document ##{document.id}: #{e.class} - #{e.message}")
+    document_thumbnail_fallback(width: width, height: height)
+  end
+
+  def document_thumbnail_fallback(width:, height:, overlay: false, hidden: false)
+    classes = "flex items-center justify-center #{thumbnail_size_classes} rounded border " \
+              "border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 " \
+              "text-slate-400 dark:text-slate-500"
+    classes += " hidden" if hidden
+    classes += " absolute inset-0" if overlay
+
+    content_tag(:div, document_pdf_icon_svg, class: classes, role: "img",
+                aria: { label: t("views.documents.thumbnail_fallback") })
+  end
+
+  def document_pdf_icon_svg
+    tag.svg(
+      xmlns: "http://www.w3.org/2000/svg",
+      fill: "none",
+      viewBox: "0 0 24 24",
+      stroke_width: "1.5",
+      stroke: "currentColor",
+      class: "w-10 h-10",
+      aria: { hidden: true }
+    ) do
+      tag.path(
+        stroke_linecap: "round",
+        stroke_linejoin: "round",
+        d: "M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.484-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
+      )
+    end
+  end
+
+  def thumbnail_size_classes
+    "w-24 h-32"
+  end
+
+  def thumbnail_frame_classes
+    "#{thumbnail_size_classes} relative shrink-0 overflow-hidden rounded border " \
+    "border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900"
+  end
+
+  def thumbnail_image_onerror_js
+    "this.classList.add('hidden');var f=this.nextElementSibling;if(f)f.classList.remove('hidden')"
+  end
 
   def ocr_status_badge(label, color, title: nil)
     classes = CATEGORY_COLOR_CLASSES.fetch(color, CATEGORY_COLOR_CLASSES[:slate])

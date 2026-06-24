@@ -5,9 +5,10 @@ Vse pomembne spremembe so dokumentirane v tej datoteki.
 ## [Unreleased]
 
 ### Dodano
+- Thumbnaili dokumentov: Active Storage PDF preview (lazy) v seznamu z varnim fallbackom (PDF ikona)
 - UX seznama dokumentov: gumb „Prikaži“ poleg „Prenesi“, Tailwind paginacija (`shared/_pagination`) z ohranitvijo `category_id` in Turbo Frame
 - Kategorizacija uvoženih povezav: `LinkCategorizer`, `LinkRecategorizer`, rake `import:recategorize_links`; `LegacyTableImporter` kategorizira povezave ob uvozu; domači blok povezav z omejeno višino in drsnikom
-- Načrtovano (naloga 28): thumbnaili dokumentov
+- Načrtovano: `ThumbnailJob` za predgeneriranje sličic po uploadu (lazy preview zadošča za zdaj)
 - Uvoz iz stare PHP table: migracija `source_url`, `LegacyTableImporter` in rake `import:legacy_dry` / `import:legacy`
 - Meilisearch iskanje po dokumentih (naslov, opis, OCR vsebina) z varnostnim filtrom `internal_only` in PostgreSQL fallbackom
 - Predogled dokumenta servira searchable PDF prek `documents#preview` (označljivo besedilo, zanesljiv inline)

@@ -167,6 +167,7 @@ sl:
       all: "Vsi"
       show: "Prikaži"
       download: "Prenesi"
+      thumbnail_fallback: "Predogled dokumenta ni na voljo"
       open_in_new_tab: "Odpri v novem zavihku"
       open_document: "Odpri dokument"
       preview_searchable_text: "Prepoznano besedilo"
