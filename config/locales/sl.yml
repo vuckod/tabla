@@ -25,6 +25,7 @@ sl:
         published_at: "Datum objave"
         internal_only: "Samo za interno uporabo"
         notify_staff: "Obvesti zaposlene"
+        unit: "Enota"
         file: "Datoteka"
         ocr_text: "OCR besedilo"
         document_category: "Kategorija"
@@ -95,6 +96,19 @@ sl:
       both: "Knjižnica in gledališče"
       library: "Knjižnica"
       theatre: "Gledališče"
+  mailers:
+    document_mailer:
+      new_document:
+        subject: "Nov dokument: %{title}"
+        header: "Nov dokument na intranetu"
+        greeting: "Pozdravljeni,"
+        intro: "Na intranetu KKC Lendava je bil objavljen nov dokument."
+        title_label: "Naslov"
+        category_label: "Kategorija"
+        unit_label: "Enota"
+        published_at_label: "Datum objave"
+        open_document: "Odpri dokument"
+        footer: "To je sistemsko obvestilo. Na to sporočilo ne odgovarjajte. Za ogled dokumenta se morate prijaviti."
   helpers:
     submit:
       create: "Shrani"
@@ -277,7 +291,7 @@ sl:
         file_hint: "Samo PDF, največ 50 MB"
         published_at_hint: "Pustite prazno ali nastavite prihodnji datum za zakasnjeno objavo"
         internal_only_hint: "Vidno samo administratorjem in urednikom"
-        notify_staff_hint: "Obvesti delavce po e-pošti ob objavi (pošiljanje pride v fazi 2)"
+        notify_staff_hint: "Pošlje e-pošto zaposlenim ciljne enote ob objavi (samo javni dokumenti)"
         ocr_status: "OCR"
         ocr_none: "Brez OCR"
         ocr_processing: "V obdelavi"

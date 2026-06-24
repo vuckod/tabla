@@ -34,11 +34,18 @@ Rails.application.configure do
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
+  config.action_mailer.delivery_method = :letter_opener_web
+  config.action_mailer.perform_deliveries = true
+
   # Make template changes take effect immediately.
   config.action_mailer.perform_caching = false
 
-  # Set localhost to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
+  # Povezave v e-pošti (Docker: host port 3002 → http://localhost:3002)
+  port = ENV.fetch("MAILER_URL_PORT", 3002).to_i
+  config.action_mailer.default_url_options = {
+    host: ENV.fetch("MAILER_URL_HOST", "localhost"),
+    port: port
+  }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

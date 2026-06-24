@@ -14,6 +14,19 @@ class User < ApplicationRecord
   scope :active, -> { where(onemogocen: false) }
   scope :ordered, -> { order(:priimek, :ime) }
 
+  # Prejemniki e-pošte za ciljno enoto dokumenta (uprava prejme obvestila obeh enot).
+  scope :for_document_unit, ->(unit) {
+    base = active.where.not(email: [nil, ""])
+    case unit.to_s
+    when "library"
+      base.where(enota: %w[knjiznica uprava])
+    when "theatre"
+      base.where(enota: %w[gledalisce uprava])
+    else
+      base
+    end
+  }
+
   def polno_ime
     "#{ime} #{priimek}".strip
   end
@@ -47,6 +60,7 @@ class User < ApplicationRecord
       ime: user_data["ime"],
       priimek: user_data["priimek"],
       email: user_data["email"],
+      enota: user_data["enota"],
       onemogocen: user_data["onemogocen"] || false,
       last_synced_at: Time.current
     )

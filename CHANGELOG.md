@@ -5,6 +5,7 @@ Vse pomembne spremembe so dokumentirane v tej datoteki.
 ## [Unreleased]
 
 ### Dodano
+- E-mail obvestila ob objavi dokumenta: `DocumentMailer`, `DocumentNotificationJob`, enota na uporabnikih/dokumentih, Outlook-kompatibilna predloga, SMTP v produkciji
 - Predgeneriranje thumbnailov: `ThumbnailGenerationService`, `ThumbnailGenerationJob`, `has_one_attached :thumbnail`, rake `thumbnails:generate_missing` / `regenerate_all`
 - Javni dostop: stran brez prijave (imenik, povezave, seznam dokumentov, iskanje); prijava za ogled/prenos dokumentov in admin; `return_to` po prijavi; `Admin::BaseController`
 - UX seznama dokumentov: gumb „Prikaži“ poleg „Prenesi“, Tailwind paginacija (`shared/_pagination`) z ohranitvijo `category_id` in Turbo Frame

@@ -50,7 +50,7 @@ module Admin
 
     def document_params
       params.require(:document).permit(
-        :title, :description, :document_category_id,
+        :title, :description, :document_category_id, :unit,
         :published_at, :internal_only, :notify_staff, :file
       )
     end

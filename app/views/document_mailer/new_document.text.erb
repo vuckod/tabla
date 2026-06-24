@@ -1,0 +1,15 @@
+Intranet KKC Lendava — <%= t("mailers.document_mailer.new_document.header") %>
+
+<%= t("mailers.document_mailer.new_document.greeting") %>
+
+<%= t("mailers.document_mailer.new_document.intro") %>
+
+<%= t("mailers.document_mailer.new_document.title_label") %>: <%= @document.title %>
+<%= t("mailers.document_mailer.new_document.category_label") %>: <%= @category.name %>
+<%= t("mailers.document_mailer.new_document.unit_label") %>: <%= @unit_label %>
+<%= t("mailers.document_mailer.new_document.published_at_label") %>: <%= @published_at_label %>
+
+<%= t("mailers.document_mailer.new_document.open_document") %>:
+<%= @url %>
+
+<%= t("mailers.document_mailer.new_document.footer") %>

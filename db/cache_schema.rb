@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_24_100017) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_24_210031) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -148,6 +148,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_24_100017) do
     t.datetime "published_at"
     t.string "source_url"
     t.string "title", null: false
+    t.integer "unit", default: 0, null: false
     t.datetime "updated_at", null: false
     t.integer "updated_by_id"
     t.index ["document_category_id"], name: "index_documents_on_document_category_id"
@@ -156,6 +157,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_24_100017) do
     t.index ["published_at"], name: "index_documents_on_published_at"
     t.index ["source_url"], name: "index_documents_on_source_url", unique: true, where: "(source_url IS NOT NULL)"
     t.index ["title"], name: "index_documents_on_title_trgm", opclass: :gin_trgm_ops, using: :gin
+    t.index ["unit"], name: "index_documents_on_unit"
   end
 
   create_table "link_categories", force: :cascade do |t|
@@ -396,6 +398,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_24_100017) do
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "email"
+    t.string "enota"
     t.string "ime"
     t.datetime "last_request_at"
     t.datetime "last_synced_at"
@@ -404,6 +407,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_24_100017) do
     t.integer "remote_id", null: false
     t.datetime "updated_at", null: false
     t.string "username", null: false
+    t.index ["enota"], name: "index_users_on_enota"
     t.index ["remote_id"], name: "index_users_on_remote_id", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end

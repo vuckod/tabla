@@ -18,6 +18,8 @@ class Document < ApplicationRecord
 
   MAX_FILE_SIZE = 50.megabytes
 
+  enum :unit, { both: 0, library: 1, theatre: 2 }, default: :both
+
   validates :title, presence: true
   validates :document_category, presence: true
   validate :file_must_be_attached, on: :create
@@ -112,6 +114,7 @@ class Document < ApplicationRecord
   def send_notification
     return unless notify_staff
     return unless published?
+    return if internal_only?
     return unless defined?(DocumentNotificationJob)
 
     DocumentNotificationJob.perform_later(self)
