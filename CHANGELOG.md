@@ -5,6 +5,7 @@ Vse pomembne spremembe so dokumentirane v tej datoteki.
 ## [Unreleased]
 
 ### Dodano
+- Predogled dokumenta servira searchable PDF prek `documents#preview` (označljivo besedilo, zanesljiv inline)
 - OCR pipeline: `OcrExtractorService` (Tesseract slv+hun) in `OcrExtractionJob` ob nalaganju PDF
 - Admin seznam dokumentov prikazuje OCR status (processing / success / error)
 - Predogled dokumenta (`documents#show`): PDF inline v iframe, odprtje v novem zavihku in prenos; mobilni fallback

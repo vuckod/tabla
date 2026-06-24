@@ -14,6 +14,8 @@
         <%= t("views.documents.internal") %>
       </span>
     <% end %>
+
+    <%= document_preview_text_badge(@document) %>
   </div>
 
   <% if @document.description.present? %>
@@ -25,13 +27,14 @@
   </p>
 
   <div class="flex flex-wrap gap-3 print:hidden">
-    <%= link_to t("views.documents.open_in_new_tab"), @inline_url,
+    <%= link_to t("views.documents.open_in_new_tab"), preview_document_path(@document),
         target: "_blank", rel: "noopener",
         class: "inline-flex items-center px-4 py-2 text-sm font-medium rounded-md
                 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300
-                bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 shadow-sm" %>
+                bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 shadow-sm",
+        data: { turbo: false } %>
 
-    <%= link_to t("views.documents.download"), @download_url,
+    <%= link_to t("views.documents.download"), download_document_path(@document),
         class: "inline-flex items-center px-4 py-2 text-sm font-medium rounded-md
                 bg-indigo-600 dark:bg-indigo-500 text-white
                 hover:bg-indigo-700 dark:hover:bg-indigo-600 shadow-sm",
@@ -44,18 +47,19 @@
 </header>
 
 <div class="md:hidden print:hidden mb-6">
-  <%= link_to t("views.documents.open_document"), @inline_url,
+  <%= link_to t("views.documents.open_document"), preview_document_path(@document),
       target: "_blank", rel: "noopener",
       class: "flex items-center justify-center w-full px-4 py-4 text-base font-medium rounded-lg
               bg-indigo-600 dark:bg-indigo-500 text-white
-              hover:bg-indigo-700 dark:hover:bg-indigo-600 shadow-sm" %>
+              hover:bg-indigo-700 dark:hover:bg-indigo-600 shadow-sm",
+      data: { turbo: false } %>
   <p class="mt-2 text-sm text-slate-500 dark:text-slate-400 text-center">
     <%= t("views.documents.preview_mobile_hint") %>
   </p>
 </div>
 
 <div class="hidden md:block print:hidden" data-controller="document-preview">
-  <iframe src="<%= @inline_url %>"
+  <iframe src="<%= preview_document_path(@document) %>"
           title="<%= @document.title %>"
           class="w-full h-[80vh] rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900"
           data-document-preview-target="iframe"
@@ -65,8 +69,9 @@
      data-document-preview-target="fallback"
      role="status">
     <%= t("views.documents.preview_fallback") %>
-    <%= link_to t("views.documents.open_in_new_tab"), @inline_url,
+    <%= link_to t("views.documents.open_in_new_tab"), preview_document_path(@document),
         target: "_blank", rel: "noopener",
-        class: "text-indigo-600 dark:text-indigo-400 hover:underline" %>.
+        class: "text-indigo-600 dark:text-indigo-400 hover:underline",
+        data: { turbo: false } %>.
   </p>
 </div>

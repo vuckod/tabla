@@ -160,6 +160,8 @@ sl:
       download: "Prenesi"
       open_in_new_tab: "Odpri v novem zavihku"
       open_document: "Odpri dokument"
+      preview_searchable_text: "Prepoznano besedilo"
+      preview_text_pending: "Besedilo še ni prepoznano"
       preview_fallback: "Če se PDF ne prikaže v oknu,"
       preview_mobile_hint: "Na mobilnih napravah odprite PDF v novem zavihku za boljši prikaz."
       file_missing: "Datoteka dokumenta ni na voljo."

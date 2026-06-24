@@ -69,6 +69,14 @@ module DocumentsHelper
     l(document.published_at.to_date, format: :long)
   end
 
+  def document_preview_text_badge(document)
+    if document.searchable_pdf_available?
+      ocr_status_badge(t("views.documents.preview_searchable_text"), :green)
+    else
+      ocr_status_badge(t("views.documents.preview_text_pending"), :amber)
+    end
+  end
+
   def document_ocr_status_badge(document)
     log = document.ocr_logs.max_by(&:started_at)
     return ocr_status_badge(t("views.admin.documents.ocr_none"), :slate) unless log
