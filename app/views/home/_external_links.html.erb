@@ -1,7 +1,7 @@
 <%= render layout: "shared/block",
     locals: { title: t("views.home.links_block"), color: :blue } do %>
   <% if external_link_categories.any? { |c| c.links.any? { |l| !l.internal_app? } } %>
-    <div class="space-y-3">
+    <div class="max-h-[28rem] overflow-y-auto space-y-3">
       <% external_link_categories.each do |category| %>
         <% links = category.links.reject(&:internal_app?).sort_by { |l| [l.position, l.title] } %>
         <% next if links.empty? %>

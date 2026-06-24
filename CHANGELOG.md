@@ -5,7 +5,8 @@ Vse pomembne spremembe so dokumentirane v tej datoteki.
 ## [Unreleased]
 
 ### Dodano
-- Načrtovano (naloge 26-28): kategorizacija uvoženih povezav, gumb "Prikaži" + modernizirana paginacija, thumbnaili dokumentov
+- Kategorizacija uvoženih povezav: `LinkCategorizer`, `LinkRecategorizer`, rake `import:recategorize_links`; `LegacyTableImporter` kategorizira povezave ob uvozu; domači blok povezav z omejeno višino in drsnikom
+- Načrtovano (naloge 27-28): gumb "Prikaži" + modernizirana paginacija, thumbnaili dokumentov
 - Uvoz iz stare PHP table: migracija `source_url`, `LegacyTableImporter` in rake `import:legacy_dry` / `import:legacy`
 - Meilisearch iskanje po dokumentih (naslov, opis, OCR vsebina) z varnostnim filtrom `internal_only` in PostgreSQL fallbackom
 - Predogled dokumenta servira searchable PDF prek `documents#preview` (označljivo besedilo, zanesljiv inline)

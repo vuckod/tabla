@@ -8,7 +8,6 @@ require "uri"
 # Enkratni/idempotenten uvoz dokumentov in povezav iz stare PHP table (HTML izvoz).
 class LegacyTableImporter
   DEFAULT_HTML_PATH = Rails.root.join("docs", "KKC Lendava - Lendvai KKK  Vstopna stran za zaposlene.htm").freeze
-  IMPORTED_LINKS_CATEGORY = "Uvožene povezave"
   CATEGORY_COLORS = DocumentsHelper::CATEGORY_COLORS.freeze
 
   DOCUMENT_TABLES = [
@@ -70,7 +69,7 @@ class LegacyTableImporter
     :table_label, :title, :url, :category_name, :unit, :published_at, :pdf
   )
 
-  ParsedLink = Data.define(:title, :url)
+  ParsedLink = Data.define(:title, :url, :category_name)
 
   def self.call(html_path = DEFAULT_HTML_PATH, download: true)
     new(html_path, download: download).call
@@ -254,7 +253,11 @@ class LegacyTableImporter
     return if url.blank? || title.blank?
     return if url.start_with?("#")
 
-    parsed = ParsedLink.new(title: title, url: url)
+    parsed = ParsedLink.new(
+      title: title,
+      url: url,
+      category_name: LinkCategorizer.category_name_for(url)
+    )
 
     if Link.exists?(url: url)
       @stats[:links][:skipped] += 1
@@ -268,9 +271,7 @@ class LegacyTableImporter
       return
     end
 
-    category = LinkCategory.find_or_create_by!(name: IMPORTED_LINKS_CATEGORY) do |cat|
-      cat.position = (LinkCategory.maximum(:position) || 0) + 1
-    end
+    category = LinkCategorizer.ensure_category!(parsed.category_name)
 
     record = Link.find_or_create_by!(url: url) do |lnk|
       lnk.title = title
@@ -379,7 +380,7 @@ class LegacyTableImporter
   end
 
   def log_link_row(parsed, status:)
-    @logger.info("[#{status}] povezava | #{parsed.title}\n  #{parsed.url}")
+    @logger.info("[#{status}] #{parsed.category_name} | #{parsed.title}\n  #{parsed.url}")
   end
 
   def record_failure(kind, label, message, detail = nil)
