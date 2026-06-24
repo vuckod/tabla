@@ -33,6 +33,9 @@
 # Ignore key files for decrypting credentials and more.
 /config/*.key
 
+# Kamal secrets — NIKOLI v git (gesla, ključi). Glej .kamal/secrets.example za vzorec.
+/.kamal/secrets
+
 
 /app/assets/builds/*
 !/app/assets/builds/.keep
