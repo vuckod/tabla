@@ -6,7 +6,7 @@ module Admin
     before_action :authorize_document!
 
     def index
-      @documents = policy_scope(Document).order(created_at: :desc).includes(:document_category)
+      @documents = policy_scope(Document).order(created_at: :desc).includes(:document_category, :ocr_logs)
     end
 
     def new

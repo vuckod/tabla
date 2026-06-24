@@ -5,6 +5,8 @@ Vse pomembne spremembe so dokumentirane v tej datoteki.
 ## [Unreleased]
 
 ### Dodano
+- OCR pipeline: `OcrExtractorService` (Tesseract slv+hun) in `OcrExtractionJob` ob nalaganju PDF
+- Admin seznam dokumentov prikazuje OCR status (processing / success / error)
 - Predogled dokumenta (`documents#show`): PDF inline v iframe, odprtje v novem zavihku in prenos; mobilni fallback
 - Admin CRUD za značke dokumentov (`DocumentCategory`) z vizualnim izbirnikom barve
 - Inline dodajanje nove značke v obrazcu za dokument (Turbo Stream, brez zapuščanja strani)
@@ -75,7 +77,7 @@ Vse pomembne spremembe so dokumentirane v tej datoteki.
 - Izboljšava admin obrazcev (skupni form helperji, preglednost) — `19_admin_forms.md` ✓
 - Upravljanje značk dokumentov (`DocumentCategory` CRUD + inline dodajanje) — `20_document_categories_crud.md` ✓
 - Predogled dokumenta (inline iframe + nov zavihek) — `21_document_preview.md` ✓
-- OCR pipeline (Tesseract slv+hun, searchable sandwich PDF) — `22_ocr_pipeline.md`
+- OCR pipeline (Tesseract slv+hun, searchable sandwich PDF) — `22_ocr_pipeline.md` ✓
 - Meilisearch iskanje (vključno OCR vsebina, deljena instanca) — `23_meilisearch.md`
 
 ### Še ni narejeno (kasnejše faze)

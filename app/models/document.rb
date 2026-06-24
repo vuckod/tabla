@@ -38,6 +38,19 @@ class Document < ApplicationRecord
     published_at.present? && published_at <= Time.current
   end
 
+  # Zadnji uspešni OCR log s priloženim searchable (sandwich) PDF-jem.
+  def latest_searchable_ocr_log
+    ocr_logs
+      .where(status: "success")
+      .order(completed_at: :desc, created_at: :desc)
+      .detect { |log| log.searchable_pdf.attached? }
+  end
+
+  # Ali obstaja searchable PDF (z OZnačljivim OCR besedilom)?
+  def searchable_pdf_available?
+    latest_searchable_ocr_log.present?
+  end
+
   private
 
   def mark_ocr_file_change

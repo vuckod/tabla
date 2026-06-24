@@ -262,6 +262,11 @@ sl:
         published_at_hint: "Pustite prazno ali nastavite prihodnji datum za zakasnjeno objavo"
         internal_only_hint: "Vidno samo administratorjem in urednikom"
         notify_staff_hint: "Obvesti delavce po e-pošti ob objavi (pošiljanje pride v fazi 2)"
+        ocr_status: "OCR"
+        ocr_none: "Brez OCR"
+        ocr_processing: "V obdelavi"
+        ocr_success: "Uspešno"
+        ocr_error: "Napaka"
       document_categories:
         title: "Značke dokumentov"
         new: "Nova značka"

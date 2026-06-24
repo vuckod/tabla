@@ -69,6 +69,22 @@ module DocumentsHelper
     l(document.published_at.to_date, format: :long)
   end
 
+  def document_ocr_status_badge(document)
+    log = document.ocr_logs.max_by(&:started_at)
+    return ocr_status_badge(t("views.admin.documents.ocr_none"), :slate) unless log
+
+    case log.status
+    when "processing"
+      ocr_status_badge(t("views.admin.documents.ocr_processing"), :amber)
+    when "success"
+      ocr_status_badge(t("views.admin.documents.ocr_success"), :green)
+    when "error"
+      ocr_status_badge(t("views.admin.documents.ocr_error"), :red, title: log.error_message)
+    else
+      ocr_status_badge(log.status, :slate)
+    end
+  end
+
   def category_color_label(color)
     t("views.admin.document_categories.colors.#{color}", default: color.to_s.humanize)
   end
@@ -78,6 +94,14 @@ module DocumentsHelper
   end
 
   private
+
+  def ocr_status_badge(label, color, title: nil)
+    classes = CATEGORY_COLOR_CLASSES.fetch(color, CATEGORY_COLOR_CLASSES[:slate])
+    options = { class: "inline-flex items-center px-2 py-0.5 rounded text-xs font-medium #{classes}" }
+    options[:title] = title if title.present?
+
+    content_tag(:span, label, **options)
+  end
 
   def category_color_classes(color)
     CATEGORY_COLOR_CLASSES.fetch(color.to_s.presence&.to_sym, CATEGORY_COLOR_CLASSES[:slate])
