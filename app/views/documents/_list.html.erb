@@ -20,8 +20,8 @@
     </div>
 
     <% if pagy.pages > 1 %>
-      <div class="mt-6 flex justify-center print:hidden">
-        <%== pagy_nav(pagy) %>
+      <div class="mt-6 flex justify-center">
+        <%= pagy_nav_tailwind(pagy, turbo_frame: "documents_list") %>
       </div>
     <% end %>
   <% end %>

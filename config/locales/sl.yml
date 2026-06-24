@@ -126,6 +126,14 @@ sl:
       confirm_delete: "Ali ste prepričani?"
       search_placeholder: "Išči..."
       no_results: "Ni zadetkov."
+      pagination:
+        nav_label: "Paginacija"
+        previous: "Prejšnja stran"
+        next: "Naslednja stran"
+        previous_short: "«"
+        next_short: "»"
+        page_of: "Stran %{page} od %{count}"
+        page_number: "Stran %{number}"
     sessions:
       login: "Prijava"
       username: "Uporabniško ime"
@@ -157,6 +165,7 @@ sl:
     documents:
       title: "Dokumenti"
       all: "Vsi"
+      show: "Prikaži"
       download: "Prenesi"
       open_in_new_tab: "Odpri v novem zavihku"
       open_document: "Odpri dokument"

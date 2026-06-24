@@ -36,8 +36,8 @@
   </div>
 
   <% if @pagy.pages > 1 %>
-    <div class="mt-8 flex justify-center print:hidden">
-      <%== pagy_nav(@pagy) %>
+    <div class="mt-8 flex justify-center">
+      <%= pagy_nav_tailwind(@pagy) %>
     </div>
   <% end %>
 <% end %>

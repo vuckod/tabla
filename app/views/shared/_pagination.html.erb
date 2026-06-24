@@ -1,0 +1,74 @@
+<%# locals: pagy, turbo_frame (optional) %>
+<nav class="print:hidden w-full" aria-label="<%= t("views.shared.pagination.nav_label") %>">
+  <%# Mobilno: prejšnja / stran X od Y / naslednja %>
+  <div class="flex sm:hidden items-center justify-between gap-3 w-full max-w-xs mx-auto">
+    <% if pagy.prev %>
+      <%= link_to t("views.shared.pagination.previous_short"),
+            pagy_url_for(pagy, pagy.prev),
+            class: pagy_nav_btn_classes,
+            data: pagy_turbo_data(turbo_frame),
+            aria: { label: t("views.shared.pagination.previous") } %>
+    <% else %>
+      <span class="<%= pagy_nav_btn_disabled_classes %>" aria-hidden="true">
+        <%= t("views.shared.pagination.previous_short") %>
+      </span>
+    <% end %>
+
+    <span class="text-sm font-medium text-slate-600 dark:text-slate-400 tabular-nums whitespace-nowrap">
+      <%= t("views.shared.pagination.page_of", page: pagy.page, count: pagy.pages) %>
+    </span>
+
+    <% if pagy.next %>
+      <%= link_to t("views.shared.pagination.next_short"),
+            pagy_url_for(pagy, pagy.next),
+            class: pagy_nav_btn_classes,
+            data: pagy_turbo_data(turbo_frame),
+            aria: { label: t("views.shared.pagination.next") } %>
+    <% else %>
+      <span class="<%= pagy_nav_btn_disabled_classes %>" aria-hidden="true">
+        <%= t("views.shared.pagination.next_short") %>
+      </span>
+    <% end %>
+  </div>
+
+  <%# Namizje: prejšnja, številke, naslednja %>
+  <div class="hidden sm:flex items-center justify-center gap-1 flex-wrap">
+    <% if pagy.prev %>
+      <%= link_to t("views.shared.pagination.previous_short"),
+            pagy_url_for(pagy, pagy.prev),
+            class: pagy_nav_btn_classes,
+            data: pagy_turbo_data(turbo_frame),
+            aria: { label: t("views.shared.pagination.previous") } %>
+    <% else %>
+      <span class="<%= pagy_nav_btn_disabled_classes %>" aria-hidden="true">
+        <%= t("views.shared.pagination.previous_short") %>
+      </span>
+    <% end %>
+
+    <% pagy.series.each do |item| %>
+      <% if item == :gap || item == "gap" %>
+        <span class="<%= pagy_gap_classes %>" aria-hidden="true">…</span>
+      <% elsif item.is_a?(Integer) %>
+        <%= link_to item,
+              pagy_url_for(pagy, item),
+              class: pagy_link_classes,
+              data: pagy_turbo_data(turbo_frame),
+              aria: { label: t("views.shared.pagination.page_number", number: item) } %>
+      <% else %>
+        <span class="<%= pagy_current_classes %>" aria-current="page"><%= item %></span>
+      <% end %>
+    <% end %>
+
+    <% if pagy.next %>
+      <%= link_to t("views.shared.pagination.next_short"),
+            pagy_url_for(pagy, pagy.next),
+            class: pagy_nav_btn_classes,
+            data: pagy_turbo_data(turbo_frame),
+            aria: { label: t("views.shared.pagination.next") } %>
+    <% else %>
+      <span class="<%= pagy_nav_btn_disabled_classes %>" aria-hidden="true">
+        <%= t("views.shared.pagination.next_short") %>
+      </span>
+    <% end %>
+  </div>
+</nav>
