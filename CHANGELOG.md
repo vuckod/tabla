@@ -5,6 +5,7 @@ Vse pomembne spremembe so dokumentirane v tej datoteki.
 ## [Unreleased]
 
 ### Dodano
+- Meilisearch iskanje po dokumentih (naslov, opis, OCR vsebina) z varnostnim filtrom `internal_only` in PostgreSQL fallbackom
 - Predogled dokumenta servira searchable PDF prek `documents#preview` (označljivo besedilo, zanesljiv inline)
 - OCR pipeline: `OcrExtractorService` (Tesseract slv+hun) in `OcrExtractionJob` ob nalaganju PDF
 - Admin seznam dokumentov prikazuje OCR status (processing / success / error)
@@ -79,7 +80,7 @@ Vse pomembne spremembe so dokumentirane v tej datoteki.
 - Upravljanje značk dokumentov (`DocumentCategory` CRUD + inline dodajanje) — `20_document_categories_crud.md` ✓
 - Predogled dokumenta (inline iframe + nov zavihek) — `21_document_preview.md` ✓
 - OCR pipeline (Tesseract slv+hun, searchable sandwich PDF) — `22_ocr_pipeline.md` ✓
-- Meilisearch iskanje (vključno OCR vsebina, deljena instanca) — `23_meilisearch.md`
+- Meilisearch iskanje (vključno OCR vsebina, deljena instanca) — `23_meilisearch.md` ✓
 
 ### Še ni narejeno (kasnejše faze)
 - E-mail obvestila ob objavi dokumenta (`DocumentNotificationJob`)

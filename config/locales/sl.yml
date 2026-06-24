@@ -177,6 +177,7 @@ sl:
       prompt: "Vnesite iskalni niz in pritisnite Enter."
       results_for: "Rezultati za \"%{query}\" (%{count})"
       no_results: "Ni zadetkov za \"%{query}\"."
+      fallback_notice: "Napredno iskanje trenutno ni na voljo — prikazani so osnovni rezultati iz baze."
     persons:
       title: "Telefonski imenik"
       employees: "Zaposleni"

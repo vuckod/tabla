@@ -35,10 +35,10 @@ services:
       # Solid Queue teče znotraj Puma procesa (za OCR in ostala ozadnja opravila v razvoju).
       # V produkciji ima Kamal ločen job worker — glej config/deploy.yml.
       SOLID_QUEUE_IN_PUMA: "true"
-      # Meilisearch: odkomentiraj ko potrebuješ iskanje
-      # Za uporabo delovodnikovega Meilisearch dodaj external network (glej docs/05_deployment.md)
-      # MEILISEARCH_URL: http://delovodnik_meilisearch:7700
-      # MEILISEARCH_MASTER_KEY: ${MEILISEARCH_MASTER_KEY:-lokalni_razvojni_kljuc_123}
+      # Meilisearch — deljena instanca z Delovodnikom (delovodnik_meilisearch na portu 7700).
+      # Tabla uporablja LOČEN indeks (tabla_documents). Dostop prek host.docker.internal.
+      MEILISEARCH_URL: ${MEILISEARCH_URL:-http://host.docker.internal:7700}
+      MEILISEARCH_MASTER_KEY: ${MEILISEARCH_MASTER_KEY:-lokalni_razvojni_kljuc_123}
     extra_hosts:
       - "host.docker.internal:host-gateway"
 

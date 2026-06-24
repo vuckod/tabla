@@ -45,6 +45,27 @@ end
 POZOR: `include MeiliSearch::Rails` mora biti previdno dodan — preveri, da ne podre obstoječih
 callback-ov (`after_commit :queue_ocr_extraction`). Meilisearch doda svoje after_commit hooke.
 
+### 1b. KRITIČNO: OCR besedilo mora po ekstrakciji v indeks
+OCR job (`OcrExtractionJob`) uporablja `record.update_column(:ocr_text, ...)`, ki NAMERNO
+preskoči callbacke (da prepreči neskončno OCR zanko). Posledica: Meilisearch `after_commit`
+hook se ob `update_column` NE sproži, zato novo OCR besedilo NE pride v indeks samodejno.
+
+Rešitev: v `OcrExtractionJob`, takoj po `record.update_column(:ocr_text, extracted_text)`,
+dodaj eksplicitni reindex:
+```ruby
+record.update_column(:ocr_text, extracted_text)
+# Meilisearch: update_column preskoči callbacke, zato ročno osveži indeks z novim ocr_text.
+if defined?(MeiliSearch::Rails) && record.class.respond_to?(:meilisearch_index)
+  record.index!
+end
+```
+(Preveri točno ime metode za verzijo meilisearch-rails v Gemfile — lahko je `index!`,
+`ms_index!`, ali `reindex!`. Uporabi `defined?` guard, da OCR job ne pade, če Meilisearch
+ni naložen ali dosegljiv.)
+
+POZOR: ovij reindex v `rescue`, da nedosegljiv Meilisearch ne podre OCR joba — OCR besedilo
+je že shranjeno v bazi (`update_column`), indeksiranje je sekundarno.
+
 ### 2. Konfiguracija razvojnega okolja — Meilisearch dostop
 V `docker-compose.yml` odkomentiraj/dodaj Meilisearch env (trenutno zakomentiran):
 ```yaml

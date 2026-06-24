@@ -12,6 +12,7 @@ class OcrExtractionJob < ApplicationJob
 
     extracted_text = blobs.filter_map { |blob| extract_text_with_logging(record, blob) }.join("\n").strip
     record.update_column(:ocr_text, extracted_text)
+    reindex_document_for_meilisearch(record)
   rescue StandardError => e
     Rails.logger.error("[OcrExtractionJob] OCR job failed for #{record.class.name}##{record.id}: #{e.class} - #{e.message}")
   ensure
@@ -105,5 +106,17 @@ class OcrExtractionJob < ApplicationJob
     File.delete(pdf_path)
   rescue StandardError => e
     Rails.logger.warn("[OcrExtractionJob] Failed to cleanup OCR pdf #{pdf_path}: #{e.class} - #{e.message}")
+  end
+
+  def reindex_document_for_meilisearch(record)
+    return unless defined?(MeiliSearch::Rails)
+    return unless record.is_a?(Document) && record.respond_to?(:index!)
+
+    record.reload
+    record.index!
+  rescue StandardError => e
+    Rails.logger.warn(
+      "[OcrExtractionJob] Meilisearch reindex failed for Document##{record.id}: #{e.class} - #{e.message}"
+    )
   end
 end

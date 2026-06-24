@@ -3,6 +3,7 @@
 # Glavni model — interni dokumenti (PDF), z OCR besedilom in (kasneje) iskanjem prek Meilisearch.
 class Document < ApplicationRecord
   include UserStampable
+  include MeiliSearch::Rails
 
   belongs_to :document_category
   belongs_to :creator, class_name: "User", foreign_key: "created_by_id", optional: true
@@ -49,6 +50,23 @@ class Document < ApplicationRecord
   # Ali obstaja searchable PDF (z OZnačljivim OCR besedilom)?
   def searchable_pdf_available?
     latest_searchable_ocr_log.present?
+  end
+
+  meilisearch index_uid: "tabla_documents",
+              auto_index: !Rails.env.test?,
+              auto_remove: !Rails.env.test? do
+    attribute :id, :title, :description, :ocr_text, :document_category_id,
+              :internal_only, :published_at, :created_at
+    attribute :category_name do
+      document_category&.name
+    end
+    attribute :published do
+      published?
+    end
+
+    searchable_attributes [:title, :description, :ocr_text, :category_name]
+    filterable_attributes [:document_category_id, :internal_only, :published]
+    sortable_attributes [:published_at, :created_at]
   end
 
   private

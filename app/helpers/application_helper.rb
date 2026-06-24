@@ -3,6 +3,7 @@ module ApplicationHelper
   include BlocksHelper
   include DirectoryHelper
   include AdminFormHelper
+  include SearchHelper
 
   def turbo_frame_request?
     request.headers["Turbo-Frame"].present?
