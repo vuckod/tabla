@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Admin
-  class DocumentsController < ApplicationController
+  class DocumentsController < BaseController
     before_action :set_document, only: %i[edit update destroy]
     before_action :authorize_document!
 

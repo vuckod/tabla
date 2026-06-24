@@ -3,8 +3,6 @@
 # Tabla — avtentikacija (login/logout).
 # Credentials se NIKOLI ne preverjajo lokalno — vedno prek Prisotnost API-ja.
 class SessionsController < ApplicationController
-  skip_before_action :require_login, only: %i[new create]
-
   def new
     redirect_to root_path if current_user
   end
@@ -15,7 +13,8 @@ class SessionsController < ApplicationController
     if api_user
       user = User.sync_from_api_data(api_user)
       session[:user_id] = user.id
-      redirect_to root_path, notice: "Prijava uspešna."
+      destination = session.delete(:return_to) || root_path
+      redirect_to destination, notice: t("views.sessions.login_success")
     else
       flash.now[:alert] = "Napačno uporabniško ime ali geslo."
       render :new, status: :unprocessable_entity

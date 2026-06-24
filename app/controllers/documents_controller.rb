@@ -4,6 +4,7 @@
 class DocumentsController < ApplicationController
   include DocumentListing
 
+  before_action :require_login, only: %i[show preview download]
   before_action :set_document, only: %i[show preview download]
 
   def index

@@ -140,6 +140,8 @@ sl:
       password: "Geslo"
       submit: "Prijava"
       logout: "Odjava"
+      login_required: "Za dostop se morate prijaviti."
+      login_success: "Prijava uspešna."
       invalid_credentials: "Napačno uporabniško ime ali geslo."
     home:
       title: "Intranet (tabla) KKC Lendava"
@@ -205,6 +207,7 @@ sl:
       empty_category: "V tej kategoriji še ni povezav."
       no_internal_apps: "Ni nastavljenih internih aplikacij."
     admin:
+      access_denied: "Za dostop do administracije nimate dovoljenja."
       nav: "Admin navigacija"
       back_to_app: "Nazaj na intranet"
       title: "Administracija"

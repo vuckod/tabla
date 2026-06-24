@@ -5,7 +5,6 @@ class ApplicationController < ActionController::Base
 
   allow_browser versions: :modern
 
-  before_action :require_login
   before_action :set_current_user
   after_action :track_ahoy_visit, :track_ahoy_page_view
 
@@ -37,7 +36,8 @@ class ApplicationController < ActionController::Base
   def require_login
     return if current_user
 
-    flash[:alert] = "Za dostop se morate prijaviti."
+    session[:return_to] = request.fullpath if request.get?
+    flash[:alert] = t("views.sessions.login_required")
     redirect_to login_path
   end
 

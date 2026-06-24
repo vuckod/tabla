@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Admin
-  class LinksController < ApplicationController
+  class LinksController < BaseController
     before_action :set_link, only: %i[edit update destroy]
     before_action :authorize_link!
 

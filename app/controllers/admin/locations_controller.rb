@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Admin
-  class LocationsController < ApplicationController
+  class LocationsController < BaseController
     before_action :set_location, only: %i[edit update destroy]
     before_action :authorize_location!
 

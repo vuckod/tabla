@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Admin
-  class PersonsController < ApplicationController
+  class PersonsController < BaseController
     before_action :set_person, only: %i[edit update destroy]
     before_action :authorize_person!
 

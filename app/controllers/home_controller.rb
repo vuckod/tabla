@@ -2,8 +2,6 @@
 class HomeController < ApplicationController
   include DocumentListing
 
-  skip_before_action :require_login
-
   def index
     @announcements = Announcement.active.recent
     @directory_rows = DirectoryTableBuilder.rows

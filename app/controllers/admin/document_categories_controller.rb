@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Admin
-  class DocumentCategoriesController < ApplicationController
+  class DocumentCategoriesController < BaseController
     before_action :set_document_category, only: %i[edit update destroy]
     before_action :authorize_document_category!
 

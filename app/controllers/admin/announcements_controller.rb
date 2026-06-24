@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Admin
-  class AnnouncementsController < ApplicationController
+  class AnnouncementsController < BaseController
     before_action :set_announcement, only: %i[edit update destroy]
     before_action :authorize_announcement!
 

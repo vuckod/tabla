@@ -5,6 +5,7 @@ Vse pomembne spremembe so dokumentirane v tej datoteki.
 ## [Unreleased]
 
 ### Dodano
+- Javni dostop: stran brez prijave (imenik, povezave, seznam dokumentov, iskanje); prijava za ogled/prenos dokumentov in admin; `return_to` po prijavi; `Admin::BaseController`
 - Thumbnaili dokumentov: Active Storage PDF preview (lazy) v seznamu z varnim fallbackom (PDF ikona)
 - UX seznama dokumentov: gumb „Prikaži“ poleg „Prenesi“, Tailwind paginacija (`shared/_pagination`) z ohranitvijo `category_id` in Turbo Frame
 - Kategorizacija uvoženih povezav: `LinkCategorizer`, `LinkRecategorizer`, rake `import:recategorize_links`; `LegacyTableImporter` kategorizira povezave ob uvozu; domači blok povezav z omejeno višino in drsnikom
