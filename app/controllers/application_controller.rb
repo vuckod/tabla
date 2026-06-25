@@ -3,7 +3,9 @@ class ApplicationController < ActionController::Base
   include Pagy::Backend
   include Pundit::Authorization
 
-  allow_browser versions: :modern
+  # OPOMBA: `allow_browser versions: :modern` je odstranjen, ker je Tabla interni intranet,
+  # ki ga zaposleni uporabljajo tudi s starejšimi brskalniki na službenih računalnikih.
+  # Privzeti Rails 8 check je vračal HTTP 406 ("Your browser is not supported").
 
   before_action :set_current_user
   after_action :track_ahoy_visit, :track_ahoy_page_view
