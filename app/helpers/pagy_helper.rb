@@ -15,12 +15,18 @@ module PagyHelper
   PAGY_NAV_BTN_DISABLED_CLASSES = "#{PAGY_PAGE_BASE} border-slate-200 dark:border-slate-700 text-slate-300 " \
                                   "dark:text-slate-600 bg-slate-50 dark:bg-slate-900 cursor-not-allowed".freeze
 
-  def pagy_nav_tailwind(pagy, turbo_frame: nil)
-    render partial: "shared/pagination", locals: { pagy: pagy, turbo_frame: turbo_frame }
+  def pagy_nav_tailwind(pagy, turbo_frame: nil, data: {})
+    return "".html_safe if pagy.nil? || pagy.pages <= 1
+
+    frame = turbo_frame.presence || data[:turbo_frame]
+    extra = data.except(:turbo_frame)
+    render partial: "shared/pagination", locals: { pagy: pagy, turbo_frame: frame, turbo_data: extra }
   end
 
-  def pagy_turbo_data(turbo_frame)
-    turbo_frame.present? ? { turbo_frame: turbo_frame } : {}
+  def pagy_turbo_data(turbo_frame = nil, extra: {})
+    attrs = extra.stringify_keys.transform_keys(&:to_sym)
+    attrs[:turbo_frame] = turbo_frame if turbo_frame.present?
+    attrs
   end
 
   # Razredi izpostavljeni kot metode, ker konstante modula niso dostopne v partialu

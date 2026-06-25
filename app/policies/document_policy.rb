@@ -11,6 +11,10 @@ class DocumentPolicy < ApplicationPolicy
     show?
   end
 
+  def audit_history?
+    user&.admin?
+  end
+
   class Scope < ApplicationPolicy::Scope
     def resolve
       scope.visible_to(user)

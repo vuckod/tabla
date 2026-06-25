@@ -55,5 +55,7 @@
     <main class="<%= page_container_classes %> py-6">
       <%= yield %>
     </main>
+
+    <%= turbo_frame_tag "modal" %>
   </body>
 </html>

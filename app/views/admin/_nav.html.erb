@@ -14,6 +14,12 @@
       class: "text-sm font-medium #{controller_path == 'admin/document_categories' ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400'}" %>
   <%= link_to t("views.admin.announcements.title"), admin_announcements_path,
       class: "text-sm font-medium #{controller_path == 'admin/announcements' ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400'}" %>
+  <% if current_user&.admin? %>
+    <%= link_to t("views.admin.analytics.title"), admin_analytics_path,
+        class: "text-sm font-medium #{controller_path == 'admin/analytics' ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400'}" %>
+    <%= link_to t("views.admin.document_audits.title"), admin_document_audits_path,
+        class: "text-sm font-medium #{controller_path == 'admin/document_audits' ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400'}" %>
+  <% end %>
   <%= link_to t("views.admin.back_to_app"), root_path,
       class: "text-sm text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 ml-auto" %>
 </nav>

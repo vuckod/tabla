@@ -39,6 +39,9 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: redirect("/admin/persons")
 
+    get "analytics", to: "analytics#index", as: :analytics
+    get "document_audits", to: "document_audits#index", as: :document_audits
+
     resources :persons
     resources :locations
     resources :link_categories
@@ -48,7 +51,11 @@ Rails.application.routes.draw do
         get :inline_cancel
       end
     end
-    resources :documents
+    resources :documents do
+      member do
+        get :audit_history
+      end
+    end
     resources :announcements
   end
 

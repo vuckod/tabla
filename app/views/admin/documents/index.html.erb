@@ -45,6 +45,11 @@
               <%= document_ocr_status_badge(document) %>
             </td>
             <td class="px-4 py-3 text-right text-sm space-x-3 print:hidden">
+              <% if policy(document).audit_history? %>
+                <%= link_to t("views.admin.documents.audit_history"), audit_history_admin_document_path(document),
+                    data: { turbo_frame: "modal" },
+                    class: "text-slate-600 dark:text-slate-400 hover:underline" %>
+              <% end %>
               <%= link_to t("views.shared.edit"), edit_admin_document_path(document),
                   class: "text-indigo-600 dark:text-indigo-400 hover:underline" %>
               <% if policy(document).destroy? %>

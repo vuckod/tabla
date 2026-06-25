@@ -5,6 +5,7 @@ Vse pomembne spremembe so dokumentirane v tej datoteki.
 ## [Unreleased]
 
 ### Dodano
+- Admin analitika (Ahoy) in audit zgodovina dokumentov: filtri, paginacija, modal per dokument, skupni pregled; dostop samo za admina
 - PWA (namestljiva aplikacija): manifest, minimalni service worker, `pwa_manifest` helper, theme-color in registracija SW v layoutu
 - Uvoz telefonskih številk iz stare table: `LegacyPhoneImporter`, rake `import:phones_dry` / `import:phones`
 - E-mail obvestila ob objavi dokumenta: `DocumentMailer`, `DocumentNotificationJob`, enota na uporabnikih/dokumentih, Outlook-kompatibilna predloga, SMTP v produkciji

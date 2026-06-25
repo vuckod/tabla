@@ -1,4 +1,5 @@
-<%# locals: pagy, turbo_frame (optional) %>
+<%# locals: pagy, turbo_frame (optional), turbo_data (optional) %>
+<% turbo_data = local_assigns.fetch(:turbo_data, {}) %>
 <nav class="print:hidden w-full" aria-label="<%= t("views.shared.pagination.nav_label") %>">
   <%# Mobilno: prejšnja / stran X od Y / naslednja %>
   <div class="flex sm:hidden items-center justify-between gap-3 w-full max-w-xs mx-auto">
@@ -6,7 +7,7 @@
       <%= link_to t("views.shared.pagination.previous_short"),
             pagy_url_for(pagy, pagy.prev),
             class: pagy_nav_btn_classes,
-            data: pagy_turbo_data(turbo_frame),
+            data: pagy_turbo_data(turbo_frame, extra: turbo_data),
             aria: { label: t("views.shared.pagination.previous") } %>
     <% else %>
       <span class="<%= pagy_nav_btn_disabled_classes %>" aria-hidden="true">
@@ -22,7 +23,7 @@
       <%= link_to t("views.shared.pagination.next_short"),
             pagy_url_for(pagy, pagy.next),
             class: pagy_nav_btn_classes,
-            data: pagy_turbo_data(turbo_frame),
+            data: pagy_turbo_data(turbo_frame, extra: turbo_data),
             aria: { label: t("views.shared.pagination.next") } %>
     <% else %>
       <span class="<%= pagy_nav_btn_disabled_classes %>" aria-hidden="true">
@@ -37,7 +38,7 @@
       <%= link_to t("views.shared.pagination.previous_short"),
             pagy_url_for(pagy, pagy.prev),
             class: pagy_nav_btn_classes,
-            data: pagy_turbo_data(turbo_frame),
+            data: pagy_turbo_data(turbo_frame, extra: turbo_data),
             aria: { label: t("views.shared.pagination.previous") } %>
     <% else %>
       <span class="<%= pagy_nav_btn_disabled_classes %>" aria-hidden="true">
@@ -52,7 +53,7 @@
         <%= link_to item,
               pagy_url_for(pagy, item),
               class: pagy_link_classes,
-              data: pagy_turbo_data(turbo_frame),
+              data: pagy_turbo_data(turbo_frame, extra: turbo_data),
               aria: { label: t("views.shared.pagination.page_number", number: item) } %>
       <% else %>
         <span class="<%= pagy_current_classes %>" aria-current="page"><%= item %></span>
@@ -63,7 +64,7 @@
       <%= link_to t("views.shared.pagination.next_short"),
             pagy_url_for(pagy, pagy.next),
             class: pagy_nav_btn_classes,
-            data: pagy_turbo_data(turbo_frame),
+            data: pagy_turbo_data(turbo_frame, extra: turbo_data),
             aria: { label: t("views.shared.pagination.next") } %>
     <% else %>
       <span class="<%= pagy_nav_btn_disabled_classes %>" aria-hidden="true">

@@ -4,6 +4,7 @@ module ApplicationHelper
   include DirectoryHelper
   include AdminFormHelper
   include SearchHelper
+  include AuditHistoryHelper
 
   def turbo_frame_request?
     request.headers["Turbo-Frame"].present?

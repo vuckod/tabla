@@ -2,7 +2,7 @@
 
 module Admin
   class DocumentsController < BaseController
-    before_action :set_document, only: %i[edit update destroy]
+    before_action :set_document, only: %i[edit update destroy audit_history]
     before_action :authorize_document!
 
     def index
@@ -36,6 +36,13 @@ module Admin
     def destroy
       @document.destroy
       redirect_to admin_documents_path, notice: t("views.admin.documents.destroyed")
+    end
+
+    def audit_history
+      authorize @document, :audit_history?
+      @audits = @document.own_and_associated_audits.includes(:user).order(created_at: :desc)
+      @audit_model_class = Document
+      render layout: false
     end
 
     private

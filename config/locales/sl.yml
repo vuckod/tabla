@@ -80,6 +80,12 @@ sl:
         ime: "Ime"
         priimek: "Priimek"
         email: "E-pošta"
+    enums:
+      document:
+        unit:
+          both: "Knjižnica in gledališče"
+          library: "Knjižnica"
+          theatre: "Gledališče"
   phone_number:
     kinds:
       external: "Zunanja"
@@ -297,6 +303,48 @@ sl:
         ocr_processing: "V obdelavi"
         ocr_success: "Uspešno"
         ocr_error: "Napaka"
+        audit_history: "Zgodovina"
+      analytics:
+        title: "Analitika"
+        subtitle: "Obiski in dogodki Ahoy (filtri spodaj)."
+        filters: "Filtri"
+        search: "Iskanje"
+        search_placeholder: "Dogodek, IP, OS, uporabnik…"
+        all_users: "Vsi"
+        ip: "IP (vsebuje)"
+        ip_placeholder: "npr. 192.168"
+        from: "Od"
+        to: "Do"
+        filter_submit: "Filtriraj"
+        clear_filters: "Počisti"
+        date_range_swapped: "Datum »Do« ne more biti pred datumom »Od« — zamenjano."
+        os_stats: "Operacijski sistem (skladno s filtrom)"
+        visits_log: "Dnevnik sej"
+        browser: "Brskalnik"
+        started_at: "Začetek"
+        events_log: "Dogodki"
+        time: "Čas"
+        event_name: "Ime"
+        properties: "Lastnosti"
+      document_audits:
+        title: "Zgodovina dokumentov"
+        subtitle: "Vse spremembe dokumentov v sistemu."
+        search_placeholder: "Išči po naslovu dokumenta…"
+      audit:
+        modal_title: "Zgodovina sprememb"
+        empty: "Ni shranjenih revizij."
+        no_changes: "Ni podrobnih sprememb."
+        record_destroyed: "Zapis je bil izbrisan."
+        action: "Dejanje"
+        changes: "Spremembe"
+        all_actions: "Vsa dejanja"
+        deleted_document: "Izbrisan dokument #%{id}"
+        boolean_yes: "Da"
+        boolean_no: "Ne"
+        actions:
+          create: "Ustvarjeno"
+          update: "Posodobljeno"
+          destroy: "Izbris"
       document_categories:
         title: "Značke dokumentov"
         new: "Nova značka"

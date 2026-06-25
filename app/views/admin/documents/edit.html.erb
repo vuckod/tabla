@@ -6,4 +6,12 @@
   <%= t("views.admin.documents.edit") %>: <%= @document.title %>
 </h1>
 
+<% if policy(@document).audit_history? %>
+  <div class="mb-6 print:hidden">
+    <%= link_to t("views.admin.documents.audit_history"), audit_history_admin_document_path(@document),
+          data: { turbo_frame: "modal" },
+          class: "inline-flex items-center rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm transition hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700" %>
+  </div>
+<% end %>
+
 <%= render "form", document: @document %>

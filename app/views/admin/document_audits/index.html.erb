@@ -1,0 +1,127 @@
+<% content_for :title, t("views.admin.document_audits.title") %>
+
+<%= render "admin/nav" %>
+
+<div class="w-full">
+  <h1 class="mb-2 text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100"><%= t("views.admin.document_audits.title") %></h1>
+  <p class="mb-6 text-sm text-slate-600 dark:text-slate-400"><%= t("views.admin.document_audits.subtitle") %></p>
+
+  <% filters_active = params[:q].present? || params[:user_id].present? || params[:action_filter].present? || params[:start_date].present? || params[:end_date].present? %>
+  <% filter_ctrl = "h-10 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:border-slate-600 dark:bg-slate-900/60 dark:text-slate-100" %>
+  <% turbo_frame = "document_audits_main" %>
+
+  <%= form_with url: admin_document_audits_path, method: :get,
+        data: {
+          controller: "auto-submit",
+          turbo_frame: turbo_frame,
+          turbo_action: "advance",
+          action: "input->auto-submit#debouncedSubmit change->auto-submit#submitImmediate"
+        },
+        class: "mb-6" do %>
+    <div class="rounded-xl border border-slate-200 bg-slate-50 p-5 dark:border-slate-800 dark:bg-slate-900/50">
+      <p class="mb-4 text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400"><%= t("views.admin.analytics.filters") %></p>
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-5">
+        <div class="sm:col-span-2">
+          <%= label_tag :q, Document.human_attribute_name(:title), class: "mb-1 block text-xs font-medium text-slate-600 dark:text-slate-400" %>
+          <%= text_field_tag :q, params[:q],
+                placeholder: t("views.admin.document_audits.search_placeholder"),
+                autocomplete: "off",
+                class: "#{filter_ctrl} px-3 text-slate-900 placeholder:text-slate-400 dark:placeholder:text-slate-500" %>
+        </div>
+        <div>
+          <%= label_tag :user_id, User.model_name.human, class: "mb-1 block text-xs font-medium text-slate-600 dark:text-slate-400" %>
+          <%= select_tag :user_id,
+                options_for_select([["#{t('views.admin.analytics.all_users')}", ""]] + User.active.order(:username).map { |u| ["#{u.polno_ime} (#{u.username})", u.id] }, params[:user_id]),
+                class: "#{filter_ctrl} px-3 text-slate-900" %>
+        </div>
+        <div>
+          <%= label_tag :action_filter, t("views.admin.audit.action"), class: "mb-1 block text-xs font-medium text-slate-600 dark:text-slate-400" %>
+          <%= select_tag :action_filter,
+                options_for_select(
+                  [
+                    [t("views.admin.audit.all_actions"), ""],
+                    [t("views.admin.audit.actions.create"), "create"],
+                    [t("views.admin.audit.actions.update"), "update"],
+                    [t("views.admin.audit.actions.destroy"), "destroy"]
+                  ],
+                  params[:action_filter]
+                ),
+                class: "#{filter_ctrl} px-3 text-slate-900" %>
+        </div>
+        <div>
+          <%= label_tag :start_date, t("views.admin.analytics.from"), class: "mb-1 block text-xs font-medium text-slate-600 dark:text-slate-400" %>
+          <%= date_field_tag :start_date, params[:start_date], class: "#{filter_ctrl} px-3 text-slate-900" %>
+        </div>
+        <div>
+          <%= label_tag :end_date, t("views.admin.analytics.to"), class: "mb-1 block text-xs font-medium text-slate-600 dark:text-slate-400" %>
+          <%= date_field_tag :end_date, params[:end_date], class: "#{filter_ctrl} px-3 text-slate-900" %>
+        </div>
+      </div>
+      <div class="mt-5 flex flex-wrap items-center justify-end gap-2">
+        <%= submit_tag t("views.admin.analytics.filter_submit"), class: "inline-flex h-10 cursor-pointer items-center rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400" %>
+        <% if filters_active %>
+          <%= link_to t("views.admin.analytics.clear_filters"), admin_document_audits_path,
+                class: "inline-flex h-10 items-center rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm transition hover:bg-slate-100 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700",
+                data: { turbo_frame: "_top" } %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <%= turbo_frame_tag turbo_frame do %>
+    <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
+      <table class="w-full table-auto divide-y divide-slate-100 text-left text-sm dark:divide-slate-800">
+        <thead class="border-b border-slate-200 text-xs font-semibold uppercase text-slate-500 dark:border-slate-800 dark:text-slate-400">
+          <tr>
+            <th class="px-4 py-3"><%= t("views.admin.analytics.time") %></th>
+            <th class="px-4 py-3"><%= Document.model_name.human %></th>
+            <th class="px-4 py-3"><%= User.model_name.human %></th>
+            <th class="px-4 py-3"><%= t("views.admin.audit.action") %></th>
+            <th class="px-4 py-3"><%= t("views.admin.audit.changes") %></th>
+            <th class="px-4 py-3 print:hidden"><%= t("views.shared.actions") %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @audits.each do |audit| %>
+            <% document = audit.auditable %>
+            <tr class="transition-colors hover:bg-slate-50 dark:hover:bg-slate-800/50">
+              <td class="whitespace-nowrap px-4 py-2 text-slate-600 dark:text-slate-400">
+                <%= audit.created_at&.strftime("%d.%m.%Y %H:%M") || "—" %>
+              </td>
+              <td class="px-4 py-2 text-slate-800 dark:text-slate-200">
+                <%= document&.title || t("views.admin.audit.deleted_document", id: audit.auditable_id) %>
+              </td>
+              <td class="px-4 py-2 text-slate-600 dark:text-slate-400">
+                <%= audit.user&.polno_ime.presence || audit.username.presence || "—" %>
+              </td>
+              <td class="px-4 py-2 text-slate-600 dark:text-slate-400">
+                <%= audit_action_label(audit.action) %>
+              </td>
+              <td class="max-w-md px-4 py-2 text-xs text-slate-500 dark:text-slate-400">
+                <%= audit_change_summary(audit, @audit_model_class) %>
+              </td>
+              <td class="px-4 py-2 text-right print:hidden">
+                <% if document %>
+                  <%= link_to t("views.admin.documents.audit_history"),
+                        audit_history_admin_document_path(document),
+                        data: { turbo_frame: "modal" },
+                        class: "text-indigo-600 dark:text-indigo-400 hover:underline text-sm" %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <% if @audits.blank? %>
+      <p class="mt-6 text-sm text-slate-500 dark:text-slate-400"><%= t("views.admin.shared.empty_list") %></p>
+    <% end %>
+
+    <% if @pagy.pages > 1 %>
+      <div class="mt-8 flex justify-center pb-10">
+        <%== pagy_nav_tailwind(@pagy, data: { turbo_frame: turbo_frame, turbo_action: "advance" }) %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
