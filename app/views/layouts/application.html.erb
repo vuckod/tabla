@@ -9,11 +9,13 @@
       <% end %>
     </title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#1e1b4b">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="application-name" content="<%= t("views.layouts.header.page_title") %>">
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <%= pwa_manifest %>
 
     <%= yield :head %>
 
@@ -25,10 +27,20 @@
 
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
+    <link rel="apple-touch-icon" href="/icon-192.png">
 
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <script>
+      window.addEventListener("load", function () {
+        if ("serviceWorker" in navigator) {
+          navigator.serviceWorker.register("<%= pwa_service_worker_path %>").catch(function (err) {
+            console.warn("SW registracija ni uspela:", err);
+          });
+        }
+      });
+    </script>
   </head>
 
   <body class="bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 min-h-screen">
