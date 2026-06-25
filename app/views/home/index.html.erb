@@ -3,19 +3,17 @@
     <%= render "home/announcements", announcements: @announcements %>
   <% end %>
 
+  <%# Vrstica 2: imenik (10) + aplikacije (2) %>
   <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
-    <div class="lg:col-span-8">
+    <div class="lg:col-span-10">
       <%= render "home/directory", directory_rows: @directory_rows %>
     </div>
     <div class="lg:col-span-2">
       <%= render "home/internal_apps", internal_links: @internal_links %>
     </div>
-    <div class="lg:col-span-2">
-      <%= render "home/external_links", external_link_categories: @external_link_categories %>
-    </div>
   </div>
 
-  <%# Vrstica 3: dokumenti (10) + povezave (2, ponovitev — samo na desktopu) %>
+  <%# Vrstica 3: dokumenti (10) + povezave (2) %>
   <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
     <div class="lg:col-span-10">
       <%= render "home/documents",
@@ -24,7 +22,7 @@
           documents: @documents,
           pagy: @pagy %>
     </div>
-    <div class="hidden lg:block lg:col-span-2">
+    <div class="lg:col-span-2">
       <%= render "home/external_links", external_link_categories: @external_link_categories %>
     </div>
   </div>
