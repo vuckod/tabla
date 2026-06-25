@@ -6,7 +6,7 @@
   <%# Vrstica 2: imenik (10) + aplikacije (2) %>
   <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
     <div class="lg:col-span-10">
-      <%= render "home/directory", directory_rows: @directory_rows %>
+      <%= render "home/directory", directory_rows_by_unit: @directory_rows_by_unit %>
     </div>
     <div class="lg:col-span-2">
       <%= render "home/internal_apps", internal_links: @internal_links %>

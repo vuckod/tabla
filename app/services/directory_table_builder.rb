@@ -11,10 +11,23 @@ class DirectoryTableBuilder
     new.rows
   end
 
+  def self.rows_by_unit_kind
+    new.rows_by_unit_kind
+  end
+
   def rows
     (person_rows + standalone_location_rows)
       .reject { |row| row.internal.blank? && row.external.blank? }
       .sort_by { |row| [row.unit_position, internal_sort_key(row.internal), row.naziv.to_s.downcase] }
+  end
+
+  def rows_by_unit_kind
+    grouped = rows.group_by(&:unit_kind)
+    ordered = {}
+    %w[headquarters branch].each do |kind|
+      ordered[kind] = grouped[kind] if grouped[kind].present?
+    end
+    ordered
   end
 
   private

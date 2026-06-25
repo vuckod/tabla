@@ -20,4 +20,9 @@ module DirectoryHelper
     content_tag(:span, enota,
                 class: "inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold #{classes}")
   end
+
+  def directory_unit_heading(unit_kind, fallback_short_code)
+    key = unit_kind.presence || "other"
+    t("views.directory.unit_headings.#{key}", default: fallback_short_code.presence || t("views.directory.other_unit"))
+  end
 end
