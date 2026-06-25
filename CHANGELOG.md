@@ -5,6 +5,8 @@ Vse pomembne spremembe so dokumentirane v tej datoteki.
 ## [Unreleased]
 
 ### Dodano
+- Domača stran: dokumenti v 10-stolčni mreži z ponovljenim blokom povezav na desktopu (skrit na mobilnem)
+- Mobilna prilagoditev admin tabel: kartični prikaz pod md, tabela skrita na ozkih zaslonih (9 strani)
 - Admin analitika (Ahoy) in audit zgodovina dokumentov: filtri, paginacija, modal per dokument, skupni pregled; dostop samo za admina
 - PWA (namestljiva aplikacija): manifest, minimalni service worker, `pwa_manifest` helper, theme-color in registracija SW v layoutu
 - Uvoz telefonskih številk iz stare table: `LegacyPhoneImporter`, rake `import:phones_dry` / `import:phones`

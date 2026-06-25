@@ -15,11 +15,17 @@
     </div>
   </div>
 
-  <div>
-    <%= render "home/documents",
-        document_categories: @document_categories,
-        selected_category_id: @selected_category_id,
-        documents: @documents,
-        pagy: @pagy %>
+  <%# Vrstica 3: dokumenti (10) + povezave (2, ponovitev — samo na desktopu) %>
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
+    <div class="lg:col-span-10">
+      <%= render "home/documents",
+          document_categories: @document_categories,
+          selected_category_id: @selected_category_id,
+          documents: @documents,
+          pagy: @pagy %>
+    </div>
+    <div class="hidden lg:block lg:col-span-2">
+      <%= render "home/external_links", external_link_categories: @external_link_categories %>
+    </div>
   </div>
 </div>
