@@ -68,8 +68,7 @@ env:
     - DATABASE_URL
     - MEILISEARCH_MASTER_KEY
     - PRISOTNOST_API_TOKEN
-    - SMTP_USERNAME
-    - SMTP_PASSWORD
+    # SMTP brez avtentikacije (mail.arnes.si, kot Delovodnik) — SMTP_USERNAME/PASSWORD nista potrebna
 
 builder:
   # Gradnja slike na strežniku (amd64), ker je MacBook arm64

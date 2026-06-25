@@ -108,14 +108,28 @@ kamal app exec "bin/rails runner 'puts User.count'"
 Preveri, da so uporabniki (in enote) sinhronizirani. Potrebuje dosegljiv PRISOTNOST_API_URL +
 veljaven PRISOTNOST_API_TOKEN.
 
-### 9. Uvoz vsebine (dokumenti, povezave, telefoni) — NEOBVEZNO
-Če želiš produkcijsko bazo napolniti z uvozom (kot v razvoju), poženi uvoze. AMPAK: stari
-strežnik tabla.knjiznica-lendava.si mora biti dosegljiv iz produkcijskega kontejnerja, in HTML
-datoteka mora biti v sliki (docs/ je COPY-jan v Docker build). Razmisli:
-- ALI uvozi v produkciji (kot razvoj): `kamal app exec "bin/rails import:legacy"` itd.
-- ALI prenesi podatke iz razvojne baze (pg_dump → restore) — a to prinese tudi storage datoteke
-PRESODI z uporabnikom. Najčisteje: uvozi v produkciji (idempotentno prek source_url), nato
-poženi thumbnaile (`thumbnails:generate_missing`). OCR bo tekel v jobs kontejnerju.
+### 9. Uvoz vsebine (dokumenti, povezave, telefoni) — NA NOVO V PRODUKCIJI (potrjeno)
+Uvozi vsebino na novo v produkciji (idempotentno prek source_url), kot v razvoju. Predpogoj:
+stari strežnik tabla.knjiznica-lendava.si mora biti dosegljiv iz produkcijskega kontejnerja,
+in HTML datoteka je v sliki (docs/ je COPY-jan v Docker build).
+
+Najprej preveri dosegljivost starega strežnika iz produkcije:
+```bash
+kamal app exec "curl -sI -o /dev/null -w 'HTTP:%{http_code}\n' http://tabla.knjiznica-lendava.si/kl_index/files/pravilniki/Akt_o_notranji_organizaciji_in_sistematizaciji_delovnih_mest_v_KKCL-LKKK_2024.pdf"
+```
+Nato (po vrsti, kot v razvoju):
+```bash
+kamal app exec "bin/rails import:legacy"            # 191 dokumentov + 54 povezav
+kamal app exec "bin/rails import:recategorize_links" # kategoriziraj povezave
+kamal app exec "bin/rails import:phones"            # telefonske številke
+kamal app exec "bin/rails thumbnails:generate_missing" # thumbnaili
+```
+OCR + thumbnaili tečejo v jobs kontejnerju (~30 min OCR za 191 dokumentov). Spremljaj:
+```bash
+kamal app logs -f -r jobs
+kamal app exec "bin/rails runner 'puts %(Dokumenti: #{Document.count}, Thumbnaili: #{Document.joins(:thumbnail_attachment).count})'"
+```
+POZOR vrstni red: `import:recategorize_links` PO `import:legacy` (najprej uvozi, nato kategoriziraj).
 
 ### 10. Preveri delovanje
 ```bash
