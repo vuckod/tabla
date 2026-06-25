@@ -32,9 +32,9 @@
   </head>
 
   <body class="bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 min-h-screen">
-    <% if current_user %>
-      <%= render "layouts/header" %>
-    <% end %>
+    <%# Header je viden VSEM (tudi neprijavljenim) — navigacija je javna, tipka za prijavo
+        je v header_actions za neprijavljene. %>
+    <%= render "layouts/header" %>
 
     <% if flash.any? %>
       <%= render "layouts/flash" %>
