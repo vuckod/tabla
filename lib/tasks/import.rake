@@ -54,4 +54,34 @@ namespace :import do
     end
     puts "Posodobljeno #{updated} dokumentov."
   end
+
+  desc "Počisti morebitne podvojene povezave po URL-ju (obdrži najstarejšo)"
+  task dedupe_links: :environment do
+    total_before = Link.count
+    duplicates_count = 0
+    deleted = 0
+
+    duplicate_urls = Link.group(:url).having("COUNT(*) > 1").count
+    duplicates_count = duplicate_urls.size
+
+    if duplicates_count.zero?
+      puts "Brez podvojenih povezav (Link.count = #{total_before})."
+      next
+    end
+
+    puts "Najdeno #{duplicates_count} podvojenih URL-jev (skupaj #{total_before} vrstic)."
+
+    duplicate_urls.each do |url, count|
+      links = Link.where(url: url).order(:id).to_a
+      keeper = links.first
+      to_delete = links.drop(1)
+      to_delete.each do |link|
+        link.destroy!
+        deleted += 1
+      end
+      puts "  #{url}: obdržal ID=#{keeper.id}, izbrisal #{to_delete.size} (od #{count})"
+    end
+
+    puts "Izbrisano #{deleted} podvojenih povezav. Skupaj zdaj: #{Link.count}."
+  end
 end

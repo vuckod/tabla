@@ -113,16 +113,21 @@ Uvozi vsebino na novo v produkciji (idempotentno prek source_url), kot v razvoju
 stari strežnik tabla.knjiznica-lendava.si mora biti dosegljiv iz produkcijskega kontejnerja,
 in HTML datoteka je v sliki (docs/ je COPY-jan v Docker build).
 
+**POZOR — VEDNO uporabi `-r web` za enkratne ukaze!** `kamal app exec` brez `-r` teče
+VZPOREDNO na vseh rolih (web + jobs), kar pri uvozu povzroči race condition (dva procesa
+hkrati poskušata ustvariti iste zapise — PG::UniqueViolation). `-r web` omeji izvajanje
+na en kontejner.
+
 Najprej preveri dosegljivost starega strežnika iz produkcije:
 ```bash
-kamal app exec "curl -sI -o /dev/null -w 'HTTP:%{http_code}\n' http://tabla.knjiznica-lendava.si/kl_index/files/pravilniki/Akt_o_notranji_organizaciji_in_sistematizaciji_delovnih_mest_v_KKCL-LKKK_2024.pdf"
+kamal app exec -r web "curl -sI -o /dev/null -w 'HTTP:%{http_code}\n' http://tabla.knjiznica-lendava.si/kl_index/files/pravilniki/Akt_o_notranji_organizaciji_in_sistematizaciji_delovnih_mest_v_KKCL-LKKK_2024.pdf"
 ```
 Nato (po vrsti, kot v razvoju):
 ```bash
-kamal app exec "bin/rails import:legacy"            # 191 dokumentov + 54 povezav
-kamal app exec "bin/rails import:recategorize_links" # kategoriziraj povezave
-kamal app exec "bin/rails import:phones"            # telefonske številke
-kamal app exec "bin/rails thumbnails:generate_missing" # thumbnaili
+kamal app exec -r web "bin/rails import:legacy"            # 191 dokumentov + 54 povezav
+kamal app exec -r web "bin/rails import:recategorize_links" # kategoriziraj povezave
+kamal app exec -r web "bin/rails import:phones"            # telefonske številke
+kamal app exec -r web "bin/rails thumbnails:generate_missing" # thumbnaili
 ```
 OCR + thumbnaili tečejo v jobs kontejnerju (~30 min OCR za 191 dokumentov). Spremljaj:
 ```bash
