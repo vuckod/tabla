@@ -128,6 +128,8 @@ sl:
         update: "Posodobi dokument"
   views:
     layouts:
+      skip_to_content: "Preskoči na vsebino"
+      nav_pages: "Strani"
       header:
         title: "Intranet (tabla) KKC Lendava"
         subtitle: "Lendvai KKK"
@@ -143,6 +145,7 @@ sl:
       flash:
         dismiss: "Zapri obvestilo"
     shared:
+      close: "Zapri"
       actions: "Dejanja"
       edit: "Uredi"
       delete: "Izbriši"

@@ -1,9 +1,15 @@
 <turbo-frame id="modal">
   <div class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 p-4 backdrop-blur-sm dark:bg-black/60 sm:p-0">
-    <div class="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-xl border border-slate-200/80 bg-white shadow-2xl dark:border-slate-800 dark:bg-slate-900">
-      <%= link_to "✕", "", data: { controller: "turbo", action: "turbo#close" }, class: "absolute right-4 top-4 text-xl font-bold text-slate-400 hover:text-slate-600 dark:text-slate-500 dark:hover:text-slate-300" %>
+    <div class="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-xl border border-slate-200/80 bg-white shadow-2xl dark:border-slate-800 dark:bg-slate-900"
+         role="dialog"
+         aria-modal="true"
+         aria-labelledby="audit-modal-title">
+      <%= link_to "✕", "",
+          data: { controller: "turbo", action: "turbo#close" },
+          class: "absolute right-4 top-4 text-xl font-bold text-slate-400 hover:text-slate-600 dark:text-slate-500 dark:hover:text-slate-300",
+          aria: { label: t("views.shared.close") } %>
       <div class="p-6 pr-12">
-        <h1 class="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100"><%= t("views.admin.audit.modal_title") %></h1>
+        <h1 id="audit-modal-title" class="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100"><%= t("views.admin.audit.modal_title") %></h1>
         <p class="mt-1 text-sm text-slate-600 dark:text-slate-400"><%= heading %></p>
 
         <% if audits.blank? %>
