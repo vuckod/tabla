@@ -3,9 +3,9 @@
   <head>
     <title>
       <% if content_for?(:title) %>
-        <%= content_for(:title) %> | <%= t("views.layouts.header.page_title") %>
+        <%= content_for(:title) %> | <%= t("views.titles.app_name") %>
       <% else %>
-        <%= t("views.layouts.header.page_title") %>
+        <%= t("views.titles.app_name") %>
       <% end %>
     </title>
     <meta name="viewport" content="width=device-width,initial-scale=1">

@@ -1,4 +1,4 @@
-<% content_for :title, t("views.search.title") %>
+<% content_for :title, @query.present? ? t("views.titles.search_query", query: @query) : t("views.titles.search") %>
 
 <h1 class="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-6">
   <%= t("views.search.title") %>
