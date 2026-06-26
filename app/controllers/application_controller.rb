@@ -38,7 +38,9 @@ class ApplicationController < ActionController::Base
   def require_login
     return if current_user
 
-    session[:return_to] = request.fullpath if request.get?
+    # request.get? vrne false za HEAD zahteve, čeprav Rails HEAD usmerja enako kot GET
+    # (Brakeman VerbConfusion) — zato preverimo oboje, da HEAD ne shrani napačne poti.
+    session[:return_to] = request.fullpath if request.get? || request.head?
     flash[:alert] = t("views.sessions.login_required")
     redirect_to login_path
   end
