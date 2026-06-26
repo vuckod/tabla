@@ -7,10 +7,6 @@
     <%= render "home/announcements", announcements: @announcements %>
   <% end %>
 
-  <% if current_user && @recent_documents.any? %>
-    <%= render "home/recent_documents", recent_documents: @recent_documents %>
-  <% end %>
-
   <%# Vrstica 2: imenik (10) + aplikacije (2) %>
   <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
     <div class="lg:col-span-10">
@@ -30,7 +26,10 @@
           documents: @documents,
           pagy: @pagy %>
     </div>
-    <div class="lg:col-span-2">
+    <div class="lg:col-span-2 space-y-4">
+      <% if current_user && @recent_documents.any? %>
+        <%= render "home/recent_documents", recent_documents: @recent_documents %>
+      <% end %>
       <%= render "home/external_links", external_link_categories: @external_link_categories %>
     </div>
   </div>

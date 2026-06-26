@@ -62,6 +62,18 @@ class User < ApplicationRecord
       .limit(limit)
   end
 
+  def new_documents_count
+    return 0 unless last_documents_seen_at
+
+    Rails.cache.fetch(new_documents_count_cache_key, expires_in: 1.minute) do
+      new_documents_scope.count
+    end
+  end
+
+  def mark_documents_as_seen!
+    update_column(:last_documents_seen_at, Time.current)
+  end
+
   # Ustvari ali posodobi lokalni zapis na podlagi podatkov iz Prisotnost API-ja.
   # user_data: { "id", "username", "ime", "priimek", "email", "onemogocen", "roles" => [...] }
   def self.sync_from_api_data(user_data)
@@ -75,6 +87,7 @@ class User < ApplicationRecord
       onemogocen: user_data["onemogocen"] || false,
       last_synced_at: Time.current
     )
+    user.last_documents_seen_at ||= Time.current
     user.save!
     sync_roles(user, user_data["roles"] || [])
     user
@@ -84,5 +97,18 @@ class User < ApplicationRecord
     intranet_roles = role_names.select { |r| r.start_with?("intranet_") }
     target_roles = Role.where("LOWER(name) IN (?)", intranet_roles.map(&:downcase))
     user.roles = target_roles
+  end
+
+  private
+
+  def new_documents_scope
+    Document.published
+            .visible_to(self)
+            .for_user_enota(self)
+            .where("documents.created_at > ?", last_documents_seen_at)
+  end
+
+  def new_documents_count_cache_key
+    "user_new_docs_count_#{id}_#{last_documents_seen_at.to_i}"
   end
 end

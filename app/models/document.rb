@@ -39,6 +39,18 @@ class Document < ApplicationRecord
 
     where(internal_only: false)
   }
+  scope :for_user_enota, ->(user) {
+    return all if user.blank? || user.admin? || user.urednik?
+
+    case user.enota
+    when "knjiznica"
+      where(unit: %i[both library])
+    when "gledalisce"
+      where(unit: %i[both theatre])
+    else
+      all
+    end
+  }
 
   def published?
     published_at.present? && published_at <= Time.current

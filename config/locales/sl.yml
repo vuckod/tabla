@@ -175,6 +175,11 @@ sl:
         directory: "Imenik"
         links: "Povezave"
         documents: "Dokumenti"
+        new_documents_badge:
+          one: "%{count} nov dokument"
+          two: "%{count} nova dokumenta"
+          few: "%{count} novi dokumenti"
+          other: "%{count} novih dokumentov"
         admin: "Administracija"
         dark_mode_toggle: "Preklopi temni način"
         menu_toggle: "Odpri meni"

@@ -4,6 +4,7 @@
 class DocumentsController < ApplicationController
   include DocumentListing
 
+  before_action :mark_documents_seen, only: :index, if: -> { current_user }
   before_action :require_login, only: %i[show preview download]
   before_action :set_document, only: %i[show preview download]
 
@@ -53,6 +54,10 @@ class DocumentsController < ApplicationController
 
   def set_document
     @document = Document.visible_to(current_user).published.includes(:document_category).find(params[:id])
+  end
+
+  def mark_documents_seen
+    current_user.mark_documents_as_seen!
   end
 
   def record_document_view(document)

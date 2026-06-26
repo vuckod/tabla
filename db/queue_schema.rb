@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_26_203400) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_26_204253) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -413,6 +413,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_26_203400) do
     t.string "email"
     t.string "enota"
     t.string "ime"
+    t.datetime "last_documents_seen_at"
     t.datetime "last_request_at"
     t.datetime "last_synced_at"
     t.boolean "onemogocen", default: false, null: false
