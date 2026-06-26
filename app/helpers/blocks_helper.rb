@@ -15,6 +15,10 @@ module BlocksHelper
       header: "bg-blue-600 dark:bg-blue-700 text-white",
       body: "bg-blue-50 dark:bg-blue-900/30 text-slate-900 dark:text-slate-100"
     },
+    teal: {
+      header: "bg-teal-600 dark:bg-teal-700 text-white",
+      body: "bg-teal-50 dark:bg-teal-900/30 text-slate-900 dark:text-slate-100"
+    },
     red: {
       header: "bg-red-600 dark:bg-red-700 text-white",
       body: "bg-red-50 dark:bg-red-900/30 text-slate-900 dark:text-slate-100"

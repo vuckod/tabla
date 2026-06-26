@@ -5,6 +5,7 @@ Vse pomembne spremembe so dokumentirane v tej datoteki.
 ## [Unreleased]
 
 ### Dodano
+- Polish pred predajo: teal blok povezav, footer z verzijo (TABLA_VERSION, RELEASE_DATE), uvoz NOE zapisnikov (`#tabs-4`) z `document_unit`, rake `import:update_units`
 - Vizualna modernizacija: imenik na domači strani v dva stolpca (SIKLND/NOE), header z ikono knjižnice, gradientom in datumom; hover-lift na karticah dokumentov; ikone v navigaciji
 - Domača stran: povezave samo v 3. vrstici ob dokumentih, imenik širši (10 stolpcev), brez scrolla na povezavah
 - Mobilna prilagoditev admin tabel: kartični prikaz pod md, tabela skrita na ozkih zaslonih (9 strani)

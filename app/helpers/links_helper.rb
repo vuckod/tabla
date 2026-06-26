@@ -68,7 +68,7 @@ module LinksHelper
   def link_to_external_block(link)
     link_to link.title, link.url,
             class: "block text-xs leading-tight truncate text-slate-900 dark:text-slate-100 " \
-                   "hover:text-indigo-800 dark:hover:text-indigo-300 hover:underline",
+                   "hover:text-teal-800 dark:hover:text-teal-300 hover:underline",
             title: link.title,
             target: "_blank",
             rel: "noopener noreferrer"

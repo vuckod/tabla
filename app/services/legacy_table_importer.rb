@@ -14,24 +14,35 @@ class LegacyTableImporter
     {
       selector: "table#dokumenti",
       label: "Pravilniki, navodila, ukrepi",
-      layout: :full
+      layout: :full,
+      document_unit: :both
     },
     {
       selector: "#tabs-3 table#zapisniki",
       label: "Zapisniki sestankov delavcev - knjižnica",
       layout: :simple,
-      default_category: "Zapisniki sestankov delavcev - knjižnica"
+      default_category: "Zapisniki sestankov delavcev - knjižnica",
+      document_unit: :library
+    },
+    {
+      selector: "#tabs-4 table#zapisniki",
+      label: "Zapisniki sestankov delavcev - NOE",
+      layout: :simple,
+      default_category: "Zapisniki sestankov delavcev - NOE",
+      document_unit: :theatre
     },
     {
       selector: "table#svet",
       label: "Zapisniki sej sveta zavoda",
       layout: :simple,
-      default_category: "Zapisniki sej sveta zavoda"
+      default_category: "Zapisniki sej sveta zavoda",
+      document_unit: :both
     },
     {
       selector: "table#obvestila",
       label: "Obvestila za zaposlene",
-      layout: :full
+      layout: :full,
+      document_unit: :both
     }
   ].freeze
 
@@ -66,7 +77,7 @@ class LegacyTableImporter
   }.freeze
 
   ParsedDocument = Data.define(
-    :table_label, :title, :url, :category_name, :unit, :published_at, :pdf
+    :table_label, :title, :url, :category_name, :unit, :document_unit, :published_at, :pdf
   )
 
   ParsedLink = Data.define(:title, :url, :category_name)
@@ -156,6 +167,7 @@ class LegacyTableImporter
       url: url,
       category_name: category_name,
       unit: unit,
+      document_unit: config[:document_unit] || :both,
       published_at: published_at,
       pdf: pdf_url?(url)
     )
@@ -207,6 +219,7 @@ class LegacyTableImporter
       title: parsed.title,
       description: parsed.unit.present? ? "Enota: #{parsed.unit}" : nil,
       document_category: category,
+      unit: parsed.document_unit,
       published_at: parsed.published_at&.in_time_zone || Time.current,
       source_url: parsed.url,
       internal_only: false,
