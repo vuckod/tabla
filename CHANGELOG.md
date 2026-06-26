@@ -5,6 +5,7 @@ Vse pomembne spremembe so dokumentirane v tej datoteki.
 ## [Unreleased]
 
 ### Dodano
+- Pre-launch polish (naloga 41): A11Y (skip link, focus-visible, ARIA, aria-current), empty states, dinamični browser title (`| Tabla`), print CSS
 - Polish pred predajo: teal blok povezav, footer z verzijo (TABLA_VERSION, RELEASE_DATE), uvoz NOE zapisnikov (`#tabs-4`) z `document_unit`, rake `import:update_units`
 - Vizualna modernizacija: imenik na domači strani v dva stolpca (SIKLND/NOE), header z ikono knjižnice, gradientom in datumom; hover-lift na karticah dokumentov; ikone v navigaciji
 - Domača stran: povezave samo v 3. vrstici ob dokumentih, imenik širši (10 stolpcev), brez scrolla na povezavah

@@ -1,7 +1,7 @@
 <% selected_category = @document_categories.find { |c| c.id == @selected_category_id.to_i } if @selected_category_id.present? %>
 <% content_for :title, [t("views.titles.documents"), selected_category&.name].compact.join(" — ") %>
 
-<h1 class="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-6">
+<h1 class="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-6 print:text-xl print:text-black print:mb-4">
   <%= t("views.documents.title") %>
 </h1>
 

@@ -1,7 +1,7 @@
 <% content_for :title, t("views.titles.persons") %>
 
-<div class="mb-8">
-  <h1 class="text-3xl font-bold text-slate-900 dark:text-slate-100">
+<div class="mb-8 print:mb-4">
+  <h1 class="text-3xl font-bold text-slate-900 dark:text-slate-100 print:text-xl print:text-black">
     <%= t("views.persons.title") %>
   </h1>
 </div>
@@ -48,7 +48,7 @@
           end) %>
     <% else %>
       <%# Desktop tabela %>
-      <div class="hidden md:block overflow-x-auto rounded-lg border border-slate-200 dark:border-slate-700">
+      <div class="hidden md:block print:block overflow-x-auto rounded-lg border border-slate-200 dark:border-slate-700 print:border-0 print:rounded-none">
         <table class="min-w-full divide-y divide-slate-200 dark:divide-slate-700">
           <thead class="bg-slate-50 dark:bg-slate-800">
             <tr>
@@ -95,7 +95,7 @@
       </div>
 
       <%# Mobilne kartice %>
-      <div class="md:hidden space-y-4">
+      <div class="md:hidden print:hidden space-y-4">
         <% @persons.each do |person| %>
           <article class="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-4 shadow-sm">
             <h3 class="text-lg font-semibold text-slate-900 dark:text-slate-100">

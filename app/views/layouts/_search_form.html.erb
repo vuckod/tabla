@@ -1,5 +1,5 @@
 <%= form_with url: search_path, method: :get,
-    class: local_assigns.fetch(:form_class, "w-full"),
+    class: "#{local_assigns.fetch(:form_class, "w-full")} print:hidden",
     role: "search" do |f| %>
   <label for="header-search-q" class="sr-only"><%= t("views.search.placeholder") %></label>
   <div class="relative">

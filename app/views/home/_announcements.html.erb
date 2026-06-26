@@ -2,7 +2,8 @@
     locals: { title: t("views.home.urgent_announcements"), color: :red } do %>
   <div class="space-y-4">
     <% announcements.each do |announcement| %>
-      <article class="rounded-lg border border-red-200/60 dark:border-red-800/60 bg-white/70 dark:bg-slate-900/40 p-4">
+      <article class="rounded-lg border border-red-200/60 dark:border-red-800/60 bg-white/70 dark:bg-slate-900/40 p-4
+                      print:border print:border-slate-300 print:bg-white print:shadow-none print:break-inside-avoid">
         <div class="flex flex-wrap items-center gap-2 mb-2">
           <% if announcement.pinned? %>
             <span class="shrink-0 text-base" title="<%= t("views.admin.announcements.pinned") %>" aria-label="<%= t("views.admin.announcements.pinned") %>">📌</span>

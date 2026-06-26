@@ -1,18 +1,26 @@
 <article class="flex flex-col sm:flex-row sm:items-center gap-4 p-4 rounded-lg border
                 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm
                 hover:border-indigo-200 dark:hover:border-indigo-800
-                transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5">
-  <%= document_thumbnail(document) %>
+                transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5
+                print:flex-row print:items-start print:gap-2 print:p-2 print:shadow-none
+                print:border-0 print:border-b print:rounded-none print:hover:translate-y-0">
+  <div class="print:hidden shrink-0">
+    <%= document_thumbnail(document) %>
+  </div>
 
   <div class="flex-1 min-w-0">
-    <div class="flex flex-wrap items-center gap-2 mb-1">
-      <h2 class="text-base font-semibold text-slate-900 dark:text-slate-100">
+    <div class="flex flex-wrap items-center gap-2 mb-1 print:mb-0">
+      <h2 class="text-base font-semibold text-slate-900 dark:text-slate-100 print:text-sm print:font-bold print:text-black">
         <%= link_to document.title, document_path(document),
-            class: "hover:text-indigo-600 dark:hover:text-indigo-400",
+            class: "hover:text-indigo-600 dark:hover:text-indigo-400 print:hidden",
             data: { turbo_frame: "_top" } %>
+        <span class="hidden print:inline"><%= document.title %></span>
       </h2>
 
-      <%= document_category_badge(document.document_category) %>
+      <span class="print:hidden"><%= document_category_badge(document.document_category) %></span>
+      <span class="hidden print:inline text-xs text-black">
+        <%= document.document_category&.name %>
+      </span>
 
       <% if document.internal_only? %>
         <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium
@@ -23,10 +31,10 @@
     </div>
 
     <% if document.description.present? %>
-      <p class="text-sm text-slate-600 dark:text-slate-400 line-clamp-2"><%= document.description %></p>
+      <p class="text-sm text-slate-600 dark:text-slate-400 line-clamp-2 print:hidden"><%= document.description %></p>
     <% end %>
 
-    <p class="text-xs text-slate-500 dark:text-slate-400 mt-2">
+    <p class="text-xs text-slate-500 dark:text-slate-400 mt-2 print:mt-0 print:text-black">
       <%= t("views.documents.published_on") %>: <%= format_published_at(document) %>
     </p>
   </div>

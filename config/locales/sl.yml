@@ -246,6 +246,8 @@ sl:
       preview_mobile_hint: "Na mobilnih napravah odprite PDF v novem zavihku za boljši prikaz."
       file_missing: "Datoteka dokumenta ni na voljo."
       published_on: "Objavljeno"
+      print_category: "Kategorija"
+      print_url: "Povezava"
       internal: "Interno"
       empty_category: "Ni dokumentov v tej kategoriji."
       empty_category_title: "Ni dokumentov"

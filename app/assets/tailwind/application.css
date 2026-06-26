@@ -10,3 +10,30 @@
 .dark :focus-visible {
   outline-color: #818cf8;
 }
+
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  header,
+  footer,
+  turbo-frame#modal,
+  [data-turbo-frame="modal"] {
+    display: none !important;
+  }
+
+  main {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    max-width: none !important;
+  }
+
+  .dark,
+  .dark * {
+    background: white !important;
+    color: black !important;
+    border-color: #cbd5e1 !important;
+  }
+}
