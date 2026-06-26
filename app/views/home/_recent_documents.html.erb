@@ -1,0 +1,21 @@
+<%= render layout: "shared/block",
+    locals: { title: t("views.home.recent_views"), color: :purple } do %>
+  <% if recent_documents.any? %>
+    <ul class="space-y-2">
+      <% recent_documents.each do |doc| %>
+        <li>
+          <%= link_to document_path(doc),
+              class: "block hover:bg-purple-100 dark:hover:bg-purple-900/30 rounded p-2" do %>
+            <div class="text-sm font-medium truncate"><%= doc.title %></div>
+            <div class="text-xs text-slate-600 dark:text-slate-400">
+              <%= time_ago_in_words(doc.read_attribute(:last_viewed_at) || doc.last_viewed_at) %>
+              <%= t("views.home.recent_views_ago") %>
+            </div>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p class="text-sm opacity-80"><%= t("views.home.recent_views_empty") %></p>
+  <% end %>
+<% end %>

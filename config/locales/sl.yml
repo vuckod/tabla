@@ -147,6 +147,7 @@ sl:
         document_category_new: "Admin — Nova kategorija dokumentov"
         document_category_edit: "Admin — Uredi kategorijo dokumentov"
         document_audits: "Admin — Zgodovina dokumentov"
+        document_popularity: "Admin — Branjenost dokumentov"
         analytics: "Admin — Analitika"
         persons: "Admin — Osebe"
         person_new: "Admin — Nova oseba"
@@ -220,6 +221,9 @@ sl:
       all_links: "Vse povezave"
       all_documents: "Vsi dokumenti →"
       urgent_announcements: "Nujna obvestila"
+      recent_views: "Nedavno ogledano"
+      recent_views_ago: "nazaj"
+      recent_views_empty: "Še niste pregledali nobenega dokumenta."
       announcement_expires: "Velja do"
     directory:
       internal: "Interna"
@@ -421,6 +425,20 @@ sl:
         title: "Zgodovina dokumentov"
         subtitle: "Vse spremembe dokumentov v sistemu."
         search_placeholder: "Išči po naslovu dokumenta…"
+      document_popularity:
+        title: "Branjenost dokumentov"
+        subtitle: "Najbolj brani dokumenti po številu ogledov (samo prijavljeni uporabniki)."
+        ranges:
+          all: "Od začetka"
+          week: "Zadnji teden"
+          month: "Zadnji mesec"
+        total_views: "Skupaj ogledov"
+        total_unique_viewers: "Različnih bralcev"
+        views: "Ogledov"
+        unique_viewers: "Bralcev"
+        last_viewed: "Zadnji ogled"
+        empty_title: "Ni zabeleženih ogledov"
+        empty_message: "Ogledi se beležijo, ko prijavljeni uporabniki odprejo dokument."
       audit:
         modal_title: "Zgodovina sprememb"
         empty: "Ni shranjenih revizij."

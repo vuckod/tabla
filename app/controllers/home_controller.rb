@@ -8,6 +8,7 @@ class HomeController < ApplicationController
     @directory_rows_by_unit = DirectoryTableBuilder.rows_by_unit_kind
     @internal_links = Link.internal_apps.ordered
     @external_link_categories = external_link_categories_for_home
+    @recent_documents = current_user&.recent_documents(limit: 5) || []
     load_documents_list
   end
 

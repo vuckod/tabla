@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_and_belongs_to_many :roles
   has_many :visits, class_name: "Ahoy::Visit", dependent: :nullify
   has_many :ahoy_events, class_name: "Ahoy::Event", dependent: :nullify
+  has_many :document_views, dependent: :destroy
 
   validates :username, presence: true, uniqueness: { case_sensitive: false }
   validates :remote_id, presence: true, uniqueness: true
@@ -49,6 +50,16 @@ class User < ApplicationRecord
 
   def bralec?
     !admin? && !urednik?
+  end
+
+  def recent_documents(limit: 5)
+    Document
+      .joins(:document_views)
+      .where(document_views: { user_id: id })
+      .group("documents.id")
+      .select("documents.*, MAX(document_views.viewed_at) AS last_viewed_at")
+      .order(Arel.sql("MAX(document_views.viewed_at) DESC"))
+      .limit(limit)
   end
 
   # Ustvari ali posodobi lokalni zapis na podlagi podatkov iz Prisotnost API-ja.

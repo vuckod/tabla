@@ -30,6 +30,10 @@ module BlocksHelper
     indigo: {
       header: "bg-indigo-600 dark:bg-indigo-700 text-white",
       body: "bg-indigo-50 dark:bg-indigo-900/30 text-slate-900 dark:text-slate-100"
+    },
+    purple: {
+      header: "bg-purple-700 dark:bg-purple-800 text-white",
+      body: "bg-purple-50 dark:bg-purple-900/30 text-slate-900 dark:text-slate-100"
     }
   }.freeze
 

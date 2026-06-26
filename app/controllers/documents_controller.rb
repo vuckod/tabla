@@ -18,6 +18,8 @@ class DocumentsController < ApplicationController
       redirect_to documents_path, alert: t("views.documents.file_missing")
       return
     end
+
+    record_document_view(@document)
   end
 
   def preview
@@ -51,5 +53,17 @@ class DocumentsController < ApplicationController
 
   def set_document
     @document = Document.visible_to(current_user).published.includes(:document_category).find(params[:id])
+  end
+
+  def record_document_view(document)
+    last_view = current_user.document_views
+                            .where(document: document)
+                            .order(viewed_at: :desc)
+                            .first
+    return if last_view && last_view.viewed_at > 5.minutes.ago
+
+    DocumentView.create!(user: current_user, document: document, viewed_at: Time.current)
+  rescue ActiveRecord::RecordInvalid
+    # Ne prekinemo prikaza dokumenta ob napaki beleženja.
   end
 end

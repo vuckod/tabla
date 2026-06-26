@@ -10,6 +10,7 @@ class Document < ApplicationRecord
   belongs_to :updater, class_name: "User", foreign_key: "updated_by_id", optional: true
 
   has_many :ocr_logs, as: :record, dependent: :destroy
+  has_many :document_views, dependent: :destroy
   has_one_attached :file
   has_one_attached :thumbnail
 
@@ -54,6 +55,18 @@ class Document < ApplicationRecord
   # Ali obstaja searchable PDF (z OZnačljivim OCR besedilom)?
   def searchable_pdf_available?
     latest_searchable_ocr_log.present?
+  end
+
+  def views_count
+    document_views.count
+  end
+
+  def unique_viewers_count
+    document_views.select(:user_id).distinct.count
+  end
+
+  def last_viewed_at
+    document_views.maximum(:viewed_at)
   end
 
   def thumbnail_ready?

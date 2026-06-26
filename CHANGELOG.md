@@ -5,6 +5,7 @@ Vse pomembne spremembe so dokumentirane v tej datoteki.
 ## [Unreleased]
 
 ### Dodano
+- Sledenje branjenosti dokumentov: model DocumentView, throttle 5 min, widget »Nedavno ogledano«, admin branjenost
 - Pre-launch polish (naloga 41): A11Y (skip link, focus-visible, ARIA, aria-current), empty states, dinamični browser title (`| Tabla`), print CSS
 - Polish pred predajo: teal blok povezav, footer z verzijo (TABLA_VERSION, RELEASE_DATE), uvoz NOE zapisnikov (`#tabs-4`) z `document_unit`, rake `import:update_units`
 - Vizualna modernizacija: imenik na domači strani v dva stolpca (SIKLND/NOE), header z ikono knjižnice, gradientom in datumom; hover-lift na karticah dokumentov; ikone v navigaciji

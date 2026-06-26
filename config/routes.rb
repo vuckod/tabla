@@ -41,6 +41,7 @@ Rails.application.routes.draw do
 
     get "analytics", to: "analytics#index", as: :analytics
     get "document_audits", to: "document_audits#index", as: :document_audits
+    get "document_popularity", to: "document_popularity#index", as: :document_popularity
 
     resources :persons
     resources :locations
