@@ -11,6 +11,64 @@ sl:
   time:
     formats:
       short: "%d.%m.%Y %H:%M"
+  datetime:
+    distance_in_words:
+      half_a_minute: "pol minute"
+      less_than_x_seconds:
+        one: "manj kot 1 sekundo"
+        two: "manj kot 2 sekundi"
+        few: "manj kot %{count} sekunde"
+        other: "manj kot %{count} sekund"
+      x_seconds:
+        one: "1 sekundo"
+        two: "2 sekundi"
+        few: "%{count} sekunde"
+        other: "%{count} sekund"
+      less_than_x_minutes:
+        one: "manj kot 1 minuto"
+        two: "manj kot 2 minuti"
+        few: "manj kot %{count} minute"
+        other: "manj kot %{count} minut"
+      x_minutes:
+        one: "1 minuto"
+        two: "2 minuti"
+        few: "%{count} minute"
+        other: "%{count} minut"
+      about_x_hours:
+        one: "okoli 1 uro"
+        two: "okoli 2 uri"
+        few: "okoli %{count} ure"
+        other: "okoli %{count} ur"
+      x_days:
+        one: "1 dan"
+        two: "2 dni"
+        few: "%{count} dni"
+        other: "%{count} dni"
+      about_x_months:
+        one: "okoli 1 mesec"
+        two: "okoli 2 meseca"
+        few: "okoli %{count} mesece"
+        other: "okoli %{count} mesecev"
+      x_months:
+        one: "1 mesec"
+        two: "2 meseca"
+        few: "%{count} mesece"
+        other: "%{count} mesecev"
+      about_x_years:
+        one: "okoli 1 leto"
+        two: "okoli 2 leti"
+        few: "okoli %{count} leta"
+        other: "okoli %{count} let"
+      over_x_years:
+        one: "več kot 1 leto"
+        two: "več kot 2 leti"
+        few: "več kot %{count} leta"
+        other: "več kot %{count} let"
+      almost_x_years:
+        one: "skoraj 1 leto"
+        two: "skoraj 2 leti"
+        few: "skoraj %{count} leta"
+        other: "skoraj %{count} let"
   activerecord:
     models:
       document: "Dokument"
