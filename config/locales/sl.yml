@@ -462,6 +462,23 @@ sl:
         ocr_success: "Uspešno"
         ocr_error: "Napaka"
         audit_history: "Zgodovina"
+        select_all: "Izberi vse dokumente"
+        selected: "izbranih"
+        bulk_choose_category: "Premakni v kategorijo…"
+        bulk_categorize: "Posodobi kategorijo"
+        bulk_delete: "Izbriši izbrane"
+        bulk_delete_confirm: "Ali ste prepričani, da želite izbrisati izbrane dokumente?"
+        bulk_destroyed:
+          one: "Izbrisan %{count} dokument."
+          two: "Izbrisana %{count} dokumenta."
+          few: "Izbrisani %{count} dokumenti."
+          other: "Izbrisanih %{count} dokumentov."
+        bulk_categorized:
+          one: "Posodobljen %{count} dokument."
+          two: "Posodobljena %{count} dokumenta."
+          few: "Posodobljeni %{count} dokumenti."
+          other: "Posodobljenih %{count} dokumentov."
+        bulk_category_required: "Izberite kategorijo za izbrane dokumente."
       analytics:
         title: "Analitika"
         subtitle: "Obiski in dogodki Ahoy (filtri spodaj)."

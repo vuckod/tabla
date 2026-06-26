@@ -45,6 +45,35 @@ module Admin
       render layout: false
     end
 
+    def bulk_destroy
+      authorize Document, :destroy?
+
+      documents = bulk_documents_scope
+      count = documents.count
+      documents.find_each(&:destroy!)
+
+      redirect_to admin_documents_path, notice: t("views.admin.documents.bulk_destroyed", count: count)
+    end
+
+    def bulk_categorize
+      authorize Document, :update?
+
+      category_id = params[:document_category_id]
+      if category_id.blank?
+        redirect_to admin_documents_path, alert: t("views.admin.documents.bulk_category_required")
+        return
+      end
+
+      documents = bulk_documents_scope
+      count = 0
+      documents.find_each do |document|
+        document.update!(document_category_id: category_id)
+        count += 1
+      end
+
+      redirect_to admin_documents_path, notice: t("views.admin.documents.bulk_categorized", count: count)
+    end
+
     private
 
     def set_document
@@ -60,6 +89,11 @@ module Admin
         :title, :description, :document_category_id, :unit,
         :published_at, :internal_only, :notify_staff, :file
       )
+    end
+
+    def bulk_documents_scope
+      ids = Array(params[:document_ids]).filter_map { |id| Integer(id, exception: false) }.uniq
+      policy_scope(Document).where(id: ids)
     end
   end
 end

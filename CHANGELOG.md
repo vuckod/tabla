@@ -5,6 +5,7 @@ Vse pomembne spremembe so dokumentirane v tej datoteki.
 ## [Unreleased]
 
 ### Dodano
+- Admin bulk operacije za dokumente: izbira, množična kategorizacija in izbris z audit trailom
 - In-app badge za nove dokumente: last_documents_seen_at, cache 1 min, badge 99+ v navigaciji
 - Sledenje branjenosti dokumentov: model DocumentView, throttle 5 min, widget »Nedavno ogledano«, admin branjenost
 - Pre-launch polish (naloga 41): A11Y (skip link, focus-visible, ARIA, aria-current), empty states, dinamični browser title (`| Tabla`), print CSS

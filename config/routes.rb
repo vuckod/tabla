@@ -53,6 +53,10 @@ Rails.application.routes.draw do
       end
     end
     resources :documents do
+      collection do
+        delete :bulk_destroy
+        patch :bulk_categorize
+      end
       member do
         get :audit_history
       end
