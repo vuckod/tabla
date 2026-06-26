@@ -8,7 +8,7 @@ module BlocksHelper
       body: "bg-yellow-100 dark:bg-yellow-900/30 text-slate-900 dark:text-slate-100"
     },
     green: {
-      header: "bg-green-600 dark:bg-green-700 text-white",
+      header: "bg-green-700 dark:bg-green-800 text-white",
       body: "bg-green-50 dark:bg-green-900/30 text-slate-900 dark:text-slate-100"
     },
     blue: {
@@ -16,7 +16,7 @@ module BlocksHelper
       body: "bg-blue-50 dark:bg-blue-900/30 text-slate-900 dark:text-slate-100"
     },
     teal: {
-      header: "bg-teal-600 dark:bg-teal-700 text-white",
+      header: "bg-teal-900 dark:bg-teal-950 text-white",
       body: "bg-teal-50 dark:bg-teal-900/30 text-slate-900 dark:text-slate-100"
     },
     red: {

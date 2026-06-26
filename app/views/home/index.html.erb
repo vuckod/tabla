@@ -1,5 +1,7 @@
 <% content_for :title, t("views.titles.home") %>
 
+<h1 class="sr-only"><%= t("views.titles.home") %></h1>
+
 <div class="space-y-6">
   <% if @announcements.any? %>
     <%= render "home/announcements", announcements: @announcements %>

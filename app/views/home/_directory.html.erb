@@ -7,10 +7,10 @@
       <% directory_rows_by_unit.each do |unit_kind, rows| %>
         <% next if rows.blank? %>
         <section>
-          <h4 class="font-semibold text-slate-800 dark:text-slate-200 mb-2 pb-1
+          <h3 class="font-semibold text-slate-800 dark:text-slate-200 mb-2 pb-1
                      border-b border-yellow-300/60 dark:border-yellow-700/60">
             <%= directory_unit_heading(unit_kind, rows.first.enota) %>
-          </h4>
+          </h3>
 
           <%# Desktop tabela %>
           <div class="hidden sm:block">
