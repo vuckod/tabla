@@ -81,5 +81,10 @@
     <% end %>
   </div>
 <% else %>
-  <%= render "admin/shared/empty_state", message: t("views.admin.shared.empty_list") %>
+  <%= render "admin/shared/empty_state",
+      icon: :users,
+      title: t("views.admin.empty_states.persons.title"),
+      message: t("views.admin.empty_states.persons.message"),
+      action_path: new_admin_person_path,
+      action_label: t("views.admin.empty_states.persons.action") %>
 <% end %>

@@ -9,9 +9,14 @@
   </nav>
 
   <% if documents.empty? %>
-    <p class="text-sm opacity-80 py-4 text-center">
-      <%= t("views.documents.empty_category") %>
-    </p>
+    <%= render "shared/empty_state",
+        icon: :document,
+        title: t("views.documents.empty_category_title"),
+        message: t("views.documents.empty_category_message"),
+        action: (if selected_category_id
+          link_to t("views.documents.empty_show_all"), documents_filter_url(filter_base),
+              class: "text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:underline"
+        end) %>
   <% else %>
     <div class="space-y-3">
       <% documents.each do |document| %>

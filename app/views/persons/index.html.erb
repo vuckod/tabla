@@ -38,7 +38,14 @@
     <% end %>
 
     <% if @persons.empty? %>
-      <p class="text-slate-500 dark:text-slate-400"><%= t("views.shared.no_results") %></p>
+      <%= render "shared/empty_state",
+          icon: :users,
+          title: t("views.persons.empty_title"),
+          message: t("views.persons.empty_message"),
+          action: (if params[:q].present? || params[:location_id].present?
+            link_to t("views.persons.reset_filters"), persons_path,
+                class: "text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:underline"
+          end) %>
     <% else %>
       <%# Desktop tabela %>
       <div class="hidden md:block overflow-x-auto rounded-lg border border-slate-200 dark:border-slate-700">

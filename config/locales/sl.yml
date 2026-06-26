@@ -212,6 +212,9 @@ sl:
       published_on: "Objavljeno"
       internal: "Interno"
       empty_category: "Ni dokumentov v tej kategoriji."
+      empty_category_title: "Ni dokumentov"
+      empty_category_message: "V tej kategoriji trenutno ni objavljenih dokumentov."
+      empty_show_all: "Prikaži vse dokumente"
       categories_nav: "Kategorije dokumentov"
       unpublished: "Ni objavljeno"
     search:
@@ -221,6 +224,9 @@ sl:
       prompt: "Vnesite iskalni niz in pritisnite Enter."
       results_for: "Rezultati za \"%{query}\" (%{count})"
       no_results: "Ni zadetkov za \"%{query}\"."
+      no_results_title: "Ni zadetkov za \"%{query}\""
+      no_results_hint: "Poskusi z drugačnim iskalnim izrazom."
+      clear_search: "Počisti iskanje"
       fallback_notice: "Napredno iskanje trenutno ni na voljo — prikazani so osnovni rezultati iz baze."
     persons:
       title: "Telefonski imenik"
@@ -234,6 +240,9 @@ sl:
       mobile_libraries: "Krajevne knjižnice"
       schedule: "Urnik"
       main_phone: "Telefon"
+      empty_title: "Ni oseb v imeniku"
+      empty_message: "Nobena oseba ne ustreza izbranim filtrom."
+      reset_filters: "Počisti filtre"
     links:
       title: "Povezave"
       empty_category: "V tej kategoriji še ni povezav."
@@ -274,6 +283,38 @@ sl:
         display_settings: "Nastavitve prikaza"
         errors_title: "Obrazec vsebuje napake"
         empty_list: "Ni vnosov."
+      empty_states:
+        documents:
+          title: "Še ni dokumentov"
+          message: "Dodajte prvi dokument v sistem."
+          action: "Dodaj prvi dokument"
+        persons:
+          title: "Še ni oseb"
+          message: "Dodajte prvo osebo v imenik."
+          action: "Dodaj prvo osebo"
+        locations:
+          title: "Še ni lokacij"
+          message: "Dodajte prvo lokacijo v sistem."
+          action: "Dodaj prvo lokacijo"
+        links:
+          title: "Še ni povezav"
+          message: "Dodajte prvo povezavo v sistem."
+          action: "Dodaj prvo povezavo"
+        link_categories:
+          title: "Še ni kategorij povezav"
+          message: "Ustvarite prvo kategorijo za povezave."
+          action: "Dodaj prvo kategorijo"
+        document_categories:
+          title: "Še ni kategorij dokumentov"
+          message: "Ustvarite prvo kategorijo za dokumente."
+          action: "Dodaj prvo kategorijo"
+        announcements:
+          title: "Še ni obvestil"
+          message: "Objavite prvo nujno obvestilo."
+          action: "Dodaj prvo obvestilo"
+        document_audits:
+          title: "Ni zgodovine"
+          message: "Spremembe dokumentov se bodo prikazale tukaj."
       link_categories:
         title: "Kategorije povezav"
         new: "Nova kategorija"

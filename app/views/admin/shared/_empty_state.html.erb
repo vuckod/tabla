@@ -1,3 +1,13 @@
-<div class="rounded-lg border border-dashed border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800/50 p-8 text-center">
-  <p class="text-sm text-slate-600 dark:text-slate-400"><%= message %></p>
-</div>
+<%# locals: icon:, title:, message: nil, action_path: nil, action_label: nil %>
+<% action = if local_assigns[:action_path].present? && local_assigns[:action_label].present?
+  link_to action_label, action_path,
+      class: "inline-flex items-center px-4 py-2 text-sm font-medium rounded-md " \
+             "bg-indigo-600 dark:bg-indigo-500 text-white " \
+             "hover:bg-indigo-700 dark:hover:bg-indigo-600 shadow-sm print:hidden"
+end %>
+
+<%= render "shared/empty_state",
+    icon: icon,
+    title: title,
+    message: local_assigns[:message],
+    action: action %>

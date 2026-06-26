@@ -11,9 +11,12 @@
 <% if @query.blank? %>
   <p class="text-slate-500 dark:text-slate-400"><%= t("views.search.prompt") %></p>
 <% elsif @documents.empty? %>
-  <p class="text-slate-500 dark:text-slate-400 py-8">
-    <%= t("views.search.no_results", query: @query) %>
-  </p>
+  <%= render "shared/empty_state",
+      icon: :search,
+      title: t("views.search.no_results_title", query: @query),
+      message: t("views.search.no_results_hint"),
+      action: link_to(t("views.search.clear_search"), search_path,
+          class: "text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:underline") %>
 <% else %>
   <% if @search_fallback %>
     <p class="text-sm text-amber-700 dark:text-amber-300 mb-4 p-3 rounded-md

@@ -66,5 +66,10 @@
     <% end %>
   </div>
 <% else %>
-  <%= render "admin/shared/empty_state", message: t("views.admin.shared.empty_list") %>
+  <%= render "admin/shared/empty_state",
+      icon: :folder,
+      title: t("views.admin.empty_states.link_categories.title"),
+      message: t("views.admin.empty_states.link_categories.message"),
+      action_path: new_admin_link_category_path,
+      action_label: t("views.admin.empty_states.link_categories.action") %>
 <% end %>

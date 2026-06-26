@@ -149,7 +149,10 @@
         <% end %>
       </div>
     <% else %>
-      <p class="mt-6 text-sm text-slate-500 dark:text-slate-400"><%= t("views.admin.shared.empty_list") %></p>
+      <%= render "admin/shared/empty_state",
+          icon: :clock,
+          title: t("views.admin.empty_states.document_audits.title"),
+          message: t("views.admin.empty_states.document_audits.message") %>
     <% end %>
 
     <% if @pagy.pages > 1 %>
