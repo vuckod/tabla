@@ -4,7 +4,15 @@
 # Credentials se NIKOLI ne preverjajo lokalno — vedno prek Prisotnost API-ja.
 class SessionsController < ApplicationController
   def new
-    redirect_to root_path if current_user
+    return redirect_to root_path if current_user
+
+    # Sprejmi return_to iz URL parametra (npr. po prijavi iz blur snippeta v search).
+    # Varovalka proti open-redirect: samo notranje poti ("/<karkoli>", a NE "//evil.com"
+    # ali "/\evil.com", ki ju browser interpretira kot zunanja preusmeritev).
+    target = params[:return_to].to_s
+    if target.match?(%r{\A/[^/\\]})
+      session[:return_to] = target
+    end
   end
 
   def create

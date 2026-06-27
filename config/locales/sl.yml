@@ -333,6 +333,9 @@ sl:
       no_results_hint: "Poskusi z drugačnim iskalnim izrazom."
       clear_search: "Počisti iskanje"
       fallback_notice: "Napredno iskanje trenutno ni na voljo — prikazani so osnovni rezultati iz baze."
+      preview_lorem: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      preview_login_prefix: "Za predogled vsebine se"
+      preview_login_link: "prijavite"
     persons:
       title: "Telefonski imenik"
       employees: "Zaposleni"
