@@ -7,8 +7,11 @@
         <% next if links.empty? %>
 
         <div>
-          <h3 class="text-xs font-bold uppercase tracking-wide text-teal-900 dark:text-teal-200 mb-1">
-            <%= category.name %>
+          <h3 class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide text-teal-900 dark:text-teal-200 mb-1">
+            <% if (svg = icon_svg(category.icon, css_class: "h-3.5 w-3.5 shrink-0")) %>
+              <%= svg %>
+            <% end %>
+            <span><%= category.name %></span>
           </h3>
           <ul class="space-y-0.5">
             <% links.each do |link| %>

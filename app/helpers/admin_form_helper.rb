@@ -98,6 +98,24 @@ module AdminFormHelper
     end
   end
 
+  def admin_icon_picker(form, field, label:, hint: nil)
+    selected = form.object.public_send(field).to_s
+
+    content_tag(:div, class: "space-y-1") do
+      safe_join([
+        form.label(field, label, class: LABEL_CLASSES),
+        content_tag(:div, class: "flex flex-wrap gap-2", role: "radiogroup", aria: { label: label }) do
+          safe_join(
+            [admin_icon_option(form, field, nil, selected)] +
+            IconHelper::ICONS.keys.map { |name| admin_icon_option(form, field, name, selected) }
+          )
+        end,
+        (hint.present? ? content_tag(:p, hint, class: HINT_CLASSES) : nil),
+        admin_field_errors(form, field)
+      ].compact)
+    end
+  end
+
   private
 
   def admin_color_option(form, field, color, selected)
@@ -115,6 +133,27 @@ module AdminFormHelper
                     class: "block w-9 h-9 rounded-full #{category_swatch_classes(color)} #{ring_classes}",
                     title: category_color_label(color),
                     aria: { hidden: true })
+      ])
+    end
+  end
+
+  def admin_icon_option(form, field, name, selected)
+    checked = selected == name.to_s
+    label_text = name.nil? ? "Brez ikone" : name.tr("-", " ").capitalize
+    box_classes = "flex items-center justify-center w-10 h-10 rounded-md border " \
+                  "text-slate-600 dark:text-slate-300"
+    box_classes += if checked
+                     " border-indigo-500 ring-2 ring-indigo-500 bg-indigo-50 dark:bg-indigo-900/30"
+                   else
+                     " border-slate-300 dark:border-slate-600 hover:border-indigo-300 dark:hover:border-indigo-600"
+                   end
+
+    content_tag(:label, class: "cursor-pointer", title: label_text) do
+      safe_join([
+        form.radio_button(field, name.to_s, class: "sr-only", checked: checked),
+        content_tag(:span, class: box_classes, aria: { hidden: true }) do
+          name.nil? ? content_tag(:span, "—", class: "text-xs") : icon_svg(name, css_class: "h-5 w-5")
+        end
       ])
     end
   end

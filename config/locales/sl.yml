@@ -431,7 +431,7 @@ sl:
         updated: "Kategorija je bila uspešno posodobljena."
         destroyed: "Kategorija je bila izbrisana."
         links_count: "Št. povezav"
-        icon_hint: "npr. computer-desktop"
+        icon_hint: "Izberi ikono, ki se prikaže ob imenu kategorije na strani Povezave."
       links:
         title: "Povezave"
         new: "Nova povezava"

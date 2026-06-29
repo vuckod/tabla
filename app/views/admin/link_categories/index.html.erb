@@ -21,7 +21,14 @@
       <tbody class="bg-white dark:bg-slate-900 divide-y divide-slate-200 dark:divide-slate-700">
         <% @link_categories.each do |category| %>
           <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
-            <td class="px-4 py-3 text-sm font-medium text-slate-900 dark:text-slate-100"><%= category.name %></td>
+            <td class="px-4 py-3 text-sm font-medium text-slate-900 dark:text-slate-100">
+              <span class="inline-flex items-center gap-2">
+                <% if (svg = icon_svg(category.icon, css_class: "h-4 w-4 text-slate-400 dark:text-slate-500 shrink-0")) %>
+                  <%= svg %>
+                <% end %>
+                <span><%= category.name %></span>
+              </span>
+            </td>
             <td class="px-4 py-3 text-sm text-slate-700 dark:text-slate-300"><%= category.position %></td>
             <td class="px-4 py-3 text-sm text-slate-700 dark:text-slate-300"><%= category.links.size %></td>
             <td class="px-4 py-3 text-right text-sm space-x-3 print:hidden">
@@ -43,7 +50,12 @@
   <div class="md:hidden space-y-3">
     <% @link_categories.each do |category| %>
       <article class="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-4 shadow-sm">
-        <h3 class="font-semibold text-slate-900 dark:text-slate-100 mb-2"><%= category.name %></h3>
+        <h3 class="flex items-center gap-2 font-semibold text-slate-900 dark:text-slate-100 mb-2">
+          <% if (svg = icon_svg(category.icon, css_class: "h-4 w-4 text-slate-400 dark:text-slate-500 shrink-0")) %>
+            <%= svg %>
+          <% end %>
+          <span><%= category.name %></span>
+        </h3>
 
         <dl class="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-sm">
           <dt class="text-slate-600 dark:text-slate-400"><%= LinkCategory.human_attribute_name(:position) %></dt>

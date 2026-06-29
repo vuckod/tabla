@@ -6,9 +6,9 @@
           label: LinkCategory.human_attribute_name(:position),
           input: :number_field,
           hint: t("views.admin.shared.position_hint") %>
-      <%= admin_text_field f, :icon,
+      <%= admin_icon_picker f, :icon,
           label: LinkCategory.human_attribute_name(:icon),
-          placeholder: t("views.admin.link_categories.icon_hint") %>
+          hint: t("views.admin.link_categories.icon_hint") %>
     <% end %>
 
     <%= render "admin/shared/form_actions", form: f, cancel_path: admin_link_categories_path %>
