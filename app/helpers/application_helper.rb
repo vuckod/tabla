@@ -6,6 +6,7 @@ module ApplicationHelper
   include SearchHelper
   include AuditHistoryHelper
   include NavigationHelper
+  include QrHelper
 
   def turbo_frame_request?
     request.headers["Turbo-Frame"].present?

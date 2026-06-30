@@ -5,6 +5,7 @@ Vse pomembne spremembe so dokumentirane v tej datoteki.
 ## [Unreleased]
 
 ### Dodano
+- QR koda dokumenta (naloga 46): rqrcode gem, QrHelper z inline SVG, toggle na document show samo za admina/urednika, absolutni `document_url`
 - Mobilni UX za nalaganje dokumentov (naloga 47): dropzone file polje, Stimulus prikaz imena datoteke, napredna polja v `<details>` na mobilnem; PWA Share Target odložen (slaba iOS podpora)
 - Zaznamki dokumentov (naloga 45): model Bookmark, toggle zvezdica na document show (Turbo Stream), blok »Moji zaznamki« na domači (sortirano po `bookmarks.created_at DESC`)
 - Admin bulk operacije za dokumente: izbira, množična kategorizacija in izbris z audit trailom

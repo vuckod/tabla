@@ -84,6 +84,9 @@ gem "csv"
 # HTTP klient za komunikacijo s Prisotnost API-jem
 gem "faraday"
 
+# QR kode (dokumenti — admin/urednik)
+gem "rqrcode", "~> 2.2"
+
 # Pregled poslane e-pošte v razvoju
 group :development do
   gem "letter_opener_web"

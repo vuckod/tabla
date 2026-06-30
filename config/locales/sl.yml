@@ -322,6 +322,8 @@ sl:
       published_on: "Objavljeno"
       print_category: "Kategorija"
       print_url: "Povezava"
+      show_qr: "Pokaži QR kodo"
+      qr_hint: "Skenirajte za odpiranje na telefonu"
       internal: "Interno"
       empty_category: "Ni dokumentov v tej kategoriji."
       empty_category_title: "Ni dokumentov"
