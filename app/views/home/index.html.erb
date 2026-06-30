@@ -27,6 +27,9 @@
           pagy: @pagy %>
     </div>
     <div class="lg:col-span-2 space-y-4">
+      <% if current_user && @bookmarked_documents.any? %>
+        <%= render "home/bookmarks", bookmarked_documents: @bookmarked_documents %>
+      <% end %>
       <% if current_user && @recent_documents.any? %>
         <%= render "home/recent_documents", recent_documents: @recent_documents %>
       <% end %>

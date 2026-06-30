@@ -9,6 +9,7 @@ class HomeController < ApplicationController
     @internal_links = Link.internal_apps.ordered
     @external_link_categories = external_link_categories_for_home
     @recent_documents = current_user&.recent_documents(limit: 5) || []
+    @bookmarked_documents = current_user&.bookmarked_documents_ordered || []
     load_documents_list
   end
 

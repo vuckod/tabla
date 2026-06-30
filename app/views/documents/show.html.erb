@@ -38,6 +38,10 @@
   </div>
 
   <div class="flex flex-wrap gap-3 print:hidden">
+    <% if current_user %>
+      <%= render "bookmarks/button", document: @document %>
+    <% end %>
+
     <%= link_to t("views.documents.open_in_new_tab"), preview_document_path(@document),
         target: "_blank", rel: "noopener",
         class: "inline-flex items-center px-4 py-2 text-sm font-medium rounded-md

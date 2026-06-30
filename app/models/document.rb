@@ -11,6 +11,7 @@ class Document < ApplicationRecord
 
   has_many :ocr_logs, as: :record, dependent: :destroy
   has_many :document_views, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
   has_one_attached :file
   has_one_attached :thumbnail
 

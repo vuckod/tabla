@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :visits, class_name: "Ahoy::Visit", dependent: :nullify
   has_many :ahoy_events, class_name: "Ahoy::Event", dependent: :nullify
   has_many :document_views, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
+  has_many :bookmarked_documents, through: :bookmarks, source: :document
 
   validates :username, presence: true, uniqueness: { case_sensitive: false }
   validates :remote_id, presence: true, uniqueness: true
@@ -60,6 +62,20 @@ class User < ApplicationRecord
       .select("documents.*, MAX(document_views.viewed_at) AS last_viewed_at")
       .order(Arel.sql("MAX(document_views.viewed_at) DESC"))
       .limit(limit)
+  end
+
+  def bookmarked?(document)
+    bookmarks.exists?(document_id: document.id)
+  end
+
+  def bookmarked_documents_ordered
+    Document.joins(:bookmarks)
+            .where(bookmarks: { user_id: id })
+            .published
+            .visible_to(self)
+            .for_user_enota(self)
+            .includes(:document_category)
+            .order(Arel.sql("bookmarks.created_at DESC"))
   end
 
   def new_documents_count

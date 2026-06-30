@@ -35,6 +35,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :bookmarks, only: [:create, :destroy], param: :document_id
+
   # --- Admin ---
   namespace :admin do
     root to: redirect("/admin/persons")

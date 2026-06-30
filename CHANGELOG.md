@@ -5,6 +5,7 @@ Vse pomembne spremembe so dokumentirane v tej datoteki.
 ## [Unreleased]
 
 ### Dodano
+- Zaznamki dokumentov (naloga 45): model Bookmark, toggle zvezdica na document show (Turbo Stream), blok »Moji zaznamki« na domači (sortirano po `bookmarks.created_at DESC`)
 - Admin bulk operacije za dokumente: izbira, množična kategorizacija in izbris z audit trailom
 - Brandirane statične error strani (404, 422, 500, 400, 406) z Tabla dizajnom in dark mode
 - In-app badge za nove dokumente: last_documents_seen_at, cache 1 min, badge 99+ v navigaciji

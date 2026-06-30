@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_26_204253) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_30_120000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -123,6 +123,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_26_204253) do
     t.index ["created_at"], name: "index_audits_on_created_at"
     t.index ["request_uuid"], name: "index_audits_on_request_uuid"
     t.index ["user_id", "user_type"], name: "user_index"
+  end
+
+  create_table "bookmarks", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "document_id", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["document_id"], name: "index_bookmarks_on_document_id"
+    t.index ["user_id", "document_id"], name: "index_bookmarks_on_user_id_and_document_id", unique: true
+    t.index ["user_id"], name: "index_bookmarks_on_user_id"
   end
 
   create_table "document_categories", force: :cascade do |t|
@@ -428,6 +438,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_26_204253) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "bookmarks", "documents"
+  add_foreign_key "bookmarks", "users"
   add_foreign_key "document_views", "documents"
   add_foreign_key "document_views", "users"
   add_foreign_key "documents", "document_categories"

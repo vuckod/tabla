@@ -287,6 +287,8 @@ sl:
       recent_views: "Nedavno ogledano"
       recent_views_ago: "nazaj"
       recent_views_empty: "Še niste pregledali nobenega dokumenta."
+      bookmarks: "Moji zaznamki"
+      bookmarks_empty: "Nimate zaznamovanih dokumentov. Kliknite zvezdico ob dokumentu."
       announcement_expires: "Velja do"
     directory:
       internal: "Interna"
@@ -299,6 +301,11 @@ sl:
         headquarters: "SIKLND — Knjižnica"
         branch: "NOE — Gledališče"
         other: "Ostalo"
+    bookmarks:
+      add: "Zaznamuj"
+      remove: "Zaznamovano"
+      add_label: "Dodaj zaznamek"
+      remove_label: "Odstrani zaznamek"
     documents:
       title: "Dokumenti"
       all: "Vsi"
