@@ -2,7 +2,6 @@
   <%= render layout: "admin/shared/form_card", locals: { object: document } do %>
     <%= render layout: "admin/shared/form_section", locals: { title: t("views.admin.shared.basic_data") } do %>
       <%= admin_text_field f, :title, label: Document.human_attribute_name(:title), required: true %>
-      <%= admin_text_area f, :description, label: Document.human_attribute_name(:description), rows: 4 %>
       <%= render "admin/documents/category_field", form: f %>
 
       <div class="space-y-1">
@@ -14,35 +13,30 @@
         <%= admin_file_field f, :file,
             label: Document.human_attribute_name(:file),
             accept: "application/pdf",
-            hint: t("views.admin.documents.file_hint") %>
+            hint: t("views.admin.documents.file_hint"),
+            dropzone: true %>
+      </div>
+
+      <div class="hidden lg:block">
+        <%= admin_text_area f, :description, label: Document.human_attribute_name(:description), rows: 4 %>
       </div>
     <% end %>
 
-    <%= render layout: "admin/shared/form_section", locals: { title: t("views.admin.shared.publication_settings") } do %>
-      <div>
-        <span class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-          <%= Document.human_attribute_name(:unit) %>
-        </span>
-        <div class="flex flex-wrap gap-4">
-          <% Document.units.each_key do |unit_key| %>
-            <label class="inline-flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300">
-              <%= f.radio_button :unit, unit_key, class: "text-indigo-600 focus:ring-indigo-500" %>
-              <%= announcement_unit_label(unit_key) %>
-            </label>
-          <% end %>
-        </div>
+    <details class="lg:hidden border border-slate-200 dark:border-slate-700 rounded-lg p-4">
+      <summary class="text-sm font-semibold text-slate-900 dark:text-slate-100 cursor-pointer select-none">
+        <%= t("views.admin.documents.advanced_settings") %>
+      </summary>
+      <div class="mt-4 pt-4 space-y-4 border-t border-slate-200 dark:border-slate-700">
+        <%= admin_text_area f, :description, label: Document.human_attribute_name(:description), rows: 4 %>
+        <%= render "admin/documents/publication_fields", form: f %>
       </div>
+    </details>
 
-      <%= admin_datetime_field f, :published_at,
-          label: Document.human_attribute_name(:published_at),
-          hint: t("views.admin.documents.published_at_hint") %>
-      <%= admin_checkbox f, :internal_only,
-          label: Document.human_attribute_name(:internal_only),
-          hint: t("views.admin.documents.internal_only_hint") %>
-      <%= admin_checkbox f, :notify_staff,
-          label: Document.human_attribute_name(:notify_staff),
-          hint: t("views.admin.documents.notify_staff_hint") %>
-    <% end %>
+    <div class="hidden lg:block">
+      <%= render layout: "admin/shared/form_section", locals: { title: t("views.admin.shared.publication_settings") } do %>
+        <%= render "admin/documents/publication_fields", form: f %>
+      <% end %>
+    </div>
 
     <%= render "admin/shared/form_actions",
         form: f,

@@ -61,15 +61,11 @@ module AdminFormHelper
     end
   end
 
-  def admin_file_field(form, field, label:, hint: nil, accept: nil, **options)
-    file_classes = "block w-full text-sm text-slate-600 dark:text-slate-300 " \
-                   "file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 " \
-                   "file:text-sm file:font-medium file:bg-indigo-50 file:text-indigo-700 " \
-                   "dark:file:bg-indigo-900/30 dark:file:text-indigo-300 " \
-                   "hover:file:bg-indigo-100 dark:hover:file:bg-indigo-900/50"
-
-    admin_field(form, field, label: label, hint: hint) do
-      form.file_field(field, { accept: accept, class: file_classes }.merge(options))
+  def admin_file_field(form, field, label:, hint: nil, accept: nil, dropzone: false, **options)
+    if dropzone
+      admin_file_dropzone_field(form, field, label: label, hint: hint, accept: accept, **options)
+    else
+      admin_file_input_field(form, field, label: label, hint: hint, accept: accept, **options)
     end
   end
 
@@ -117,6 +113,59 @@ module AdminFormHelper
   end
 
   private
+
+  def admin_file_input_field(form, field, label:, hint: nil, accept: nil, **options)
+    file_classes = "block w-full text-sm text-slate-600 dark:text-slate-300 " \
+                   "file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 " \
+                   "file:text-sm file:font-medium file:bg-indigo-50 file:text-indigo-700 " \
+                   "dark:file:bg-indigo-900/30 dark:file:text-indigo-300 " \
+                   "hover:file:bg-indigo-100 dark:hover:file:bg-indigo-900/50"
+
+    admin_field(form, field, label: label, hint: hint) do
+      form.file_field(field, { accept: accept, class: file_classes }.merge(options))
+    end
+  end
+
+  def admin_file_dropzone_field(form, field, label:, hint: nil, accept: nil, **options)
+    field_id = "#{form.object_name}_#{field}"
+    selected_template = t("views.admin.documents.file_selected", filename: "%{filename}")
+
+    content_tag(:div, class: "space-y-1", data: { controller: "file-input", file_input_selected_value: selected_template }) do
+      safe_join([
+        form.label(field, label, class: LABEL_CLASSES),
+        content_tag(:label, for: field_id,
+                    class: "flex flex-col items-center justify-center w-full min-h-[8rem] " \
+                           "border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-lg " \
+                           "cursor-pointer bg-slate-50 dark:bg-slate-800 " \
+                           "hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors p-6") do
+          safe_join([
+            admin_file_dropzone_icon,
+            content_tag(:span, t("views.admin.documents.upload_tap"),
+                        class: "text-sm font-medium text-slate-700 dark:text-slate-300 text-center"),
+            (hint.present? ? content_tag(:span, hint,
+                                         class: "text-xs text-slate-500 dark:text-slate-400 mt-1 text-center") : nil),
+            form.file_field(field, {
+              accept: accept,
+              id: field_id,
+              class: "sr-only",
+              data: { action: "change->file-input#showName" }
+            }.merge(options))
+          ].compact)
+        end,
+        content_tag(:p, "", class: "mt-2 text-sm text-slate-600 dark:text-slate-300 hidden",
+                    data: { file_input_target: "name" }),
+        admin_field_errors(form, field)
+      ])
+    end
+  end
+
+  def admin_file_dropzone_icon
+    content_tag(:svg, class: "h-10 w-10 text-slate-400 mb-2", fill: "none",
+                viewBox: "0 0 24 24", stroke_width: "1.5", stroke: "currentColor", aria: { hidden: true }) do
+      tag.path("stroke-linecap": "round", "stroke-linejoin": "round",
+               d: "M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z")
+    end
+  end
 
   def admin_color_option(form, field, color, selected)
     checked = selected == color.to_s

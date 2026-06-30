@@ -5,6 +5,7 @@ Vse pomembne spremembe so dokumentirane v tej datoteki.
 ## [Unreleased]
 
 ### Dodano
+- Mobilni UX za nalaganje dokumentov (naloga 47): dropzone file polje, Stimulus prikaz imena datoteke, napredna polja v `<details>` na mobilnem; PWA Share Target odložen (slaba iOS podpora)
 - Zaznamki dokumentov (naloga 45): model Bookmark, toggle zvezdica na document show (Turbo Stream), blok »Moji zaznamki« na domači (sortirano po `bookmarks.created_at DESC`)
 - Admin bulk operacije za dokumente: izbira, množična kategorizacija in izbris z audit trailom
 - Brandirane statične error strani (404, 422, 500, 400, 406) z Tabla dizajnom in dark mode

@@ -1,0 +1,24 @@
+<%# locals: form %>
+<div>
+  <span class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+    <%= Document.human_attribute_name(:unit) %>
+  </span>
+  <div class="flex flex-wrap gap-4">
+    <% Document.units.each_key do |unit_key| %>
+      <label class="inline-flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300">
+        <%= form.radio_button :unit, unit_key, class: "text-indigo-600 focus:ring-indigo-500" %>
+        <%= announcement_unit_label(unit_key) %>
+      </label>
+    <% end %>
+  </div>
+</div>
+
+<%= admin_datetime_field form, :published_at,
+    label: Document.human_attribute_name(:published_at),
+    hint: t("views.admin.documents.published_at_hint") %>
+<%= admin_checkbox form, :internal_only,
+    label: Document.human_attribute_name(:internal_only),
+    hint: t("views.admin.documents.internal_only_hint") %>
+<%= admin_checkbox form, :notify_staff,
+    label: Document.human_attribute_name(:notify_staff),
+    hint: t("views.admin.documents.notify_staff_hint") %>
