@@ -1,8 +1,16 @@
 # Changelog — Tabla (Intranet KL-KL)
 
 Vse pomembne spremembe so dokumentirane v tej datoteki.
+Format sledi [Keep a Changelog](https://keepachangelog.com/sl/); projekt uporablja
+[semantično verzioniranje](https://semver.org/lang/sl/).
 
 ## [Unreleased]
+
+_Nove spremembe se beležijo tukaj, dokler niso vključene v naslednjo objavljeno verzijo._
+
+## [1.0.0] - 2026-06-30
+
+Prva uradna izdaja — Tabla v produkciji na https://i.kl-kl.si, predana v uporabo.
 
 ### Dodano
 - QR koda dokumenta (naloga 46): rqrcode gem, QrHelper z inline SVG, toggle na document show samo za admina/urednika, absolutni `document_url`

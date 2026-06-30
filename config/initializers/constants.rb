@@ -9,7 +9,7 @@ rescue StandardError
 end
 git_hash = nil if git_hash.blank?
 
-BASE_VERSION = "0.1.0"
+BASE_VERSION = "1.0.0"
 
 short_hash = git_hash.present? ? git_hash[0..6] : nil
 TABLA_VERSION = short_hash.present? ? "#{BASE_VERSION} (#{short_hash})" : BASE_VERSION
