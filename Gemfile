@@ -85,7 +85,7 @@ gem "csv"
 gem "faraday"
 
 # QR kode (dokumenti — admin/urednik)
-gem "rqrcode", "~> 2.2"
+gem "rqrcode", "~> 3.2"
 
 # Pregled poslane e-pošte v razvoju
 group :development do
